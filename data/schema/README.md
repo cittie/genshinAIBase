@@ -120,21 +120,28 @@ artifact_main_stats.csv
 
 | 表 | 主键 | 详细定义 |
 |---|---|---|
-| `reactions.csv` | `reaction_id` | [elements/README.md](../elements/README.md) |
+| `level_coefficients.csv` | `level` | [elements/README.md](../elements/README.md) |
+| `reactions.csv` | `reaction_id` | 同上 |
 | `aura_consumption.csv` | `reaction_id` | 同上 |
-| `particle_energy.csv` | `pickup_type` + `element_relation` + `field_state` | 同上 |
+| `particle_energy.csv` | `pickup_type` + `element_relation` + `field_state` + `party_size` | 同上 |
 
 ```
+level_coefficients.csv
+  level, player_multiplier, enemy_multiplier, shield_multiplier,
+  version, source, source_url
+
 reactions.csv
   reaction_id, reaction_zh, reaction_en, category, trigger_element,
   aura_element, damage_element, base_multiplier, em_scaling, can_crit,
-  uses_def_zone, notes, version, source
+  uses_def_zone, notes, version, source, source_url
 
 aura_consumption.csv
-  reaction_id, aura_consumed_unit, aura_consumed_ratio, notes, version, source
+  reaction_id, aura_consumed_unit, aura_consumed_ratio, notes,
+  version, source, source_url
 
 particle_energy.csv
-  pickup_type, element_relation, field_state, energy_value, notes, version, source
+  pickup_type, element_relation, field_state, party_size, energy_value,
+  notes, version, source, source_url
 ```
 
 ### 2.5 enemies/

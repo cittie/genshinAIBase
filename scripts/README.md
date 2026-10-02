@@ -187,6 +187,67 @@ node scripts/import_genshin_db.mjs --in <path> --targets all     # 全部四类
 
 ---
 
+## 元素机制导入（`scripts/import_kqm_tcl.mjs`）
+
+从 **KQM Theorycrafting Library** 导入 `data/elements/` 的四张表。
+
+```bash
+node scripts/import_kqm_tcl.mjs --fetch    # 下载固定 commit 的源文件到 .cache/kqm-tcl/
+node scripts/import_kqm_tcl.mjs            # 校验锚点 → 写出 CSV
+node scripts/import_kqm_tcl.mjs --dry-run  # 只校验不写文件
+node scripts/import_kqm_tcl.mjs --refresh  # 检查上游是否已有新 commit
+```
+
+| 产物 | 行数 | 说明 |
+|---|---|---|
+| `data/elements/level_coefficients.csv` | 100 | 等级 → 角色/敌人/结晶护盾系数 |
+| `data/elements/reactions.csv` | 20 | 反应倍率、类别、伤害元素、是否吃暴击/防御区 |
+| `data/elements/aura_consumption.csv` | 18 | 反应对附着量的消耗 |
+| `data/elements/particle_energy.csv` | 24 | 微粒/晶球能量（含队伍人数） |
+
+**来源**：`KQM-git/TCL` @ `106c0f3`（2026-10-01，`7.1 data`）。
+固定到 commit 而非 `master`，保证可复现。
+
+### 两类数据的获取方式不同
+
+| 数据 | 方式 | 校验 |
+|---|---|---|
+| 等级系数 | **机器提取**源仓库的 JSON 数组 | 已知锚点：90 级 = 1446.8535、1 级 = 17.165606、2 级 = 18.535048 |
+| 反应倍率 / 附着消耗 / 能量表 | **人工转写**自 markdown 正文 | 每条转写带「锚点字符串」，必须出现在被引用的源文件里 |
+
+### 锚点校验（本脚本的核心保护）
+
+反应倍率这类数值大部分写在 markdown 正文里，无法可靠地自动解析，只能人工转写。
+为防转写悄悄过期，脚本对每条数值都要求一个**锚点字符串**存在于被引用的源文件：
+
+```js
+{ src: SRC.transformFormula, must: ['2.75', '0.25', '0.6', '1.5', 'ECTriggers'] }
+```
+
+任一条找不到 → **退出码 3，拒绝写入**。这样上游一旦改数值，脚本会立刻失败，
+而不是静默保留过期值（这正是「5.2 加强剧变反应」这类改动能被发现的机制）。
+
+### 踩过的坑
+
+| # | 问题 | 修法 |
+|---|---|---|
+| 23 | Node 的 `fetch` 偶发 `ECONNRESET`（网络层重置） | 抓取加退避重试（4 次）。注意：本机环境里 `fetch` 可用而 `https` 模块反而失败 |
+| 24 | 锚点写错：给 `ECTriggers` 凭空加了 `>` `<` 标记 | 锚点必须**逐字**取自源文件，不能凭印象写 |
+| 25 | 锚点归属写错：`8GU`（碎冰消耗）出自 `transformative-reactions.md`，误记为 gauge 文档 | 锚点表逐条对照源文件；这两处都是**脚本抓出的我自己的错**，不是源变动 |
+| 26 | `particle_energy.csv` 原 schema 只有三列主键，无法表达后台系数随队伍人数变化 | 追加 `party_size` 列（表为空，追加安全） |
+
+### 顺带修正的文档错误
+
+导入后对照源数据核查 `docs/mechanics/`，发现并修正：
+
+| 错误 | 正确值 |
+|---|---|
+| 剧变反应的精通系数写成了增幅的 `2.78/(1400+EM)` | `16/(2000+EM)` |
+| 超绽放 / 烈绽放的伤害元素写成雷 / 火 | 都是**草元素** |
+| 燃烧被归入「无伤害反应」 | 燃烧是剧变反应，倍率 0.25、造成火伤 |
+
+---
+
 ## 天赋导入（`--targets talents`）
 
 | 产物 | 行数 | 说明 |

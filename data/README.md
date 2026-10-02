@@ -15,6 +15,10 @@
 > | `weapons/weapons.csv` | ✅ **已填充 255 行**（全量武器，含满级基础攻击力与副属性） |
 > | `artifacts/artifact_sets.csv` | ✅ **已填充 63 行**（全量套装） |
 > | `artifacts/artifact_set_bonuses.csv` | ✅ **已填充 122 行**（2 件套完整 + 4 件套部分结构化） |
+> | `elements/level_coefficients.csv` | ✅ **已填充 100 行**（等级系数，`source=community`） |
+> | `elements/reactions.csv` | ✅ **已填充 20 行**（v7.1，含 5.2 剧变反应加强后的倍率） |
+> | `elements/aura_consumption.csv` | ✅ **已填充 18 行**（附着量消耗） |
+> | `elements/particle_energy.csv` | ✅ **已填充 24 行**（含 `party_size`，后台系数按队伍人数） |
 > | 其余 8 张表 | ⏳ 仅表头（字段契约已冻结，数值待填） |
 >
 > 只有表头代表「该表待填充」，**不等于字段不存在**。校验脚本会提示哪些表为空。
@@ -58,7 +62,8 @@
 | [artifacts/](artifacts/README.md) | `artifact_sets.csv` | 圣遗物套装主表 |
 | | `artifact_set_bonuses.csv` | 套装效果（长表，一效果一行） |
 | | `artifact_main_stats.csv` | 各部位可选主词条数值 |
-| [elements/](elements/README.md) | `reactions.csv` | 元素反应系数与属性 |
+| [elements/](elements/README.md) | `level_coefficients.csv` | 等级 → 角色/敌人/结晶护盾系数 |
+| | `reactions.csv` | 元素反应系数与属性 |
 | | `aura_consumption.csv` | 反应对元素附着量的消耗 |
 | | `particle_energy.csv` | 元素微粒/晶球能量结算 |
 | [enemies/](enemies/README.md) | `enemies.csv` | 敌人基础属性 |

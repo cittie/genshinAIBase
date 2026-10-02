@@ -37,7 +37,8 @@ PRIMARY_KEYS: dict[str, list[str]] = {
     "data/artifacts/artifact_main_stats.csv": ["slot", "main_stat"],
     "data/elements/reactions.csv": ["reaction_id"],
     "data/elements/aura_consumption.csv": ["reaction_id"],
-    "data/elements/particle_energy.csv": ["pickup_type", "element_relation", "field_state"],
+    "data/elements/particle_energy.csv": ["pickup_type", "element_relation", "field_state", "party_size"],
+    "data/elements/level_coefficients.csv": ["level"],
     "data/enemies/enemies.csv": ["enemy_id"],
     "data/enemies/enemy_resistance.csv": ["enemy_id", "element"],
     "data/teams/team_archetypes.csv": ["archetype_id"],
@@ -308,8 +309,19 @@ def check_bilingual_pairs() -> None:
             PAIR_ERRORS.append(f"{left_rel}: 缺少 {right_rel} 中的链接: {target}")
 
 
+# 不参与校验的目录：缓存与版本控制内部目录。
+# `.cache/` 存放从上游抓取的原始文件（见 scripts/import_kqm_tcl.mjs），
+# 其中的相对链接是上游仓库内部的，对本仓库无效，不应计入校验。
+EXCLUDED_DIRS = {".cache", ".git", ".github", "node_modules", "__pycache__", ".venv", "venv"}
+
+
 def iter_files(pattern: str, base: Path):
-    return sorted(p for p in base.rglob(pattern) if p.is_file())
+    def keep(p: Path) -> bool:
+        if not p.is_file():
+            return False
+        return not any(part in EXCLUDED_DIRS for part in p.relative_to(base).parts[:-1])
+
+    return sorted(p for p in base.rglob(pattern) if keep(p))
 
 
 def main() -> int:

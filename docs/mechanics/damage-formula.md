@@ -104,6 +104,10 @@
 
 反应倍率见 [reactions.md](reactions.md#2-增幅反应)。
 
+> ⚠️ **此系数只适用于增幅反应**（蒸发/融化）。剧变反应的精通系数是 `16 × EM / (2000 + EM)`，
+> 催化反应是 `5 × EM / (1200 + EM)`，**三者不可混用**。对照表见
+> [reactions.md §1](reactions.md#精通加成系数三种反应各不相同)。
+
 ### 2.7 独立加成区
 
 部分套装效果、天赋、武器被动提供**独立乘区**（不与伤害加成区相加），
@@ -141,9 +145,11 @@
 
 以下内容本仓库**尚未收录完整数值**，引用时请标注：
 
-- 各角色技能倍率表（`data/characters/` 待补）
-- 各敌人防御力与等级血量（`data/enemies/` 待补）
-- 剧变反应等级系数表（`data/elements/reactions.csv` 标记为 `?`）
+- 各敌人防御力、等级血量与抗性（`data/enemies/` 待补）
+
+> 已补齐（原先列在此处，现已可用）：
+> - **各角色技能倍率** → [`data/characters/character_talent_params.csv`](../../data/characters/character_talent_params.csv)（含逐条属性来源与 1/10 级数值）
+> - **剧变反应倍率与等级系数** → [`data/elements/reactions.csv`](../../data/elements/reactions.csv)、[`level_coefficients.csv`](../../data/elements/level_coefficients.csv)
 
 > AI 使用要求：涉及上述缺失数据时，必须显式声明「本仓库未收录该数值」，不得推测。
 

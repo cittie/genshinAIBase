@@ -87,9 +87,10 @@
 | [artifacts/artifact_sets.csv](../data/artifacts/artifact_sets.csv) | `set_id` | 圣遗物套装主表 | ✅ **63 行** |
 | [artifacts/artifact_set_bonuses.csv](../data/artifacts/artifact_set_bonuses.csv) | `set_id`+`pieces`+`effect_index` | 套装效果（长表） | ✅ **122 行** |
 | [artifacts/artifact_main_stats.csv](../data/artifacts/artifact_main_stats.csv) | `slot`+`main_stat` | 主词条数值 | 表头 |
-| [elements/reactions.csv](../data/elements/reactions.csv) | `reaction_id` | 反应系数与属性 | 表头 |
-| [elements/aura_consumption.csv](../data/elements/aura_consumption.csv) | `reaction_id` | 附着量消耗 | 表头 |
-| [elements/particle_energy.csv](../data/elements/particle_energy.csv) | 三列复合 | 微粒/晶球能量 | 表头 |
+| [elements/level_coefficients.csv](../data/elements/level_coefficients.csv) | `level` | 等级 → 角色/敌人/结晶护盾系数 | ✅ **100 行** |
+| [elements/reactions.csv](../data/elements/reactions.csv) | `reaction_id` | 反应系数与属性 | ✅ **20 行** |
+| [elements/aura_consumption.csv](../data/elements/aura_consumption.csv) | `reaction_id` | 附着量消耗 | ✅ **18 行** |
+| [elements/particle_energy.csv](../data/elements/particle_energy.csv) | `pickup_type`+`element_relation`+`field_state`+`party_size` | 微粒/晶球能量 | ✅ **24 行** |
 | [enemies/enemies.csv](../data/enemies/enemies.csv) | `enemy_id` | 敌人基础属性 | 表头 |
 | [enemies/enemy_resistance.csv](../data/enemies/enemy_resistance.csv) | `enemy_id`+`element` | 敌人元素抗性（长表） | 表头 |
 | [teams/team_archetypes.csv](../data/teams/team_archetypes.csv) | `archetype_id` | 队伍原型 | 表头 |
@@ -173,11 +174,23 @@
 | 旅行者分元素变体（仅天赋/命座记录可得） | `data/characters/` |
 | 全部武器数值与被动 | `data/weapons/` |
 | 全部套装效果数值与主词条数值 | `data/artifacts/` |
-| 剧变/催化反应系数、附着消耗、微粒能量 | `data/elements/` |
+| ✅ **反应倍率、等级系数、附着消耗、能量结算已收录**（v7.1，20 + 100 + 18 + 24 行） | `data/elements/` |
 | 敌人属性与抗性 | `data/enemies/` |
 | 元素共鸣数值 | `data/teams/elemental_resonance.csv` |
 | 命之座激活材料、天赋升级材料、固有天赋解锁阶段 | 待建表 |
-| 逐技能 ICD 与附着标签 | 待建表 |
+| 逐技能 ICD 与附着标签（U 值） | 待建表（KQM 有附着量汇编，未纳入） |
+| 各角色技能产球量 | 待建表（KQM 有 `elemental-skill-particles`，未纳入） |
+| 反应优先级与元素共存表 | 待建表（源文档未给出完整表） |
 
 > AI 在数值补齐前应给出方法论与结构性结论，而非具体排名；
 > 唯一可以精确引用的是 `data/characters/characters.csv`。
+
+### 已知易错点（引用前务必确认）
+
+| 易错点 | 正确值 | 出处 |
+|---|---|---|
+| 剧变反应精通系数 | `16 × EM / (2000 + EM)`，不是增幅的 `2.78/(1400+EM)` | `docs/mechanics/reactions.md` §1 |
+| 超载 / 超导倍率 | **2.75 / 1.5**（5.2 加强后），旧的 2.0 / 0.5 已过期 | `data/elements/reactions.csv` |
+| 超绽放 / 烈绽放伤害元素 | 都是**草元素**，不是雷/火 | `data/elements/reactions.csv` |
+| 后台回能系数 | 随队伍人数变化（4 人 **60%**），不是固定 80% | `data/elements/particle_energy.csv` |
+| 普攻命中回能 | 只有**在场角色**获得，且不受 ER% 影响 | `docs/mechanics/energy-and-rotation.md` §1 |

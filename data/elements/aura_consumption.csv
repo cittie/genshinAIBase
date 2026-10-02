@@ -1,1 +1,19 @@
-reaction_id,aura_consumed_unit,aura_consumed_ratio,notes,version,source
+reaction_id,aura_consumed_unit,aura_consumed_ratio,notes,version,source,source_url
+overloaded,,1,超载与超导的单位修正为 1×（等量消耗触发元素的附着量）,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/elemental-effects/elemental-gauge-theory.md
+superconduct,,1,同上,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/elemental-effects/elemental-gauge-theory.md
+vaporize_weak,,0.5,弱增幅触发（1.5 倍）的单位修正为 0.5×,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/elemental-effects/elemental-gauge-theory.md
+vaporize_strong,,2,强增幅触发（2 倍）的单位修正为 2×,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/elemental-effects/elemental-gauge-theory.md
+melt_weak,,0.5,弱增幅触发（1.5 倍）的单位修正为 0.5×,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/elemental-effects/elemental-gauge-theory.md
+melt_strong,,2,强增幅触发（2 倍）的单位修正为 2×,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/elemental-effects/elemental-gauge-theory.md
+swirl,,0.5,风触发一律 0.5×；扩散的 AoE 有非零附着量，传播规则另见文档,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/elemental-effects/elemental-gauge-theory.md
+crystallize,,0.5,岩触发一律 0.5×；反应内建全局 ICD 1 秒（期间不再消耗附着）,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/elemental-effects/elemental-gauge-theory.md
+electro_charged,0.4,,每跳从水与雷两个附着量各扣 0.4U；AoE 跳为零附着,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/elemental-effects/elemental-gauge-theory.md
+shattered,8,,常规消耗 8GU；部分情况下更少（可连续碎冰）,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/elemental-effects/transformative-reactions.md
+bloom,,,触发元素影响消耗、比例为 水:草 = 2:1（水为弱元素），但**不影响伤害**；源文档未给出可用的单一系数,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/elemental-effects/transformative-reactions.md
+frozen,,,冻结附着量 = 2×min(原附着量、触发附着量)；消耗规则见冻结公式,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/elemental-effects/elemental-gauge-theory.md
+burning,,,源文档未给出附着消耗数值,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/elemental-effects/transformative-reactions.md
+hyperbloom,,,作用于草原核、不消耗敌人身上的附着,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/elemental-effects/transformative-reactions.md
+burgeon,,,作用于草原核、不消耗敌人身上的附着,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/elemental-effects/transformative-reactions.md
+quicken,,,源文档未给出附着消耗数值,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/_formulas/additive.md
+aggravate,,,催化反应不消耗被激化目标的附着（加到原伤害）,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/_formulas/additive.md
+spread,,,同上,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/_formulas/additive.md

@@ -1,1 +1,25 @@
-pickup_type,element_relation,field_state,energy_value,notes,version,source
+pickup_type,element_relation,field_state,party_size,energy_value,notes,version,source,source_url
+particle,same,on_field,NA,3,在场角色；与队伍人数无关,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+orb,same,on_field,NA,9,晶球能量为微粒的 3 倍；在场角色；与队伍人数无关,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+particle,same,off_field,4,1.8,后台角色；4/3/2 人队伍分别按 60%/70%/80% 结算；同元素为异元素的 3 倍、无色为异元素的 2 倍,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+orb,same,off_field,4,5.4,晶球能量为微粒的 3 倍；后台角色；4/3/2 人队伍分别按 60%/70%/80% 结算；同元素为异元素的 3 倍、无色为异元素的 2 倍,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+particle,same,off_field,3,2.1,后台角色；4/3/2 人队伍分别按 60%/70%/80% 结算；同元素为异元素的 3 倍、无色为异元素的 2 倍,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+orb,same,off_field,3,6.3,晶球能量为微粒的 3 倍；后台角色；4/3/2 人队伍分别按 60%/70%/80% 结算；同元素为异元素的 3 倍、无色为异元素的 2 倍,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+particle,same,off_field,2,2.4,后台角色；4/3/2 人队伍分别按 60%/70%/80% 结算；同元素为异元素的 3 倍、无色为异元素的 2 倍,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+orb,same,off_field,2,7.2,晶球能量为微粒的 3 倍；后台角色；4/3/2 人队伍分别按 60%/70%/80% 结算；同元素为异元素的 3 倍、无色为异元素的 2 倍,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+particle,different,on_field,NA,1,在场角色；与队伍人数无关,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+orb,different,on_field,NA,3,晶球能量为微粒的 3 倍；在场角色；与队伍人数无关,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+particle,different,off_field,4,0.6,后台角色；4/3/2 人队伍分别按 60%/70%/80% 结算；同元素为异元素的 3 倍、无色为异元素的 2 倍,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+orb,different,off_field,4,1.8,晶球能量为微粒的 3 倍；后台角色；4/3/2 人队伍分别按 60%/70%/80% 结算；同元素为异元素的 3 倍、无色为异元素的 2 倍,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+particle,different,off_field,3,0.7,后台角色；4/3/2 人队伍分别按 60%/70%/80% 结算；同元素为异元素的 3 倍、无色为异元素的 2 倍,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+orb,different,off_field,3,2.1,晶球能量为微粒的 3 倍；后台角色；4/3/2 人队伍分别按 60%/70%/80% 结算；同元素为异元素的 3 倍、无色为异元素的 2 倍,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+particle,different,off_field,2,0.8,后台角色；4/3/2 人队伍分别按 60%/70%/80% 结算；同元素为异元素的 3 倍、无色为异元素的 2 倍,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+orb,different,off_field,2,2.4,晶球能量为微粒的 3 倍；后台角色；4/3/2 人队伍分别按 60%/70%/80% 结算；同元素为异元素的 3 倍、无色为异元素的 2 倍,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+particle,no_element,on_field,NA,2,在场角色；与队伍人数无关,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+orb,no_element,on_field,NA,6,晶球能量为微粒的 3 倍；在场角色；与队伍人数无关,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+particle,no_element,off_field,4,1.2,后台角色；4/3/2 人队伍分别按 60%/70%/80% 结算；同元素为异元素的 3 倍、无色为异元素的 2 倍,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+orb,no_element,off_field,4,3.6,晶球能量为微粒的 3 倍；后台角色；4/3/2 人队伍分别按 60%/70%/80% 结算；同元素为异元素的 3 倍、无色为异元素的 2 倍,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+particle,no_element,off_field,3,1.4,后台角色；4/3/2 人队伍分别按 60%/70%/80% 结算；同元素为异元素的 3 倍、无色为异元素的 2 倍,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+orb,no_element,off_field,3,4.2,晶球能量为微粒的 3 倍；后台角色；4/3/2 人队伍分别按 60%/70%/80% 结算；同元素为异元素的 3 倍、无色为异元素的 2 倍,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+particle,no_element,off_field,2,1.6,后台角色；4/3/2 人队伍分别按 60%/70%/80% 结算；同元素为异元素的 3 倍、无色为异元素的 2 倍,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
+orb,no_element,off_field,2,4.8,晶球能量为微粒的 3 倍；后台角色；4/3/2 人队伍分别按 60%/70%/80% 结算；同元素为异元素的 3 倍、无色为异元素的 2 倍,7.1,community,https://github.com/KQM-git/TCL/blob/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/energy.md
