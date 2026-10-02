@@ -1,0 +1,173 @@
+char_id,slug,role,is_primary,scaling_stat,damage_type,damage_source,field_state,confidence,notes,version,source
+10000002,kamisato_ayaka,main_dps,true,atk,cryo,,on_field,medium,社区来源一致:main_dps,2.0,community
+10000003,jean,healer,true,atk,anemo,,,high,combat3: At the same time、 she instantly regenerates a large amount of HP for all party members.,1.0,datamine
+10000006,lisa,debuffer,true,atk,electro,,,high,passive2: Opponents hit by Lightning Rose have their DEF decreased by 15% for 10s.,1.0,datamine
+10000014,barbara,healer,true,atk,hydro,,,high,combat2: Melody Loop ·On hit、 Barbara's Normal Attacks heal your own party members and nearby teammates for a certain amount of HP、 which scales with Barbara's,1.0,datamine
+10000015,kaeya,sub_dps,true,atk,cryo,,off_field,medium,社区来源一致:sub_dps,1.0,community
+10000016,diluc,main_dps,true,atk,pyro,,on_field,medium,社区来源一致:main_dps,1.0,community
+10000020,razor,main_dps,true,atk,physical,,on_field,medium,社区来源一致:main_dps,1.0,community
+10000021,amber,sub_dps,true,atk,pyro,,off_field,medium,社区来源一致:sub_dps,1.0,community
+10000022,venti,sub_dps,true,atk,anemo,,off_field,medium,社区来源一致:sub_dps,1.0,community
+10000023,xiangling,sub_dps,true,atk,pyro,,off_field,medium,社区来源一致:sub_dps,1.0,community
+10000024,beidou,sub_dps,true,atk;hp,electro,,off_field,medium,社区来源一致:sub_dps,1.0,community
+10000024,beidou,shielder,false,atk;hp,electro,,,high,combat2: The shield possesses the following properties: ·Has 250% Electro DMG Absorption Efficiency.,1.0,datamine
+10000025,xingqiu,sub_dps,true,atk,hydro,,off_field,medium,社区来源一致:sub_dps,1.0,community
+10000025,xingqiu,healer,false,atk,hydro,,,high,passive1: When a Rain Sword is shattered or when its duration expires、 it regenerates the current character's HP based on 6% of Xingqiu's Max HP.,1.0,datamine
+10000026,xiao,main_dps,true,atk,anemo,,on_field,medium,社区来源一致:main_dps,1.3,community
+10000027,ningguang,main_dps,true,atk,geo,,on_field,medium,社区来源一致:main_dps,1.0,community
+10000029,klee,main_dps,true,atk,pyro,,on_field,medium,社区来源一致:main_dps,1.0,community
+10000030,zhongli,debuffer,false,atk,geo,,,high,combat2: Characters protected by the Jade Shield will decrease the Elemental RES and Physical RES of opponents in a small AoE by 20%.,1.1,datamine
+10000030,zhongli,shielder,true,atk,geo,,,high,combat2: ·Creates a shield of jade.,1.1,datamine
+10000031,fischl,sub_dps,true,atk,electro,,off_field,medium,社区来源一致:sub_dps,1.0,community
+10000032,bennett,buffer,false,atk,pyro,,,high,combat3: ·If the health of a character within the AoE is higher than 70%、 they gain an ATK Bonus that is based on Bennett's Base ATK.,1.0,datamine
+10000032,bennett,healer,true,atk,pyro,,,high,combat3: Inspiration Field ·If the health of a character within the AoE is equal to or falls below 70%、 their health will continuously regenerate.,1.0,datamine
+10000033,tartaglia,main_dps,true,atk,hydro,,on_field,medium,社区来源一致:main_dps,1.1,community
+10000034,noelle,main_dps,true,atk;def,geo,,on_field,medium,社区来源一致:main_dps,1.0,community
+10000034,noelle,healer,false,atk;def,geo,,,high,combat2: The shield has the following properties: ·When Noelle's Normal and Charged Attacks hit a target、 they have a certain chance to regenerate HP for all c,1.0,datamine
+10000034,noelle,shielder,false,atk;def,geo,,,high,combat2: Summons protective stone armor、 dealing Geo DMG to surrounding opponents and creating a shield.,1.0,datamine
+10000035,qiqi,healer,true,atk,cryo,,,high,combat2: Herald of Frost ·On hit、 Qiqi's Normal and Charged Attacks regenerate HP for your own party members and nearby teammates.,1.0,datamine
+10000036,chongyun,buffer,false,atk,cryo,,,high,passive1: Sword、 Claymore、 or Polearm-wielding characters within the field created by Spirit Blade: Chonghua's Layered Frost have their Normal ATK SPD increased,1.0,datamine
+10000036,chongyun,debuffer,true,atk,cryo,,,high,passive2: Opponents hit by this blade will have their Cryo RES decreased by 10% for 8s.,1.0,datamine
+10000037,ganyu,main_dps,true,atk,cryo,,on_field,medium,社区来源一致:main_dps,1.2,community
+10000037,ganyu,buffer,false,atk,cryo,,,high,passive2: Celestial Shower grants a 20% Cryo DMG Bonus to active party members in the AoE.,1.2,datamine
+10000038,albedo,sub_dps,true,atk;def,geo,,off_field,medium,社区来源一致:sub_dps,1.2,community
+10000038,albedo,buffer,false,atk;def,geo,,,high,passive2: Using Rite of Progeniture: Tectonic Tide increases the Elemental Mastery of nearby party members by 125 for 10s.,1.2,datamine
+10000039,diona,healer,false,atk;hp,cryo,,,high,combat3: ·Continuously regenerates the HP of characters within the AoE.,1.1,datamine
+10000039,diona,shielder,true,atk;hp,cryo,,,high,combat2: The shield's DMG Absorption scales based on Diona's Max HP、 and its duration scales off the number of Icy Paws that hit their target.,1.1,datamine
+10000041,mona,support,true,atk,hydro,,,medium,社区标注为 Support、但解包技能文本未匹配到具体职能,1.0,community
+10000042,keqing,main_dps,true,atk,electro,,on_field,medium,社区来源一致:main_dps,1.0,community
+10000043,sucrose,buffer,true,atk,anemo,,,high,passive1: When Sucrose triggers a Swirl or Stellar Swirl reaction、 all characters in the party with the matching element (excluding Sucrose) have their Elementa,1.0,datamine
+10000044,xinyan,main_dps,true,atk;def,pyro,,on_field,low,来源冲突:tier-list=support/builds=main_dps,1.1,community
+10000044,xinyan,shielder,false,atk;def,pyro,,,high,combat2: The shield's DMG Absorption scales based on Xinyan's DEF and on the number of opponents hit.,1.1,datamine
+10000045,rosaria,buffer,true,atk,cryo,,,high,passive2: Casting Rites of Termination increases CRIT Rate of all nearby party members (except Rosaria herself) by 15% of Rosaria's CRIT Rate for 10s.,1.4,datamine
+10000046,hu_tao,main_dps,true,atk,pyro,,on_field,medium,社区来源一致:main_dps,1.3,community
+10000046,hu_tao,buffer,false,atk,pyro,,,high,passive1: When a Paramita Papilio state activated by Guide to Afterlife ends、 all allies in the party (excluding Hu Tao herself) will have their CRIT Rate incre,1.3,datamine
+10000047,kaedehara_kazuha,buffer,true,atk,anemo,,,high,passive2: Upon triggering a Swirl or Stellar Swirl reaction、 Kaedehara Kazuha will grant all party members a 0.04% Elemental DMG Bonus to the element absorbed b,1.6,datamine
+10000048,yanfei,main_dps,true,atk,pyro,,on_field,medium,社区来源一致:main_dps,1.5,community
+10000049,yoimiya,main_dps,true,atk,pyro,,on_field,medium,社区来源一致:main_dps,2.0,community
+10000050,thoma,buffer,false,atk;hp,pyro,,,high,passive1: When your current active character obtains or refreshes a Blazing Barrier、 this character's Shield Strength will increase by 5% for 6s.,2.2,datamine
+10000050,thoma,shielder,true,atk;hp,pyro,,,high,combat2: The DMG Absorption of the Blazing Barrier scales off Thoma's Max HP.,2.2,datamine
+10000051,eula,main_dps,true,atk,cryo,,on_field,medium,社区来源一致:main_dps,1.5,community
+10000051,eula,debuffer,false,atk,cryo,,,high,combat2: If Grimheart stacks are consumed、 surrounding opponents will have their Physical RES and Cryo RES decreased.,1.5,datamine
+10000052,raiden_shogun,sub_dps,true,atk,electro,,off_field,medium,社区来源一致:sub_dps,2.1,community
+10000052,raiden_shogun,buffer,false,atk,electro,,,high,combat2: The Raiden Shogun unveils a shard of her Euthymia、 dealing Electro DMG to nearby opponents、 and granting nearby party members the Eye of Stormy Judgme,2.1,datamine
+10000053,sayu,healer,true,atk,anemo,,,high,combat3: Deals Anemo DMG to nearby opponents and heals all nearby party members.,2.0,datamine
+10000054,sangonomiya_kokomi,healer,true,atk;hp,hydro,,,high,combat2: Summons a "Bake-Kurage" created from water that can heal her allies.,2.1,datamine
+10000055,gorou,buffer,true,atk;def,geo,,,high,combat2: General's War Banner Provides up to 3 buffs to active characters within the skill's AoE based on the number of Geo characters in the party at the time,2.3,datamine
+10000056,kujou_sara,buffer,true,atk,electro,,,high,combat2: Crowfeathers will trigger Tengu Juurai: Ambush after a short time、 dealing Electro DMG and granting the active character within its AoE an ATK Bonus b,2.1,datamine
+10000057,arataki_itto,main_dps,true,atk,geo,,on_field,medium,社区来源一致:main_dps,2.3,community
+10000058,yae_miko,sub_dps,true,atk,electro,,off_field,medium,社区来源一致:sub_dps,2.5,community
+10000059,shikanoin_heizou,sub_dps,true,atk,anemo,,off_field,medium,社区来源一致:sub_dps,2.8,community
+10000060,yelan,sub_dps,true,atk;hp,hydro,,off_field,medium,社区来源一致:sub_dps,2.7,community
+10000061,kirara,shielder,true,atk;hp,dendro,,,high,combat2: Press Leaps into the air with all the agility of a cat passing through the bushes、 and thwacks her foes with a flying kick that deals AoE Dendro DMG w,3.7,datamine
+10000062,aloy,sub_dps,true,atk,cryo,,off_field,medium,社区来源一致:sub_dps,2.1,community
+10000063,shenhe,buffer,false,atk,cryo,,,high,combat2: Grants all nearby party members the Icy Quill effect and deals Cryo DMG in different ways based on whether it is pressed or held.,2.4,datamine
+10000063,shenhe,debuffer,true,atk,cryo,,,high,combat3: The Talisman Spirit then creates a field that decreases the Cryo RES and Physical RES of opponents within it.,2.4,datamine
+10000064,yun_jin,buffer,false,atk;hp;def,geo,,,high,combat3: Deals AoE Geo DMG and grants all nearby party members a Flying Cloud Flag Formation.,2.4,datamine
+10000064,yun_jin,shielder,true,atk;hp;def,geo,,,high,combat2: DMG Absorption is based on Yun Jin's Max HP and has 150% effectiveness against all Elemental DMG and Physical DMG.,2.4,datamine
+10000065,kuki_shinobu,sub_dps,true,atk;hp,electro,,off_field,medium,社区来源一致:sub_dps,2.7,community
+10000065,kuki_shinobu,healer,false,atk;hp,electro,,,high,combat2: Deals Electro DMG to nearby opponents every 1.5s and restores HP for active character(s) within the ring's AoE based on Kuki Shinobu's Max HP.,2.7,datamine
+10000066,kamisato_ayato,main_dps,true,atk;hp,hydro,,on_field,medium,社区来源一致:main_dps,2.6,community
+10000066,kamisato_ayato,buffer,false,atk;hp,hydro,,,high,combat3: While this space exists、 Bloomwater Blades will constantly rain down and attack opponents within its AoE、 dealing Hydro DMG and increasing the Normal ,2.6,datamine
+10000067,collei,buffer,true,atk,dendro,,,high,passive1: If one of your party members has triggered Burning、 Quicken、 Aggravate、 Spread、 Bloom、 Hyperbloom、 Burgeon、 or Lunar-Bloom reactions before the Floral,3.0,datamine
+10000068,dori,healer,true,atk,electro,,,high,combat3: The connected character will: · Continuously restore HP based on Dori's Max HP.,3.0,datamine
+10000069,tighnari,sub_dps,true,atk,dendro,,off_field,medium,社区来源一致:sub_dps,3.0,community
+10000070,nilou,buffer,true,atk;hp,hydro,,,high,passive1: Characters under the effect of Golden Chalice's Bounty will increase the Elemental Mastery of all nearby characters by 100 for 10s whenever they are h,3.1,datamine
+10000071,cyno,main_dps,true,atk,electro,,on_field,medium,社区来源一致:main_dps,3.1,community
+10000072,candace,buffer,true,atk;hp,hydro,,,high,combat3: Raising her weapon on high、 Candace calls upon a divine blessing that deals AoE Hydro DMG based on her Max HP and continuously confers the Prayer of t,3.1,datamine
+10000073,nahida,sub_dps,true,atk;em,dendro,,off_field,medium,社区来源一致:sub_dps,3.2,community
+10000073,nahida,buffer,false,atk;em,dendro,,,high,passive1: When unleashing Illusory Heart、 the Shrine of Maya will gain the following effects: The Elemental Mastery of the active character within the field wil,3.2,datamine
+10000074,layla,shielder,true,atk;hp,cryo,,,high,combat2: Puts forth a shield known as the Curtain of Slumber、 dealing AoE Cryo DMG.,3.2,datamine
+10000075,wanderer,main_dps,true,atk,anemo,,on_field,medium,社区来源一致:main_dps,3.3,community
+10000076,faruzan,buffer,false,atk,anemo,,,high,combat3: ·The Whirlwind Pulse will also apply Prayerful Wind's Benefit to all nearby party members when it is unleashed、 granting them an Anemo DMG Bonus.,3.3,datamine
+10000076,faruzan,debuffer,true,atk,anemo,,,high,combat3: Whirlwind Pulse ·When the Whirlwind Pulse is unleashed、 it will apply Perfidious Wind's Bale to nearby opponents、 decreasing their Anemo RES.,3.3,datamine
+10000077,yaoyao,healer,true,atk,dendro,,,high,combat2: Yuegui: Throwing Mode Throws out White Jade Radishes that will explode upon hitting characters or opponents、 dealing Dendro DMG to opponents within a ,3.4,datamine
+10000078,alhaitham,main_dps,true,atk;em,dendro,,on_field,medium,社区来源一致:main_dps,3.4,community
+10000079,dehya,buffer,true,atk;hp,pyro,,,high,combat2: Active characters within this field have their resistance to interruption increased、 and when such characters take DMG、 a portion of that damage will ,3.5,datamine
+10000080,mika,healer,true,atk,cryo,,,high,combat3: Derives the ability to spur his teammates on from the recited prayers of the knightly order、 regenerating HP for all nearby party members.,3.5,datamine
+10000081,kaveh,main_dps,true,atk,dendro,,on_field,medium,社区来源一致:main_dps,3.6,community
+10000082,baizhu,healer,false,atk;hp,dendro,,,high,combat2: After it performs 3 attacks or if there are no opponents nearby、 the Sprite will return、 healing all nearby party members based on Baizhu's Max HP.,3.6,datamine
+10000082,baizhu,shielder,true,atk;hp,dendro,,,high,combat3: Enters the Pulsing Clarity state、 creating a Seamless Shield that absorbs Dendro DMG with 250% effectiveness.,3.6,datamine
+10000083,lynette,buffer,true,atk,anemo,,,high,passive1: Within 10s after using Magic Trick: Astonishing Shift、 when there are 1/2/3/4 Elemental Types in the party、 all party members' ATK will be increased b,4.0,datamine
+10000084,lyney,main_dps,true,atk,pyro,,on_field,medium,社区来源一致:main_dps,4.0,community
+10000085,freminet,main_dps,true,atk,cryo,,on_field,medium,社区来源一致:main_dps,4.0,community
+10000086,wriothesley,main_dps,true,atk,cryo,,on_field,medium,社区来源一致:main_dps,4.1,community
+10000087,neuvillette,main_dps,true,atk;hp,hydro,,on_field,medium,社区来源一致:main_dps,4.1,community
+10000088,charlotte,healer,true,atk,cryo,,,high,combat3: Condensing ice to create The Steambird's signature、 Charlotte creates a Newsflash Field that will deal AoE Cryo DMG and restores HP for all nearby par,4.2,datamine
+10000089,furina,sub_dps,true,atk;hp,hydro,,off_field,medium,社区来源一致:sub_dps,4.2,community
+10000089,furina,buffer,false,atk;hp,hydro,,,high,combat3: At the same time、 Furina will increase the DMG dealt by and Incoming Healing Bonus of all nearby party members based on the amount of Fanfare she has.,4.2,datamine
+10000089,furina,healer,false,atk;hp,hydro,,,high,combat2: Pneuma Summons the Singer of Many Waters、 who will heal nearby active character(s) based on Max HP at intervals.,4.2,datamine
+10000090,chevreuse,debuffer,true,atk,pyro,,,high,passive1: When all party members are Pyro and Electro characters and there is at least one Pyro and one Electro character each in the party: Chevreuse grants "C,4.3,datamine
+10000090,chevreuse,healer,false,atk,pyro,,,high,combat2: For a short duration after Chevreuse fires a shot、 she will continuously restore HP to your active character on the field.,4.3,datamine
+10000091,navia,main_dps,true,atk,geo,,on_field,medium,社区来源一致:main_dps,4.3,community
+10000092,gaming,main_dps,true,atk,pyro,,on_field,medium,社区来源一致:main_dps,4.4,community
+10000092,gaming,buffer,false,atk,pyro,,,high,passive3: During the day (06:00 – 18:00)、 your party members gain the Swift Stride effect: Movement SPD increased by 10%.,4.4,datamine
+10000093,xianyun,healer,true,atk,anemo,,,high,combat3: Brings forth a sacred breeze that deals AoE Anemo DMG and heals all nearby characters based on Xianyun's ATK.,4.4,datamine
+10000094,chiori,sub_dps,true,atk;def,geo,,off_field,medium,社区来源一致:sub_dps,4.5,community
+10000094,chiori,buffer,false,atk;def,geo,,,high,passive1: · Grants all your party members "Seize the Moment": When your active party member's Normal Attacks、 Charged Attacks、 and Plunging Attacks hit a nearby,4.5,datamine
+10000095,sigewinne,buffer,false,atk;hp,hydro,,,high,passive1: When the Elemental Skills of your nearby off-field party members other than Sigewinne deal DMG、 consume 1 stack of Convalescence、 and increase the DMG,4.7,datamine
+10000095,sigewinne,healer,true,atk;hp,hydro,,,high,combat2: When it bounces、 it will restore HP to all nearby party members except Sigewinne herself.,4.7,datamine
+10000096,arlecchino,main_dps,true,atk,pyro,,on_field,medium,社区来源一致:main_dps,4.6,community
+10000097,sethos,sub_dps,true,atk;em,electro,,off_field,low,来源冲突:tier-list=sub_dps/builds=main_dps,4.7,community
+10000098,clorinde,main_dps,true,atk,electro,,on_field,medium,社区来源一致:main_dps,4.7,community
+10000099,emilie,sub_dps,true,atk,dendro,,off_field,medium,社区来源一致:sub_dps,4.8,community
+10000099,emilie,buffer,false,atk,dendro,,,high,passive3: When the Lumidouce Case created by Emilie is on the field、 all party members gain 85% Pyro RES against Burning DMG.,4.8,datamine
+10000100,kachina,sub_dps,true,atk;def,geo,,off_field,medium,社区来源一致:sub_dps,5.0,community
+10000101,kinich,main_dps,true,atk,dendro,,on_field,medium,社区来源一致:main_dps,5.0,community
+10000102,mualani,main_dps,true,atk;hp,hydro,,on_field,medium,社区来源一致:main_dps,5.0,community
+10000103,xilonen,debuffer,true,atk;def,geo,,,high,combat2: Source Samples Xilonen has 3 Samplers with her that can generate different Soundscapes based on her other party members' Elemental Types、 decreasing n,5.1,datamine
+10000103,xilonen,healer,false,atk;def,geo,,,high,combat3: Additionally、 she will trigger the following effects based on her different Source Samples: ·If she has at least 2 Source Samples that have had their ,5.1,datamine
+10000104,chasca,main_dps,true,atk,anemo,,on_field,medium,社区来源一致:main_dps,5.2,community
+10000105,ororon,sub_dps,true,atk,electro,,off_field,low,来源冲突:tier-list=support/builds=sub_dps,5.2,community
+10000105,ororon,buffer,false,atk,electro,,,high,passive1: Also、 when nearby opponents take Electro-Charged or Lunar-Charged reaction DMG or Nightsoul-aligned DMG dealt by other nearby characters、 Ororon will ,5.2,datamine
+10000106,mavuika,main_dps,true,atk,pyro,,on_field,medium,社区来源一致:main_dps,5.3,community
+10000106,mavuika,buffer,false,atk,pyro,,,high,passive2: After using her Elemental Burst、 Hour of Burning Skies、 every point of Fighting Spirit present when it is used increases the DMG that the current acti,5.3,datamine
+10000107,citlali,debuffer,false,atk;em,cryo,,,high,passive1: While Itzpapa is on the field、 after nearby party members trigger the Frozen or Melt reactions、 the Pyro and Hydro RES of opponents affected by that r,5.3,datamine
+10000107,citlali,shielder,true,atk;em,cryo,,,high,combat2: Invoking secret pacts passed down by her tribe over the millennia、 Citlali deploys an Opal Shield and calls forth "Obsidian Tzitzimitl: Itzpapa、" a cr,5.3,datamine
+10000108,lan_yan,shielder,true,atk,anemo,,,high,combat2: Summoning forth the Swallow-Wisp Shield、 a secret art passed down across generations、 Lan Yan dashes forward and、 upon making contact with her target、,5.3,datamine
+10000109,yumemizuki_mizuki,main_dps,true,atk;em,anemo,,on_field,medium,社区来源一致:main_dps,5.4,community
+10000109,yumemizuki_mizuki,buffer,false,atk;em,anemo,,,high,combat2: ·Increases the Swirl DMG and Stellar Swirl reaction DMG that nearby party members deal based on Yumemizuki Mizuki's Elemental Mastery.,5.4,datamine
+10000109,yumemizuki_mizuki,healer,false,atk;em,anemo,,,high,passive3: When Yumemizuki Mizuki is in the party、 party members have a chance to recover 30% additional HP when using healing foods that do not have reviving pr,5.4,datamine
+10000110,iansan,buffer,false,atk,electro,,,high,combat3: Kinetic Energy Scale The Kinetic Energy Scale will follow the character around、 boosting the ATK of your current active party member in different ways,5.5,datamine
+10000110,iansan,healer,true,atk,electro,,,high,combat3: Additionally、 the Scale will log the distance your current active character (excluding Iansan) has moved so long as it is active、 restoring Nightsoul ,5.5,datamine
+10000111,varesa,main_dps,true,atk,electro,,on_field,medium,社区来源一致:main_dps,5.5,community
+10000112,escoffier,sub_dps,true,atk,cryo,,off_field,medium,社区来源一致:sub_dps,5.6,community
+10000112,escoffier,debuffer,false,atk,cryo,,,high,passive2: When there are 1/2/3/4 Hydro or Cryo characters in the party、 Escoffier will decrease the Hydro RES and Cryo RES of any opponents hit by her Elemental,5.6,datamine
+10000112,escoffier,healer,false,atk,cryo,,,high,combat3: Displaying her exceptional knife skills、 Escoffier deals AoE Cryo DMG and restores HP to all nearby party members based on her ATK.,5.6,datamine
+10000113,ifa,sub_dps,true,atk,anemo,,off_field,low,来源冲突:tier-list=sub_dps/builds=main_dps,5.6,community
+10000113,ifa,buffer,false,atk,anemo,,,high,passive1: Rescue Essentials will increase the Swirl、 Stellar Swirl、 Electro-Charged、 and Lunar-Charged reaction DMG dealt by nearby party members.,5.6,datamine
+10000113,ifa,healer,false,atk,anemo,,,high,combat2: When he uses Normal Attacks in this state、 he will use different kinds of **Supporting Fire** depending on whether you Tap or Hold、 firing Tonicshots ,5.6,datamine
+10000114,skirk,main_dps,true,atk,cryo,,on_field,medium,社区来源一致:main_dps,5.7,community
+10000115,dahlia,buffer,false,atk;hp,hydro,,,high,combat3: Appeals to the divine with earnestness and song、 dealing AoE Hydro DMG to nearby opponents and granting his party members Favonian Favor、 summoning a ,5.7,datamine
+10000115,dahlia,shielder,true,atk;hp,hydro,,,high,combat3: Appeals to the divine with earnestness and song、 dealing AoE Hydro DMG to nearby opponents and granting his party members Favonian Favor、 summoning a ,5.7,datamine
+10000116,ineffa,sub_dps,true,atk,electro,,off_field,medium,社区来源一致:sub_dps,5.8,community
+10000116,ineffa,buffer,false,atk,electro,,,high,passive2: When using the Elemental Burst **Supreme Instruction: Cyclonic Exterminator**、 all your party members will gain the Parameter Permutation effect: Incr,5.8,datamine
+10000119,lauma,buffer,false,atk;em,dendro,,,high,passive3: When a Bloom reaction is triggered by a party member、 it will be converted into the Lunar-Bloom reaction、 with every point of Elemental Mastery that L,6.0,datamine
+10000119,lauma,debuffer,true,atk;em,dendro,,,high,combat2: Additionally、 when Lauma's Elemental Skill or attacks from Frostgrove Sanctuary hit an opponent、 that opponent's Dendro RES and Hydro RES will be decr,6.0,datamine
+10000120,flins,main_dps,true,atk,electro,,on_field,medium,社区来源一致:main_dps,6.0,community
+10000120,flins,buffer,false,atk,electro,,,high,passive3: When a party member triggers an Electro-Charged reaction、 it will be converted into the Lunar-Charged reaction、 with every 100 ATK that Flins has incr,6.0,datamine
+10000121,aino,support,true,atk,hydro,,,medium,社区标注为 Support、但解包技能文本未匹配到具体职能,6.0,community
+10000122,nefer,main_dps,true,atk;em,dendro,,on_field,medium,社区来源一致:main_dps,6.1,community
+10000122,nefer,buffer,false,atk;em,dendro,,,high,passive3: When a party member triggers a Bloom reaction、 it will be converted into the Lunar-Bloom reaction、 with every point of Elemental Mastery that Nefer ha,6.1,datamine
+10000123,durin,sub_dps,true,atk,pyro,,off_field,medium,社区来源一致:sub_dps,6.2,community
+10000123,durin,debuffer,false,atk,pyro,,,high,passive1: When that form is: Dragon of White Flame After nearby party members trigger Burning、 Overloaded、 Pyro Swirl、 or Pyro Crystallize reactions on an oppon,6.2,datamine
+10000124,jahoda,support,true,atk,anemo,,,medium,社区标注为 Support、但解包技能文本未匹配到具体职能,6.2,community
+10000125,columbina,sub_dps,true,atk;hp,hydro,,off_field,low,来源冲突:tier-list=sub_dps/builds=support,6.3,community
+10000126,zibai,main_dps,true,atk;def,geo,,on_field,medium,社区来源一致:main_dps,6.3,community
+10000126,zibai,buffer,false,atk;def,geo,,,high,passive3: When a party member triggers a Hydro Crystallize reaction、 it will be converted into the Lunar-Crystallize reaction、 with every 100 DEF that Zibai has,6.3,datamine
+10000127,illuga,buffer,true,atk;def;em,geo,,,high,combat3: When Normal Attacks、 Charged Attacks、 Plunging Attacks、 Elemental Skills、 and Elemental Bursts of nearby active party members deal Geo DMG to opponent,6.3,datamine
+10000128,varka,main_dps,true,atk,anemo,,on_field,medium,社区来源一致:main_dps,6.4,community
+10000129,lohen,main_dps,true,atk,cryo,,on_field,medium,社区来源一致:main_dps,6.6,community
+10000130,linnea,buffer,false,atk;def,geo,,,high,passive2: Linnea will increase the Elemental Mastery of certain characters in your party according to your current active character.,6.5,datamine
+10000130,linnea,debuffer,true,atk;def,geo,,,high,passive1: When Lumi is present on the field、 the Geo RES of opponents near Lumi will decrease by 15%.,6.5,datamine
+10000130,linnea,healer,false,atk;def,geo,,,high,combat3: Linnea summons Lumi to strike in **Super Power Form**、 healing nearby party members.,6.5,datamine
+10000131,nicole,shielder,true,atk,pyro,,,high,combat2: This increases their ATK and deals AoE Pyro DMG、 as well as creates a Shield of Blazing Light.,6.6,datamine
+10000132,prune,support,true,atk,anemo,,,medium,社区标注为 Support、但解包技能文本未匹配到具体职能,6.6,community
+10000133,sandrone,main_dps,true,atk,cryo,,on_field,medium,社区来源一致:main_dps,6.7,community
+10000133,sandrone,buffer,false,atk,cryo,,,high,passive3: When a party member triggers a Superconduct or Cryo Swirl reaction、 it becomes a Stellar-Conduct or Stellar Swirl reaction instead、 and the Base DMG o,6.7,datamine
+10000140,vodyanitsa,debuffer,true,atk;hp,hydro,,,high,combat2: The above two types of attacks will also decrease the Hydro RES and Cryo RES of opponents hit.,7.1,datamine
+10000140,vodyanitsa,healer,false,atk;hp,hydro,,,high,combat2: Additionally、 while the Song of Ages Past effect is active、 the party's active character gains increased resistance to interruption and periodically r,7.1,datamine
+10000143,vesna,main_dps,true,atk,anemo,,on_field,low,社区定位,7.1,community
+10000148,alyosha,healer,true,atk,electro,,,high,passive1: When **Tugarin** attacks、 it will also restore HP to nearby active characters at 120% of Alyosha's ATK.,7.0,datamine
+10000150,odette,sub_dps,true,atk,cryo,,off_field,medium,社区来源一致:sub_dps,7.0,community
+10000150,odette,buffer,false,atk,cryo,,,high,passive3: When a party member triggers a Superconduct or Cryo Swirl reaction、 it becomes a Stellar-Conduct or Stellar Swirl reaction instead、 and the Base DMG o,7.0,datamine

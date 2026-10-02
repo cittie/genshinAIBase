@@ -1,0 +1,32 @@
+name: validate
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: 校验数据与文档
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 安装 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 运行校验脚本
+        run: python scripts/validate_data.py
+
+      - name: 检查行尾是否为 LF
+        run: |
+          if git ls-files --eol | grep -E 'w/(crlf|mixed)' ; then
+            echo "::error::检测到 CRLF 或混合行尾，请统一为 LF（见 .gitattributes）"
+            exit 1
+          fi
+          echo "行尾检查通过"

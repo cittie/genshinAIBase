@@ -1,0 +1,59 @@
+# ---- 游戏资源：一律不提交 ----
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.mp3
+*.ogg
+*.wav
+*.mp4
+*.blend
+*.fbx
+*.unity3d
+*.bytes
+*.bundle
+
+# ---- 原始数据来源（解包/抓取产物，只提交整理后的 CSV）----
+raw/
+dump/
+cache/
+*.bin
+ExcelBinOutput/
+TextMap/
+
+# ---- genshin-db 源数据（按 README 步骤下载，不入库）----
+genshin-db*.tgz
+data.min.json
+/package/
+
+# ---- 抓取到的网页缓存（scripts/fetch_community_roles.py --offline 复用）----
+.cache/
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- Node / 构建产物 ----
+node_modules/
+dist/
+build/
+
+# ---- 编辑器与操作系统 ----
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- 本地临时文件 ----
+*.tmp
+*.bak
+*.local.md
+scratch/

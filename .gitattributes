@@ -1,0 +1,18 @@
+# 统一行尾，保证跨平台差异最小化（AI 与脚本解析依赖 LF）
+* text=auto eol=lf
+
+*.csv  text eol=lf
+*.md   text eol=lf
+*.py   text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+
+# CSV 不做 diff 统计噪音，但保留可读 diff
+*.csv -text linguist-language=CSV
+
+# 二进制资源
+*.png binary
+*.jpg binary
+*.webp binary
+*.mp3 binary
+*.ogg binary
