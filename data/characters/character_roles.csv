@@ -101,7 +101,6 @@ char_id,slug,role,is_primary,scaling_stat,damage_type,damage_source,field_state,
 10000090,chevreuse,healer,false,atk,pyro,,,high,combat2: For a short duration after Chevreuse fires a shot、 she will continuously restore HP to your active character on the field.,4.3,datamine
 10000091,navia,main_dps,true,atk,geo,,on_field,medium,社区来源一致:main_dps,4.3,community
 10000092,gaming,main_dps,true,atk,pyro,,on_field,medium,社区来源一致:main_dps,4.4,community
-10000092,gaming,buffer,false,atk,pyro,,,high,passive3: During the day (06:00 – 18:00)、 your party members gain the Swift Stride effect: Movement SPD increased by 10%.,4.4,datamine
 10000093,xianyun,healer,true,atk,anemo,,,high,combat3: Brings forth a sacred breeze that deals AoE Anemo DMG and heals all nearby characters based on Xianyun's ATK.,4.4,datamine
 10000094,chiori,sub_dps,true,atk;def,geo,,off_field,medium,社区来源一致:sub_dps,4.5,community
 10000094,chiori,buffer,false,atk;def,geo,,,high,passive1: · Grants all your party members "Seize the Moment": When your active party member's Normal Attacks、 Charged Attacks、 and Plunging Attacks hit a nearby,4.5,datamine

@@ -28,6 +28,8 @@ PRIMARY_KEYS: dict[str, list[str]] = {
     "data/characters/characters.csv": ["char_id"],
     "data/characters/character_roles.csv": ["char_id", "role"],
     "data/characters/community_roles.csv": ["char_id"],
+    "data/characters/character_talents.csv": ["char_id", "talent_type"],
+    "data/characters/character_talent_params.csv": ["char_id", "talent_type", "label_index"],
     "data/weapons/weapons.csv": ["weapon_id"],
     "data/artifacts/artifact_sets.csv": ["set_id"],
     "data/artifacts/artifact_set_bonuses.csv": ["set_id", "pieces", "effect_index"],
@@ -42,13 +44,15 @@ PRIMARY_KEYS: dict[str, list[str]] = {
 }
 
 # 数值字段判定
-NUMERIC_SUFFIXES = ("_pct", "_sec", "_value", "_ratio", "_multiplier", "_lv90", "_lv20_5star")
+NUMERIC_SUFFIXES = ("_pct", "_sec", "_value", "_ratio", "_multiplier", "_lv90", "_lv20_5star",
+                    "_lv1", "_lv10")
 NUMERIC_NAMES = {
     "rarity", "level", "hp", "atk", "def", "pieces", "effect_index", "max_stacks",
     "burst_cost", "value", "value_base", "aura_consumed_unit", "energy_value",
+    "param_refs",
 }
 # 明确不是数值的同名/近名字段（避免误判）
-NON_NUMERIC_OVERRIDE = {"value_unit", "sub_stat"}
+NON_NUMERIC_OVERRIDE = {"value_unit", "sub_stat", "scaling_stat"}
 
 NULLISH = {"", "NA", "?", "N/A", "na", "null"}
 SNAKE_RE = re.compile(r"^[a-z][a-z0-9_]*$")
@@ -177,11 +181,17 @@ def check_csv(path: Path) -> None:
                     f"字段 '{name}' 含逗号；多值请用 ';' 分隔，文本请改写")
 
             if i in numeric_cols and value not in NULLISH:
-                try:
-                    float(value)
-                except ValueError:
-                    err(CSV_ERRORS, path, lineno,
-                        f"字段 '{name}' 应为数值或空/NA/?，实际为 '{value}'")
+                # 允许多值数值字段：`;` 分隔，如 param_refs / value_lv1（与 value_unit 按位置对齐）
+                for part in value.split(";"):
+                    part = part.strip()
+                    if part in NULLISH:
+                        continue
+                    try:
+                        float(part)
+                    except ValueError:
+                        err(CSV_ERRORS, path, lineno,
+                            f"字段 '{name}' 应为数值或空/NA/?，实际片段为 '{part}'")
+                        break
 
         if key_idx:
             key = tuple(row[i].strip() for i in key_idx)

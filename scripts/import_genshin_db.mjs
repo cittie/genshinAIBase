@@ -56,7 +56,7 @@ const REPO = path.resolve(args.outDir || path.join(__dirname, '..'));
 const SRC = path.resolve(args.input);
 const TARGETS = new Set(
   args.targets.split(',').map(s => s.trim()).filter(Boolean).flatMap(t =>
-    t === 'all' ? ['characters', 'roles', 'weapons', 'artifacts'] : [t]));
+    t === 'all' ? ['characters', 'roles', 'weapons', 'artifacts', 'talents'] : [t]));
 
 // ---------------------------------------------------------------------------
 // 枚举映射
@@ -543,7 +543,12 @@ const CAPABILITY_RULES = [
   },
 ];
 
-const TALENT_PROPS = ['combat1', 'combat2', 'combat3', 'passive1', 'passive2', 'passive3'];
+const TALENT_PROPS = ['combat1', 'combat2', 'combat3', 'passive1', 'passive2', 'passive3', 'passive4'];
+
+// 仅在探索场景生效的固有天赋不计入战斗职能。
+// 否则「队伍移动速度 +15%」这类被动会被误判为队伍增益（buff）。
+const EXPLORATION_ONLY =
+  /(does not take effect in Domains|no effect in Domains|Phlogiston Mechanics|Trounce Domains, or (the )?Spiral Abyss)/i;
 
 function sentencesOf(text) {
   return String(text || '')
@@ -590,6 +595,7 @@ function deriveCapabilities(raw, key) {
     for (const prop of TALENT_PROPS) {
       const talent = rec[prop];
       if (!talent) continue;
+      if (prop.startsWith('passive') && EXPLORATION_ONLY.test(talent.description || '')) continue;
       for (const s of sentencesOf(talent.description)) {
         if (!rule.verb.test(s)) continue;
         if (rule.statWord && !rule.statWord.test(s)) continue;
@@ -1087,6 +1093,251 @@ function buildArtifacts(raw, version) {
 }
 
 // ---------------------------------------------------------------------------
+// character_talents.csv + character_talent_params.csv
+//
+// 天赋表补上仓库此前最大的缺口：完整技能文本（不截断）与**逐条效果的属性缩放来源**。
+// 例如沃雅妮莎的元素战技：
+//   「遥久之歌治疗量|{param5:I}+{param6:F2P}生命值上限」→ 治疗吃生命值上限
+//   「技能冷却时间|{param10:F1}秒」              → 不适用（不是属性缩放）
+//
+// 属性来源判定（依据游戏自己的标签写法）：
+//   1) 去掉 {paramN:FMT} 后的剩余中文若是「生命值上限/攻击力/防御力/元素精通」→ 即该属性
+//   2) 否则若标签含「伤害（但不含伤害加成）/治疗/恢复/护盾/吸收」→ 攻击力（游戏默认）
+//   3) 其余（持续时间/冷却/体力/元素能量/抗性降低…）→ NA（不是属性缩放）
+// ---------------------------------------------------------------------------
+
+const TALENT_TYPE = {
+  combat1: 'normal_attack',
+  combat2: 'elemental_skill',
+  combat3: 'elemental_burst',
+  combatsp: 'alternate_sprint',
+  combatju: 'alternate_attack',
+};
+const PASSIVE_TYPES = {
+  passive1: 'passive_1', passive2: 'passive_2', passive3: 'passive_3', passive4: 'passive_4',
+};
+const STAT_SUFFIX = {
+  生命值上限: 'hp', 最大生命值: 'hp', 攻击力: 'atk', 防御力: 'def', 元素精通: 'em',
+};
+// 属性词（按正则，注意「最大生命值」是「生命值上限」的另一种写法）
+const STAT_WORDS = [
+  { re: '生命值上限|最大生命值', stat: 'hp' },
+  { re: '攻击力', stat: 'atk' },
+  { re: '防御力', stat: 'def' },
+  { re: '元素精通', stat: 'em' },
+];
+// 非角色面板属性的机制（生命之契/当前生命值/元素能量…）→ 不适用
+const NON_STAT_SUFFIX = /(生命之契|当前生命值|元素能量|战意|夜魂值|体力|燃素)/;
+const META_LABEL = /(间隔|持续|冷却|消耗|数量|层数|范围|速度|概率|次数|充能)/;
+const STAT_ORDER = ['atk', 'hp', 'def', 'em'];
+
+const TALENTS_HEADER = [
+  'char_id', 'slug', 'talent_type', 'name_zh', 'name_en',
+  'scaling_stat', 'description_zh', 'version', 'source',
+];
+
+const TALENT_PARAMS_HEADER = [
+  'char_id', 'slug', 'talent_type', 'label_index', 'label_zh', 'scaling_stat',
+  'value_unit', 'param_refs', 'value_lv1', 'value_lv10', 'version', 'source',
+];
+
+/** 全文清洗：不留 ASCII 逗号/分号（CSV 契约），但**不截断**。
+ *  与 noteText 统一：逗号 → 「、」，分号 → 「；」。英文名称同样需要清洗
+ *  （如香菱固有天赋 "Beware, It's Super Hot!"）。 */
+function fullText(s) {
+  return String(s || '')
+    .replace(/,/g, '、')
+    .replace(/;/g, '；')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/** 解析一条属性标签：`技能伤害|{param1:F2P}生命值上限`。
+ *
+ *  属性与单位都是**逐参数**的：一条标签可能引用多个不同属性的参数
+ *  （如 `突进攻击伤害|{param1:F1P}攻击力+{param2:F1P}元素精通` → 参数 1 吃攻击力、参数 2 吃精通），
+ *  也可能混合单位（`治疗量|{param5:I}+{param6:F2P}生命值上限` → 固定值 + 生命值百分比）。
+ *  因此 scaling_stat / value_unit 都与 param_refs 按位置一一对应。
+ *
+ *  判定顺序：
+ *   1. 按出现顺序扫描模板，把属性词分配给「它之前最近的一批参数」；
+ *      尾部未标注的参数继承最后一个属性词（如 `{param2:F1P}最大生命值+{param3:I}` 两个都吃生命值）。
+ *   2. 完全没有属性词时：元数据词（间隔/持续/冷却/消耗…）或非面板机制（生命之契…）→ NA；
+ *      否则仅当该词条全部参数都是百分比、且词条名含「伤害（不含伤害加成）/治疗/恢复/护盾/吸收」
+ *      → 攻击力（游戏默认）。固定值词条（如护盾基础吸收量 `{param5:I}`）不套用默认，判 NA。
+ */
+function parseLabel(label) {
+  const m = String(label).match(/^([^|]+)\|(.*)$/);
+  if (!m) return null;
+  const name = m[1].trim();
+  const tpl = m[2];
+
+  const params = [...tpl.matchAll(/\{param(\d+):([^}]+)\}/g)].map(x => {
+    const fmt = x[2];
+    let unit = 'flat';
+    if (/P$/.test(fmt)) unit = 'pct';
+    else if (/秒/.test(tpl)) unit = 'sec';
+    return { n: Number(x[1]), fmt, unit, index: x.index, stat: '' };
+  });
+
+  // 1. 属性词按位置分配给参数
+  const tokens = params.map(p => ({ kind: 'param', index: p.index, ref: p }));
+  for (const w of STAT_WORDS) {
+    for (const h of tpl.matchAll(new RegExp(w.re, 'g'))) {
+      tokens.push({ kind: 'stat', index: h.index, stat: w.stat });
+    }
+  }
+  tokens.sort((a, b) => a.index - b.index);
+  let pending = [];
+  let lastStat = '';
+  for (const t of tokens) {
+    if (t.kind === 'param') pending.push(t.ref);
+    else { for (const p of pending) p.stat = t.stat; pending = []; lastStat = t.stat; }
+  }
+  for (const p of pending) p.stat = lastStat;
+
+  // 2. 无属性词时的兜底
+  const suffix = tpl.replace(/\{param\d+:[^}]+\}/g, '').replace(/[^\u4e00-\u9fa5]/g, '');
+  const anyStat = params.some(p => p.stat);
+  let fallback = 'NA';
+  if (!anyStat) {
+    if (META_LABEL.test(name) || NON_STAT_SUFFIX.test(suffix)) fallback = 'NA';
+    else if (params.length && params.every(p => p.unit === 'pct')
+             && (/伤害/.test(name) && !/伤害加成/.test(name) || /(治疗|恢复|护盾|吸收)/.test(name))) {
+      fallback = 'atk';
+    }
+  }
+  for (const p of params) if (!p.stat) p.stat = fallback;
+
+  const stats = [...new Set(params.map(p => p.stat))];
+  return {
+    name,
+    params,
+    stat: STAT_ORDER.filter(s => stats.includes(s)).join(';') || 'NA',
+    stats: params.map(p => p.stat).join(';'),
+    units: params.map(p => p.unit).join(';'),
+  };
+}
+
+/** 数值裁剪到 4 位小数，避免浮点噪声。 */
+function num(v) {
+  const n = Number(v);
+  return Number.isFinite(n) ? String(Math.round(n * 10000) / 10000) : String(v);
+}
+
+function buildTalents(raw, version, repo) {
+  const chars = listCharactersForRoles(raw, repo);   // 复用：保证与 characters.csv 的 slug 一致
+  const zhTalents = raw.data.ChineseSimplified.talents;
+  const enTalents = raw.data.English.talents;
+  const stats = raw.stats.talents;
+
+  const talentRows = [];
+  const paramRows = [];
+  const skipped = [];
+
+  for (const ch of chars) {
+    const zrec = zhTalents[ch.sourceKey];
+    const erec = enTalents[ch.sourceKey];
+    if (!zrec || !erec) { skipped.push(ch.slug); continue; }
+    const ver = version.talents ? (version.talents[ch.sourceKey] || '') : '';
+
+    for (const [sub, type] of Object.entries({ ...TALENT_TYPE, ...PASSIVE_TYPES })) {
+      const z = zrec[sub];
+      const e = erec[sub];
+      if (!z) continue;
+
+      const labels = (z.attributes && z.attributes.labels) || [];
+      const parsed = labels.map(parseLabel).filter(Boolean);
+      const statsFound = new Set();
+      for (const p of parsed) for (const s of p.stats.split(';')) if (s && s !== 'NA') statsFound.add(s);
+      const aggregate = STAT_ORDER.filter(s => statsFound.has(s)).join(';');
+
+      talentRows.push([
+        ch.charId, ch.slug, type,
+        fullText(z.name || ''), fullText(e.name || ''),
+        aggregate, fullText(z.description || ''), ver, 'datamine',
+      ]);
+
+      // 只有战斗天赋有参数（固有天赋是纯文本）
+      parsed.forEach((p, i) => {
+        const rec = stats[ch.sourceKey] && stats[ch.sourceKey][sub];
+        const values = p.params.map(pp => (rec ? rec['param' + pp.n] : null));
+        // 百分比按契约输出为百分数数值（3.27 而非 0.0327）
+        const at = (arr, idx, unit) => {
+          if (!Array.isArray(arr) || arr.length <= idx) return '';
+          const raw = Number(arr[idx]);
+          if (!Number.isFinite(raw)) return String(arr[idx]);
+          return unit === 'pct' ? num(raw * 100) : num(raw);
+        };
+        paramRows.push([
+          ch.charId, ch.slug, type, String(i + 1), fullText(p.name), p.stats, p.units,
+          p.params.map(pp => pp.n).join(';'),
+          values.map((v, k) => at(v, 0, p.params[k].unit)).join(';'),   // 1 级
+          values.map((v, k) => at(v, 9, p.params[k].unit)).join(';'),   // 10 级（源数组 15 级）
+          ver, 'datamine',
+        ]);
+      });
+    }
+  }
+
+  talentRows.sort((a, b) => Number(a[0]) - Number(b[0]) || a[2].localeCompare(b[2]));
+  paramRows.sort((a, b) => Number(a[0]) - Number(b[0]) || a[2].localeCompare(b[2]) || Number(a[3]) - Number(b[3]));
+
+  if (skipped.length) console.error(`无天赋记录、已跳过 ${skipped.length} 个角色: ${skipped.join(', ')}`);
+
+  const naCount = paramRows.filter(r => r[5] === 'NA').length;
+  console.error(`天赋行 ${talentRows.length} / 属性词条行 ${paramRows.length}`
+    + `（其中不适用缩放的元数据行 ${naCount}）`);
+
+  // 普通攻击理论上都吃攻击力；列出例外供人工核对
+  const oddNA = talentRows.filter(r => r[2] === 'normal_attack' && r[5] !== 'atk');
+  if (oddNA.length) {
+    console.error(`⚠ 普通攻击 scaling_stat 非 atk 的 ${oddNA.length} 个，需人工核对：`);
+    oddNA.slice(0, 12).forEach(r => console.error(`    ${r[1]} = ${r[5] || '(空)'}`));
+  }
+
+  return { talentRows, paramRows };
+}
+
+// ---------------------------------------------------------------------------
+// 天赋回归自检。
+// - vodyanitsa：三条天赋已对照技能原文人工核实（治疗与技能伤害基于生命值上限）。
+// - 普攻非纯攻击力的 4 个角色已逐条核对描述，属真实设计（生命值/防御力倍率）。
+// ---------------------------------------------------------------------------
+const TALENT_REGRESSION = {
+  vodyanitsa: {
+    normal_attack: 'atk',        // 一段伤害…均无属性后缀
+    elemental_skill: 'hp',       // 技能伤害/唤春角笛伤害/遥久之歌治疗量 均基于生命值上限
+    elemental_burst: 'hp',       // 技能伤害基于生命值上限
+  },
+  yelan: { normal_attack: 'atk;hp' },        // 破局矢（重击）基于生命值上限
+  neuvillette: { normal_attack: 'atk;hp' },  // 重击·衡平推裁基于生命值上限
+  xilonen: { normal_attack: 'atk;def' },     // 战技状态下普攻/下落攻击转为防御力
+  zhongli: { elemental_skill: 'atk;hp' },    // 护盾附加吸收量基于最大生命值（前有岩脊伤害吃攻击力）
+  diona: { elemental_skill: 'atk;hp' },      // 猫爪伤害吃攻击力 + 护盾基础吸收量基于最大生命值
+  noelle: { elemental_skill: 'atk;def' },    // 技能伤害/吸收量/治疗量均基于防御力
+};
+
+function runTalentRegression(talentRows) {
+  const bySlug = new Map();
+  for (const r of talentRows) {
+    if (!bySlug.has(r[1])) bySlug.set(r[1], new Map());
+    bySlug.get(r[1]).set(r[2], r[5]);
+  }
+  const problems = [];
+  for (const [slug, want] of Object.entries(TALENT_REGRESSION)) {
+    const got = bySlug.get(slug);
+    if (!got) { problems.push(`${slug}: 缺失`); continue; }
+    for (const [type, stat] of Object.entries(want)) {
+      if (got.get(type) !== stat) {
+        problems.push(`${slug}.${type}.scaling_stat: got ${got.get(type)} want ${stat}`);
+      }
+    }
+  }
+  return problems;
+}
+
+// ---------------------------------------------------------------------------
 // 主流程
 // ---------------------------------------------------------------------------
 const produced = [];
@@ -1137,6 +1388,19 @@ if (TARGETS.has('artifacts')) {
     + `${Object.keys(ARTIFACT_TARGET_REGRESSION).length} 套 4 件套受益对象）`);
   produced.push(writeCsv('data/artifacts/artifact_sets.csv', ARTIFACT_SETS_HEADER, setRows));
   produced.push(writeCsv('data/artifacts/artifact_set_bonuses.csv', ARTIFACT_BONUSES_HEADER, bonusRows));
+}
+
+if (TARGETS.has('talents')) {
+  const { talentRows, paramRows } = buildTalents(raw, version, REPO);
+  const problems = runTalentRegression(talentRows);
+  if (problems.length) {
+    console.error('\n[天赋回归自检失败] 已中止写入：');
+    problems.forEach(p => console.error('  - ' + p));
+    process.exit(2);
+  }
+  console.error(`天赋回归自检通过（${Object.keys(TALENT_REGRESSION).length} 个角色）`);
+  produced.push(writeCsv('data/characters/character_talents.csv', TALENTS_HEADER, talentRows));
+  produced.push(writeCsv('data/characters/character_talent_params.csv', TALENT_PARAMS_HEADER, paramRows));
 }
 
 console.log('\n=== 导入结果 ===');

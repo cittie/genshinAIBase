@@ -1,17 +1,22 @@
 # data/characters/ — 角色数据
 
-角色基础属性与定位。
+角色基础属性、职能定位与天赋。
 
 > **数据状态**
 > - `characters.csv`：**已填充 124 行**（v7.1 全量），`source=datamine`
-> - `character_roles.csv`：**已填充 172 行**，覆盖 120 / 124 个角色
+> - `character_roles.csv`：**已填充 171 行**，覆盖 120 / 124 个角色（推导字段，含依据与可信度）
+> - `character_talents.csv`：**已填充 753 行**，技能完整文本（不截断）+ 属性缩放
+> - `character_talent_params.csv`：**已填充 2387 行**，逐条效果的属性来源与数值
 > - `community_roles.csv`：**已填充 120 行**，社区定位来源快照（交叉核对用）
 >
 > 重新生成：
 > ```bash
-> node scripts/import_genshin_db.mjs --in <genshin-db 的 data.min.json> --targets characters,roles
+> node scripts/import_genshin_db.mjs --in <genshin-db 的 data.min.json> --targets characters,roles,talents
 > python scripts/fetch_community_roles.py   # 刷新社区定位来源快照（联网）
 > ```
+>
+> **属性缩放问题先查 `character_talent_params.csv`**：它是「某条效果吃什么属性」的权威依据，
+> 例如「沃雅妮莎的治疗吃生命值上限」就记录在那里。
 
 ---
 
@@ -221,14 +226,115 @@
 
 ---
 
+## character_talents.csv — 天赋（技能文本与属性缩放）
+
+**一行一个天赋**（3 个战斗天赋 + 最多 4 个固有天赋）。
+
+> **状态：已填充 753 行**，覆盖 120 / 124 个角色（`source=datamine`）
+
+这张表补上了仓库此前最大的缺口：**完整技能文本（不截断）+ 每条效果的属性缩放来源**。
+
+| 字段 | 类型 | 单位 | 枚举/取值 | 可空 | 说明 |
+|---|---|---|---|---|---|
+| `char_id` | string | — | — | 否 | **主键之一**，关联 `characters.char_id` |
+| `slug` | string | — | — | 否 | 与 `characters.slug` 一致 |
+| `talent_type` | string | — | 见下方枚举 | 否 | **主键之一**，天赋类别 |
+| `name_zh` / `name_en` | string | — | — | 是 | 天赋名（已做逗号清洗，见契约） |
+| `scaling_stat` | string | — | `atk` `hp` `def` `em`，多值用 `;` | 是 | **该天赋全部效果的属性来源汇总**；固有天赋为空（无数值） |
+| `description_zh` | string | — | — | 是 | **完整技能文本（不截断）** |
+| `version` | string | — | — | 否 | 该角色实装的游戏版本 |
+| `source` | string | — | `datamine` | 否 | 数据来源 |
+
+### `talent_type` 枚举
+
+| 值 | 中文 | 说明 |
+|---|---|---|
+| `normal_attack` | 普通攻击 | 含重击、下落攻击 |
+| `elemental_skill` | 元素战技 | |
+| `elemental_burst` | 元素爆发 | |
+| `alternate_sprint` | 替代冲刺 | 仅 3 个角色（如莫娜、神里绫华） |
+| `alternate_attack` | 替代动作 | 仅 3 个角色 |
+| `passive_1` ~ `passive_4` | 固有天赋 | `passive_4` 仅 27 个角色有 |
+
+---
+
+## character_talent_params.csv — 天赋属性词条（长表）
+
+**一行一条属性词条**，是「某条效果吃什么属性」的**权威依据**。
+
+> **状态：已填充 2387 行**（`source=datamine`）
+
+按 schema 「一对多优先长表」的原则设计：一条技能有多个效果，各自可能吃不同属性。
+
+| 字段 | 类型 | 单位 | 枚举/取值 | 可空 | 说明 |
+|---|---|---|---|---|---|
+| `char_id` | string | — | — | 否 | **主键之一** |
+| `slug` | string | — | — | 否 | 与 `characters.slug` 一致 |
+| `talent_type` | string | — | 同 `character_talents.talent_type` | 否 | **主键之一** |
+| `label_index` | int | — | 从 `1` 开始 | 否 | **主键之一**，该天赋下第几条词条 |
+| `label_zh` | string | — | — | 否 | 词条名，即游戏内属性表的行名 |
+| `scaling_stat` | string | — | `atk` `hp` `def` `em` `NA`，多值用 `;` | 否 | **属性来源，与 `param_refs` 按位置一一对应**；`NA` = 不适用 |
+| `value_unit` | string | — | `pct` `flat` `sec`，多值用 `;` | 是 | **逐参数对齐**：一条词条可混合单位 |
+| `param_refs` | string | — | 数字，多值用 `;` | 是 | 引用的参数序号，与 `scaling_stat` / `value_unit` 按位置一一对应 |
+| `value_lv1` / `value_lv10` | float | 依 `value_unit` | 多值用 `;` | 是 | 1 级 / 10 级的数值（源数组共 15 级，10 级为常规满级） |
+| `version` | string | — | — | 否 | 数据版本 |
+| `source` | string | — | `datamine` | 否 | 数据来源 |
+
+### 判定规则（依据游戏自己的标签写法）
+
+词条原文形如 `技能伤害|{param1:F2P}生命值上限`。**属性与单位都是逐参数的**，
+因为一条词条可能引用多个不同属性的参数：
+
+```
+突进攻击伤害|{param1:F1P}攻击力+{param2:F1P}元素精通
+  → scaling_stat = atk;em     param_refs = 1;2
+
+护盾基础吸收量|{param2:F1P}最大生命值+{param3:I}
+  → scaling_stat = hp;hp      value_unit = pct;flat
+```
+
+判定顺序：
+
+| 步骤 | 做法 |
+|---|---|
+| 1 | 按出现顺序扫描模板，把属性词分配给**它之前最近的一批参数**；尾部未标注的参数继承最后一个属性词 |
+| 2 | 完全没有属性词时：元数据词（间隔/持续/冷却/消耗…）或非面板机制（生命之契/当前生命值/元素能量…）→ `NA` |
+| 3 | 否则**仅当该词条全部参数都是百分比**、且词条名含「伤害（不含伤害加成）/治疗/恢复/护盾/吸收」→ `atk`（游戏默认）。固定值词条不套用默认 |
+
+> ⚠️ 三个已修的真实误判（都是被真实数据打出来的）：
+> 1. **`最大生命值` 是 `生命值上限` 的另一种写法**——只映射了后者，
+>    导致钟离/迪奥娜的护盾被算成吃攻击力（现在两者都映射到 `hp`）。
+> 2. **一条词条可引用两个不同属性的参数**（全库 13 例如「攻击力+元素精通」），
+>    早期用单一 `scaling_stat` 表达不了，现改为逐参数对齐。
+> 3. **兜底规则过宽**：`护盾基础吸收量|{param5:I}` 是固定值，
+>    曾因词条名含「护盾」被判为吃攻击力；现固定值词条判 `NA`。
+> 4. 「遥久之歌治疗**间隔**」含「治疗」二字，曾是吃攻击力——它是时间参数，现元数据词优先判 `NA`。
+> 5. 百分比曾按原始小数写入（`0.0327`），违反「百分比用百分数数值」契约；现统一 ×100（`3.27`）。
+
+### 用法示例
+
+```
+Q：沃雅妮莎的治疗吃什么属性？
+→ character_talent_params.csv 中 slug=vodyanitsa、talent_type=elemental_skill、
+  label_zh=遥久之歌治疗量 → scaling_stat=hp、value_unit=flat;pct、
+  value_lv10=593.2278;5.04
+→ 即「固定值 593 + 生命值上限 5.04%」，治疗吃生命值上限。
+```
+
+**已知缺口**：`aether` / `lumine` / `manekin` / `manekina` 无天赋记录（4 个，与角色表缺口一致）；
+旅行者分元素变体（`traveleranemo` 等 7 种）在源数据里**有天赋记录但没有角色级属性**，
+因此不纳入本表（其 `slug` 无法关联 `characters.csv`）。
+
+---
+
 ## 待建表
 
 | 表 | 用途 | 源数据可得性 |
 |---|---|---|
-| `character_talents.csv` | 天赋倍率、升级材料、天赋书系列 | ✅ genshin-db 有 `stats.talents` 全量参数 |
 | `character_constellations.csv` | 命之座效果 | ✅ genshin-db 有 `constellations` |
-| `character_passives.csv` | 固有天赋与解锁突破阶段 | ✅ genshin-db 有 `talents.passive1~3` |
 | `character_abilities.csv` | 技能附着标签（U 值）与 ICD 组 | ❌ 需其他来源（解包属性表） |
+| 固有天赋**解锁突破阶段** | 突破 1 / 4 / 6 各解锁哪个 | ❌ 源数据未提供，`character_talents` 无法填此列 |
+| 天赋**升级材料** | 天赋书系列、周本材料 | ✅ genshin-db 的 `talents.*.costs` |
 
 ---
 
