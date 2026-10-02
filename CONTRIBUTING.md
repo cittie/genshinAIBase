@@ -61,14 +61,34 @@
 ## 四、提交前自检
 
 ```bash
+python -m unittest discover -s tests -p "test_*.py"
+node --test
 python scripts/validate_data.py
 ```
+
+**三条都要跑，缺一不可**（CI 也会强制执行）：
+
+| 命令 | 证明什么 |
+|---|---|
+| `python -m unittest discover -s tests -p "test_*.py"` | 校验脚本自身的逻辑正确 |
+| `node --test` | 解析/推导函数的行为正确 |
+| `python scripts/validate_data.py` | **数据**符合契约 |
 
 校验内容：UTF-8 无 BOM、LF 换行、表头存在、每行列数一致、主键唯一、
 `_pct` 字段为数值、多值字段未使用逗号、无空行与尾随空列、
 **Markdown 相对链接有效**、**双语 README 的命令与链接同构**。
 
-CI 会在 PR 上自动跑同一脚本，必须为绿。
+### 脚本改动额外要求
+
+> **原则：需要重复执行的步骤或逻辑，优先提炼为脚本；脚本必须有单元测试；
+> 每次修改都必须跑单元测试。**（见 [AGENTS.md §6.1](AGENTS.md)）
+
+- 新增脚本 → 同时新增 `tests/` 下的用例，并在 [scripts/README.md](scripts/README.md) 登记。
+- 修改 `scripts/lib/` 的纯逻辑 → 先补/改用例，再改实现。
+- 用例应优先覆盖**历史上真实出过的 bug**，并在注释里标出回归编号。
+- 纯逻辑不得引入文件/网络/进程副作用，这样测试才能脱离 186MB 解包数据运行。
+
+CI 会在 PR 上自动跑上述三条命令，必须全绿。
 
 ---
 

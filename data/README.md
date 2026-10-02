@@ -19,7 +19,8 @@
 > | `elements/reactions.csv` | ✅ **已填充 20 行**（v7.1，含 5.2 剧变反应加强后的倍率） |
 > | `elements/aura_consumption.csv` | ✅ **已填充 18 行**（附着量消耗） |
 > | `elements/particle_energy.csv` | ✅ **已填充 24 行**（含 `party_size`，后台系数按队伍人数） |
-> | 其余 8 张表 | ⏳ 仅表头（字段契约已冻结，数值待填） |
+> | `teams/elemental_resonance.csv` | ✅ **已填充 18 行**（8 个元素共鸣，长表） |
+> | 其余 7 张表 | ⏳ 仅表头（字段契约已冻结，数值待填） |
 >
 > 只有表头代表「该表待填充」，**不等于字段不存在**。校验脚本会提示哪些表为空。
 

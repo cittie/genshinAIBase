@@ -13,6 +13,24 @@
 ## [未发布]
 
 ### 新增
+- **新增知识库原则：脚本化与单元测试**（[AGENTS.md §6.1](AGENTS.md)）——
+  需要重复执行的步骤或逻辑优先提炼为脚本；脚本必须带单元测试；每次修改必须跑测试。
+  同时写入 [CONTRIBUTING.md](CONTRIBUTING.md) 与 [scripts/README.md](scripts/README.md)，
+  并由 CI 强制执行（新增 Python 与 Node 两个测试步骤）。
+- **新增 `tests/` 单元测试（Python 24 条 + Node 75 条）**，并把纯逻辑从脚本中抽出：
+  - `scripts/lib/parse.mjs`：文本清洗、slug 消歧、天赋标签解析、命座受益对象、
+    天赋 +3 归属、4 件套受益对象、CSV 契约。**历史 bug 全部固化为用例**
+    （撇号 slug、治疗间隔误判、最大生命值别名、多属性参数、提升/提高措辞、
+    天赋名含 ♪ 与 ！、饰金之梦自身增益等）。
+  - `scripts/lib/kqm.mjs`：KQM 转写表、构建器、锚点定义与校验。
+    用例覆盖三张表的内部一致性（晶球 = 微粒 3 倍、后台 60/70/80%、
+    共鸣 `effect_index` 连续、`condition` 用元素中文名等）。
+  - `tests/test_validate_data.py`：校验器自身的测试，含「多值数值字段不误报」
+    与「跳过 `.cache`」两个本会话修掉的 bug。
+  - 两个导入脚本改为薄壳（只留参数解析、网络、文件读写与主流程），
+    重构后**全量重生成的 8 张表与重构前逐字节一致**。
+- **`data/teams/elemental_resonance.csv`（18 行）**：8 个元素共鸣（长表，一效果一行）
+  从 KQM TCL 导入。原先只有表头，主键随之改为 `resonance_id` + `effect_index`。
 - **`data/elements/` 四张表全部填充**（此前仅有表头），来源为
   **KQM Theorycrafting Library**（`KQM-git/TCL` @ `106c0f3`，2026-10-01，`7.1 data`）：
   - `level_coefficients.csv`（100 行）：等级 → **角色 / 敌人 / 结晶护盾**三种系数。

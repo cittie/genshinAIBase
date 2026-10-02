@@ -116,6 +116,19 @@ node --max-old-space-size=4096 scripts/import_genshin_db.mjs --in package/src/mi
 
 细节见 [scripts/README.md](scripts/README.md)。
 
+### 运行单元测试
+
+脚本的纯逻辑有单元测试。**修改任何脚本后都必须跑这三条命令并全绿**（CI 也会跑）：
+
+```bash
+python -m unittest discover -s tests -p "test_*.py"
+node --test
+python scripts/validate_data.py
+```
+
+> 三条都要跑：单元测试证明**逻辑**正确，校验脚本证明**数据**符合契约。
+> 用例优先覆盖历史上真实出过的 bug，注释里标了对应的回归编号。
+
 ---
 
 ## 三、Windows 常见问题

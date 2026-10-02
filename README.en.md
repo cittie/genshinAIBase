@@ -117,6 +117,21 @@ When it fails, first decide whether the script broke or the expectation was mis-
 
 Details: [scripts/README.md](scripts/README.md).
 
+### Running the unit tests
+
+The scripts' pure logic is unit-tested. **After changing any script you must run all
+three commands below and have them pass** (CI enforces the same three):
+
+```bash
+python -m unittest discover -s tests -p "test_*.py"
+node --test
+python scripts/validate_data.py
+```
+
+> Run all three: the unit tests prove the **logic** is correct, and the validator proves
+> the **data** satisfies the contract. Test cases deliberately target bugs that actually
+> happened before; comments carry the matching regression number.
+
 ---
 
 ## 3. Windows Troubleshooting

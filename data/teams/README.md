@@ -1,6 +1,6 @@
 # data/teams/ — 队伍数据
 
-队伍原型（反应轴模板）与元素共鸣。**当前仅有表头，数值/内容待录入。**
+队伍原型（反应轴模板）与元素共鸣。
 
 ---
 
@@ -45,24 +45,50 @@
 
 ## elemental_resonance.csv — 元素共鸣
 
-一行一个共鸣。
+**长表：一行一个效果。** 一个共鸣有多个效果（如「炽热之火」既是受冰影响时间减少 40%、
+又是攻击力 +25%），单行无法用一个 `value` 表达。
+
+> **状态：已填充 18 行**（8 个共鸣 × 各自的效果条数），`source=community`
+> （KQM Theorycrafting Library @ `106c0f3`，v7.1）
 
 | 字段 | 类型 | 单位 | 枚举/取值 | 可空 | 说明 |
 |---|---|---|---|---|---|
-| `resonance_id` | string | — | — | 否 | **主键**，如 `pyro_resonance` |
-| `element_pair` | string | — | 元素枚举，多值用 `;` | 否 | 触发共鸣的元素（同元素 2 人） |
+| `resonance_id` | string | — | 小写下划线 | 否 | **主键之一**，如 `fervent_flames` |
+| `effect_index` | int | — | 从 `1` 开始 | 否 | **主键之一**，该共鸣下第几条效果 |
+| `element_pair` | string | — | 元素枚举，多值用 `;`；四元素共鸣为 `any;any` | 否 | 触发共鸣的元素 |
 | `name_zh` | string | — | — | 否 | 共鸣名 |
 | `name_en` | string | — | — | 否 | 英文名 |
-| `effect_type` | string | — | 见 `artifact_set_bonuses.effect_type` | 是 | 效果类型 |
-| `effect_summary` | string | — | — | 是 | 效果摘要（**禁止含逗号**） |
+| `effect_type` | string | — | 见下 | 否 | 效果类型 |
+| `effect_summary` | string | — | — | 否 | 效果摘要（**禁止含逗号**） |
 | `value` | float | 依 `value_unit` | — | 是 | 数值 |
-| `value_unit` | string | — | `pct` `flat` `sec` `count` | 是 | 单位 |
-| `condition` | string | — | — | 是 | 触发条件（**禁止含逗号**） |
+| `value_unit` | string | — | `pct` `flat` `sec` | 是 | 单位 |
+| `condition` | string | — | — | 否 | 触发条件（**禁止含逗号**） |
 | `version` | string | — | — | 否 | 数据版本 |
-| `source` | string | — | — | 否 | 数据来源 |
+| `source` | string | — | `community` | 否 | 数据来源 |
+| `source_url` | string | — | URL | 否 | 该行数值的出处文件 |
 
-> ⚠️ **数值待核实**。在录入前，AI 只能说明「双 X 共鸣提供 Y 类增益」，
-> 不得给出百分比数字。见 [`rules/team-building.md §4`](../../rules/team-building.md#4-元素共鸣判定)。
+### `effect_type` 枚举
+
+`aura_duration`（受某元素影响时间减少）｜`stat_buff`（攻击力/生命值上限/暴击率/元素精通）
+｜`damage_bonus`｜`resistance_buff`｜`resistance_shred`｜`shield_strength`
+｜`energy_generation`｜`stamina_cost`｜`movement_speed`｜`cooldown_reduction`
+
+### 八个共鸣
+
+| `resonance_id` | 中文 | 效果条数 |
+|---|---|---|
+| `fervent_flames` | 炽热之火 | 2 |
+| `soothing_water` | 滋润之水 | 2 |
+| `high_voltage` | 强压之雷 | 2 |
+| `shattering_ice` | 粉碎之冰 | 2 |
+| `impetuous_winds` | 迅捷之风 | 3 |
+| `enduring_rock` | 坚定之岩 | 3 |
+| `sprawling_greenery` | 蔓生之草 | 2 |
+| `protective_canopy` | 庇护之光 | 2 |
+
+> ⚠️ 「双元素共鸣」需要队伍中有 **2 名同元素**角色；庇护之光需要 **4 名不同元素**角色。
+> 试用角色（剧情/邀约中）**不计入也不享受**元素共鸣。
+> 判定规则见 [`rules/team-building.md §4`](../../rules/team-building.md#4-元素共鸣判定)。
 
 ---
 

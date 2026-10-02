@@ -20,8 +20,19 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: 运行校验脚本
+      - name: 安装 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 数据一致性校验（CSV 契约 + 链接 + 双语）
         run: python scripts/validate_data.py
+
+      - name: 单元测试（Python）
+        run: python -m unittest discover -s tests -p "test_*.py"
+
+      - name: 单元测试（Node）
+        run: node --test
 
       - name: 检查行尾是否为 LF
         run: |

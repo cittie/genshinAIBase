@@ -42,7 +42,7 @@ PRIMARY_KEYS: dict[str, list[str]] = {
     "data/enemies/enemies.csv": ["enemy_id"],
     "data/enemies/enemy_resistance.csv": ["enemy_id", "element"],
     "data/teams/team_archetypes.csv": ["archetype_id"],
-    "data/teams/elemental_resonance.csv": ["resonance_id"],
+    "data/teams/elemental_resonance.csv": ["resonance_id", "effect_index"],
 }
 
 # 数值字段判定

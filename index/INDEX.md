@@ -94,7 +94,7 @@
 | [enemies/enemies.csv](../data/enemies/enemies.csv) | `enemy_id` | 敌人基础属性 | 表头 |
 | [enemies/enemy_resistance.csv](../data/enemies/enemy_resistance.csv) | `enemy_id`+`element` | 敌人元素抗性（长表） | 表头 |
 | [teams/team_archetypes.csv](../data/teams/team_archetypes.csv) | `archetype_id` | 队伍原型 | 表头 |
-| [teams/elemental_resonance.csv](../data/teams/elemental_resonance.csv) | `resonance_id` | 元素共鸣 | 表头 |
+| [teams/elemental_resonance.csv](../data/teams/elemental_resonance.csv) | `resonance_id`+`effect_index` | 元素共鸣（长表） | ✅ **18 行** |
 
 > 状态「表头」= 字段契约已冻结，数值待录入。
 
@@ -176,7 +176,7 @@
 | 全部套装效果数值与主词条数值 | `data/artifacts/` |
 | ✅ **反应倍率、等级系数、附着消耗、能量结算已收录**（v7.1，20 + 100 + 18 + 24 行） | `data/elements/` |
 | 敌人属性与抗性 | `data/enemies/` |
-| 元素共鸣数值 | `data/teams/elemental_resonance.csv` |
+| ✅ **元素共鸣数值已收录**（8 个共鸣 18 条效果） | `data/teams/elemental_resonance.csv` |
 | 命之座激活材料、天赋升级材料、固有天赋解锁阶段 | 待建表 |
 | 逐技能 ICD 与附着标签（U 值） | 待建表（KQM 有附着量汇编，未纳入） |
 | 各角色技能产球量 | 待建表（KQM 有 `elemental-skill-particles`，未纳入） |

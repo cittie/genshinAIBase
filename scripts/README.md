@@ -1,13 +1,59 @@
 # scripts/ — 校验与生成脚本
 
-本目录存放维护知识库的自动化脚本。**无第三方依赖**，仅用 Python 标准库。
+本目录存放维护知识库的自动化脚本。**无第三方依赖**，仅用 Python 标准库与 Node 内置模块。
+
+> **硬性要求（见 [AGENTS.md §6.1](../AGENTS.md)）**
+> 1. 需要重复执行的步骤或逻辑，优先提炼为脚本。
+> 2. 脚本必须有对应的单元测试（`tests/`）。
+> 3. 每次修改脚本或其依赖的数据/规则后，必须跑测试，全绿才算完成。
+>
+> ```bash
+> python -m unittest discover -s tests -p "test_*.py"
+> node --test
+> python scripts/validate_data.py
+> ```
+
+## 目录结构：纯逻辑与 IO 分离
+
+可测逻辑放 `lib/`，脚本只保留参数解析、网络、文件读写与主流程。
+这样单元测试能**脱离 186MB 解包数据与网络**直接验证解析行为。
+
+```
+scripts/
+├─ lib/
+│  ├─ parse.mjs      # 文本清洗、slug、天赋标签解析、受益对象推导、CSV 契约（纯函数）
+│  └─ kqm.mjs        # KQM 转写表、构建器、锚点定义与校验（纯函数）
+├─ validate_data.py          # 数据契约校验（CSV + 链接 + 双语）
+├─ import_genshin_db.mjs     # 解包数据 → 角色/定位/武器/圣遗物/天赋/命座
+├─ import_kqm_tcl.mjs        # KQM TCL → 反应/等级系数/附着/能量/元素共鸣
+└─ fetch_community_roles.py  # genshin.gg → 社区定位来源快照
+
+tests/
+├─ parse.test.mjs            # lib/parse.mjs
+├─ kqm.test.mjs              # lib/kqm.mjs
+└─ test_validate_data.py     # validate_data.py
+```
+
+**用例优先覆盖历史上真实出过的 bug**（注释里标了回归编号，与下表对应），
+而不是凭空构造输入——那些才是真正会再犯的错。
+
+### 回归闸门 vs 单元测试
+
+| | 位置 | 证明什么 | 何时跑 |
+|---|---|---|---|
+| 回归闸门 | 脚本内（`REGRESSION` / `ANCHORS`） | 导入结果与**外部人工核对的期望**一致 | 每次导入 |
+| 单元测试 | `tests/` | 解析/推导**函数本身**的行为正确 | 每次修改 |
+
+两者不可互相替代：闸门证明不了「改一行解析逻辑后其他输入仍正确」，
+单元测试也覆盖不到解包数据的真实分布。
 
 ---
 
 ## 环境要求
 
 - Python 3.8+（推荐 3.10+）
-- 无 pip 依赖
+- Node.js 18+（导入脚本与 Node 单元测试）
+- 无 pip / npm 依赖
 
 ---
 
