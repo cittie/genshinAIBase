@@ -47,6 +47,10 @@
   数据来自 genshin-db v5.2.14（GenshinData 解包 + Fandom wiki）。
 
 ### 修正
+- **修复 4 件套 `effect_target` 的误判**：原规则「文本含 party 即判为 `team`」会把
+  `gilded_dreams`（饰金之梦，「使**装备者**获得强化」，队友只是触发条件）错判为全队增益。
+  改为「全队词 + 受益者是否本人」的规则判定，枚举新增 `both`（`heart_of_the_furnace`、
+  `night_of_the_skys_unveiling` 属于自身+全队兼有），并新增 14 套人工核对过的受益对象回归自检。
 - **配队规则补 §3.5「同轴辅助优先」**（[rules/team-building.md](rules/team-building.md)）：
   实战中发现，按「先挑元素共鸣 → 再按共鸣筛角色」的顺序作答，会**结构性排除主 C 自身元素的辅助**。
   判定顺序改为把「先找与主 C 伤害类型同元素的辅助」列为第 4 步并标注不可跳过，

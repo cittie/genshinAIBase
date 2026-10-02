@@ -440,6 +440,38 @@ function runArtifactRegression(setRows) {
 }
 
 // ---------------------------------------------------------------------------
+// 4 件套受益对象回归自检：逐条人工核对过英文原文后写下的期望值。
+// ---------------------------------------------------------------------------
+const ARTIFACT_TARGET_REGRESSION = {
+  instructor: 'team',
+  the_exile: 'team',
+  scholar: 'team',
+  maiden_beloved: 'team',
+  noblesse_oblige: 'team',
+  archaic_petra: 'team',
+  tenacity_of_the_millelith: 'team',
+  silken_moons_serenade: 'team',
+  celestial_gift: 'team',
+  scroll_of_the_hero_of_cinder_city: 'team',
+  heart_of_the_furnace: 'both',      // 自身攻击 +12% 且全队星烁反应伤害 +50%
+  gilded_dreams: 'self',             // 「使装备者获得强化」，队友只是触发条件
+  gladiators_finale: 'self',
+  crimson_witch_of_flames: 'self',
+};
+
+function runArtifactTargetRegression(bonusRows) {
+  const bySlug = new Map();
+  for (const r of bonusRows) if (r[2] === '4') bySlug.set(r[1], r);
+  const problems = [];
+  for (const [slug, want] of Object.entries(ARTIFACT_TARGET_REGRESSION)) {
+    const row = bySlug.get(slug);
+    if (!row) { problems.push(`${slug}: 缺少 4 件套行`); continue; }
+    if (row[6] !== want) problems.push(`${slug}.effect_target: got ${row[6]} want ${want}`);
+  }
+  return problems;
+}
+
+// ---------------------------------------------------------------------------
 // character_roles.csv —— 职能定位（推导字段）
 //
 // 两类来源，各自独立、互不冒充：
@@ -928,8 +960,20 @@ function parseArtifactStats(text) {
   return out;
 }
 
-/** 触发条件：取第一个分句（中文按「，」，英文按逗号）。 */
-function firstClause(text) {
+// 受益对象判定。原先的「文本里出现 party 就算 team」是错的：
+// 饰金之梦 4 件套写的是「使装备者获得强化」，队友只是**触发条件**，属自身增益。
+const TEAM_TARGET = /\b(all party members|all nearby party members|nearby party members)\b/i;
+const SELF_TARGET =
+  /((equipping character|character equipping|character wearing|wielder|wearer)\b[^.]{0,50}\b(obtain|gain|receive|is increased|are increased))|((increases?|boosts?|enhances?)\b[^.]{0,30}\b(equipping character|wielder|wearer)\b)/i;
+
+/** 判定 4 件套效果的受益对象：self / team / both。 */
+function artifactTarget(text) {
+  const isTeam = TEAM_TARGET.test(String(text || ''));
+  if (!isTeam) return 'self';
+  return SELF_TARGET.test(String(text || '')) ? 'both' : 'team';
+}
+
+/** 触发条件：取第一个分句（中文按「，」，英文按逗号）。 */function firstClause(text) {
   const zhParts = String(text || '').split('，');
   if (zhParts.length > 1) return zhParts[0];
   const enParts = String(text || '').split(/,\s*/);
@@ -999,7 +1043,7 @@ function buildArtifacts(raw, version) {
       // 叠层语序有两种：「maximum of 3 stacks」与「stacks up to 2 times」
       const stacks = singleNumber(eff4,
         /(?:maximum of|up to|max(?:imum)?) (\d+) stacks?|stacks? up to (\d+) times?/gi);
-      const target = /party members|nearby party|all party/i.test(eff4) ? 'team' : 'self';
+      const target = artifactTarget(eff4);
       const condition = noteText(firstClause(zh4 || eff4));
 
       if (parsed4.length === 0) {
@@ -1083,7 +1127,14 @@ if (TARGETS.has('artifacts')) {
     problems.forEach(p => console.error('  - ' + p));
     process.exit(2);
   }
-  console.error(`圣遗物回归自检通过（${Object.keys(ARTIFACT_REGRESSION).length} 套）`);
+  const targetProblems = runArtifactTargetRegression(bonusRows);
+  if (targetProblems.length) {
+    console.error('\n[4 件套受益对象回归自检失败] 已中止写入：');
+    targetProblems.forEach(p => console.error('  - ' + p));
+    process.exit(2);
+  }
+  console.error(`圣遗物回归自检通过（${Object.keys(ARTIFACT_REGRESSION).length} 套 2 件套 + `
+    + `${Object.keys(ARTIFACT_TARGET_REGRESSION).length} 套 4 件套受益对象）`);
   produced.push(writeCsv('data/artifacts/artifact_sets.csv', ARTIFACT_SETS_HEADER, setRows));
   produced.push(writeCsv('data/artifacts/artifact_set_bonuses.csv', ARTIFACT_BONUSES_HEADER, bonusRows));
 }

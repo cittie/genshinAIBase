@@ -180,6 +180,7 @@ node scripts/import_genshin_db.mjs --in <path> --targets all     # 全部四类
 | 7 | `prizedisshinblade-01` 副属性输出 0 | 源数据 `baseStatText` 是字面量 `"NaN"`、`base.specialized=0`，按契约留空而非写 0 |
 | 8 | 4 件套 `effect_type` 只有 1/61 有值 | 4 件套多用「X is increased by Y%」句式，补 9 条规则后提升到 19/61 |
 | 9 | `max_stacks` 漏掉「stacks up to 2 times」语序 | `singleNumber` 支持多捕获组，叠层正则兼容两种语序（5 → 7 套） |
+| 10 | `effect_target` 把「饰金之梦」4 件套判成全队 | 该套原文是「使**装备者**获得强化」，队友只是触发条件。原启发式「文本含 party 即 team」不成立，改为「全队词 + 受益者是否本人」的规则，并新增 14 套人工核对过的受益对象回归自检；枚举补充 `both` |
 
 ### 设计取舍
 

@@ -73,7 +73,7 @@ set_id,slug,pieces,effect_index,effect_name,effect_type,effect_target,value,valu
 15025,deepwood_memories,2,1,,dendro_dmg_pct,self,15,pct,,,,获得15%草元素伤害加成。,3.0,datamine
 15025,deepwood_memories,4,1,,dendro_res_shred_pct,self,30,pct,元素战技或元素爆发命中敌人后,8,,元素战技或元素爆发命中敌人后，使命中目标的草元素抗性降低30%，持续8秒。装备者处于队伍后台时，依然能触发该效果。,3.0,datamine
 15026,gilded_dreams,2,1,,em,self,80,flat,,,,元素精通提高80点。,3.0,datamine
-15026,gilded_dreams,4,1,,atk_pct,team,14,pct,触发元素反应后的8秒内,,,触发元素反应后的8秒内，会根据队伍内其他角色的元素类型，使装备者获得强化：队伍中每存在1个和装备者同类元素的角色，攻击力提升14%；每存在1个和装备者不同元素类型的角色，元素精通提升50点。上述每类效果至多计算3个角色。该效果每8秒至多触发一次。装备者处于队伍后台时，依然能触发该效果。,3.0,datamine
+15026,gilded_dreams,4,1,,atk_pct,self,14,pct,触发元素反应后的8秒内,,,触发元素反应后的8秒内，会根据队伍内其他角色的元素类型，使装备者获得强化：队伍中每存在1个和装备者同类元素的角色，攻击力提升14%；每存在1个和装备者不同元素类型的角色，元素精通提升50点。上述每类效果至多计算3个角色。该效果每8秒至多触发一次。装备者处于队伍后台时，依然能触发该效果。,3.0,datamine
 15027,desert_pavilion_chronicle,2,1,,anemo_dmg_pct,self,15,pct,,,,获得15%风元素伤害加成。,3.3,datamine
 15027,desert_pavilion_chronicle,4,1,,normal_attack_dmg_pct,self,40,pct,重击命中敌人后,15,,重击命中敌人后，该角色的普通攻击速度提升10%，普通攻击、重击与下落攻击造成的伤害提升40%，持续15秒。,3.3,datamine
 15027,desert_pavilion_chronicle,4,2,,charged_attack_dmg_pct,self,40,pct,重击命中敌人后,15,,重击命中敌人后，该角色的普通攻击速度提升10%，普通攻击、重击与下落攻击造成的伤害提升40%，持续15秒。,3.3,datamine
@@ -106,7 +106,7 @@ set_id,slug,pieces,effect_index,effect_name,effect_type,effect_target,value,valu
 15040,finale_of_the_deep_galleries,2,1,,cryo_dmg_pct,self,15,pct,,,,获得15%冰元素伤害加成。,5.5,datamine
 15040,finale_of_the_deep_galleries,4,1,,normal_attack_dmg_pct,self,60,pct,装备者的元素能量为0时,,,装备者的元素能量为0时，普通攻击造成的伤害提升60%，元素爆发造成的伤害提升60%。装备者的普通攻击造成伤害后，上述元素爆发伤害提升效果将失效6秒；装备者的元素爆发造成伤害后，上述普通攻击伤害提升效果将失效6秒。角色处于队伍后台也能触发。,5.5,datamine
 15041,night_of_the_skys_unveiling,2,1,,em,self,80,flat,,,,元素精通提高80点。,6.0,datamine
-15041,night_of_the_skys_unveiling,4,1,,,team,,,队伍中附近的角色触发月曜反应时,4,,队伍中附近的角色触发月曜反应时，若装备者在场上，将获得持续4秒的「月辉明光·蓄念」效果：队伍的月兆为初辉/满辉时，暴击率提升15%/30%。队伍中的角色每拥有一种不同的「月辉明光」效果，队伍中的所有角色触发的月曜反应造成的伤害提升10%。由「月辉明光」产生的效果无法叠加。,6.0,datamine
+15041,night_of_the_skys_unveiling,4,1,,,both,,,队伍中附近的角色触发月曜反应时,4,,队伍中附近的角色触发月曜反应时，若装备者在场上，将获得持续4秒的「月辉明光·蓄念」效果：队伍的月兆为初辉/满辉时，暴击率提升15%/30%。队伍中的角色每拥有一种不同的「月辉明光」效果，队伍中的所有角色触发的月曜反应造成的伤害提升10%。由「月辉明光」产生的效果无法叠加。,6.0,datamine
 15042,silken_moons_serenade,2,1,,energy_recharge_pct,self,20,pct,,,,元素充能效率提高20%。,6.0,datamine
 15042,silken_moons_serenade,4,1,,,team,,,造成元素伤害时,8,,造成元素伤害时，获得持续8秒的「月辉明光·崇信」效果：队伍的月兆为初辉/满辉时，队伍中的所有角色的元素精通提高60点/120点。装备者处于后台时也能触发上述效果。队伍中的角色每拥有一种不同的「月辉明光」效果，队伍中的所有角色触发的月曜反应造成的伤害提升10%。由「月辉明光」产生的效果无法叠加。,6.0,datamine
 15043,aubade_of_morningstar_and_moon,2,1,,em,self,80,flat,,,,元素精通提高80点。,6.3,datamine
@@ -120,4 +120,4 @@ set_id,slug,pieces,effect_index,effect_name,effect_type,effect_target,value,valu
 15047,scarlet_proof,2,1,,atk_pct,self,18,pct,,,,攻击力提高18%。,7.0,datamine
 15047,scarlet_proof,4,1,,,self,,,装备者触发星扩散反应后的10秒内,10,,装备者触发星扩散反应后的10秒内，暴击率提升16%，星扩散反应伤害提升40%。,7.0,datamine
 15048,heart_of_the_furnace,2,1,,atk_pct,self,18,pct,,,,攻击力提高18%。,7.0,datamine
-15048,heart_of_the_furnace,4,1,,,team,,,装备者触发星烁反应或造成星烁反应伤害后的12秒内,12,,装备者触发星烁反应或造成星烁反应伤害后的12秒内，攻击力提升12%，队伍中附近的所有角色造成的星烁反应伤害提升50%。装备者处于后台时也能触发上述效果。同名圣遗物套装产生的伤害加成效果无法叠加。,7.0,datamine
+15048,heart_of_the_furnace,4,1,,,both,,,装备者触发星烁反应或造成星烁反应伤害后的12秒内,12,,装备者触发星烁反应或造成星烁反应伤害后的12秒内，攻击力提升12%，队伍中附近的所有角色造成的星烁反应伤害提升50%。装备者处于后台时也能触发上述效果。同名圣遗物套装产生的伤害加成效果无法叠加。,7.0,datamine

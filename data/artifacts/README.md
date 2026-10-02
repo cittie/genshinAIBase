@@ -124,10 +124,22 @@
 
 ### `effect_target` 枚举
 
-`self`（装备者）｜`team`（全队）｜`enemy`（敌人）｜`other`
+`self`（装备者）｜`team`（全队）｜`both`（两者兼有）｜`other`
 
-> 当前由规则表启发式判定：文本含 `party members` / `nearby party` / `all party` 记为 `team`，
-> 否则记为 `self`。**这是启发式，不是解包事实**，`cross-check` 时请注意。
+判定规则（依据英文原文，且有回归闸门）：
+
+| 条件 | 判定 |
+|---|---|
+| 出现 `all party members` / `all nearby party members` / `nearby party members`，**且**受益者是装备者本人 | `both` |
+| 出现上述全队词，受益者不是本人 | `team` |
+| 未出现全队词 | `self` |
+
+> ⚠️ **不能简单地把「文本里出现 party 就算 team」**——`gilded_dreams`（饰金之梦）4 件套写的是
+> 「使**装备者**获得强化」，队友只是**触发条件**，属自身增益。这条正是早期规则判错的地方。
+> 当前实现带 14 套人工核对过的 4 件套受益对象回归自检，改规则会被立刻拦住。
+>
+> `both` 目前有 2 套：`heart_of_the_furnace`（自身攻击 +12% 且全队星烁反应伤害 +50%）、
+> `night_of_the_skys_unveiling`（自身暴击率 + 全队月曜反应伤害 +10%）。
 
 ### 为什么用长表
 
