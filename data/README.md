@@ -9,7 +9,10 @@
 > | `characters/characters.csv` | ✅ **已填充 124 行**（v7.1 全量，`source=datamine`） |
 > | `characters/character_roles.csv` | ✅ **已填充 172 行**（覆盖 120 角色；推导字段，含依据与可信度） |
 > | `characters/community_roles.csv` | ✅ **已填充 120 行**（社区定位来源快照，用于交叉核对） |
-> | 其余 11 张表 | ⏳ 仅表头（字段契约已冻结，数值待填） |
+> | `weapons/weapons.csv` | ✅ **已填充 255 行**（全量武器，含满级基础攻击力与副属性） |
+> | `artifacts/artifact_sets.csv` | ✅ **已填充 63 行**（全量套装） |
+> | `artifacts/artifact_set_bonuses.csv` | ✅ **已填充 122 行**（2 件套完整 + 4 件套部分结构化） |
+> | 其余 8 张表 | ⏳ 仅表头（字段契约已冻结，数值待填） |
 >
 > 只有表头代表「该表待填充」，**不等于字段不存在**。校验脚本会提示哪些表为空。
 

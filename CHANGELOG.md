@@ -13,6 +13,17 @@
 ## [未发布]
 
 ### 新增
+- **`data/weapons/weapons.csv` 已填充 255 行**（v7.1 全量武器），`source=datamine`：
+  满级基础攻击力（由成长曲线精确计算）、副属性类型与数值、被动名称与 R1 全文（中文）、实装版本。
+  新增 `max_level` 列——1★/2★ 共 10 把武器等级上限为 70，其余 245 把为 90。
+- **`data/artifacts/artifact_sets.csv` 已填充 63 行**、**`artifact_set_bonuses.csv` 已填充 122 行**：
+  套装 ID/名称/最高稀有度、2 件套类型与数值、4 件套完整中文效果；
+  效果行按规则表拆成 `effect_type` / `value` / `duration_sec` / `max_stacks` / `condition`。
+  - **2 件套采用「无匹配即中止」闸门**（退出码 3）：措辞规整，漏解析说明规则表有洞，不允许静默缺项。
+  - **4 件套不硬拆**：多为复合条件句，只填可机械提取的字段，覆盖度在 `data/artifacts/README.md` 公开
+    （`condition` 58/61、`duration_sec` 34/61、`effect_type` 19/61、`max_stacks` 7/61）。
+- 导入器新增 `weapons` / `artifacts` 两个 target 与 `all`，并新增两组回归自检：
+  12 把武器（48 个数）、22 套圣遗物的 2 件套解析结果，全部与外部独立来源一致。
 - **`data/characters/character_roles.csv` 已填充 172 行，覆盖 120 / 124 个角色**，是**推导字段**，
   每行都带判定依据（`notes`）与可信度（`confidence`）：
   - 机械类职能（`healer` / `shielder` / `debuffer` / `buffer`）由解包技能文本推导，
@@ -36,6 +47,16 @@
   数据来自 genshin-db v5.2.14（GenshinData 解包 + Fandom wiki）。
 
 ### 修正
+- 武器/圣遗物导入过程中发现并修复 9 类问题（全部写入 `scripts/README.md` 的回归清单）：
+  1. EM 副属性算成 16538.4（`SUBSTAT` 映射后传入的是枚举值 `em`，函数却判断原始 `FIGHT_PROP_*` 名）。
+  2. EM 应输出整数（游戏内显示 165 而非 165.4）。
+  3. 元素类 2 件套数值取到元素名（`(\w+) DMG Bonus \+(\d+)%` 的数值在第 2 捕获组）→ 规则表新增 `valueGroup`。
+  4. 「烬城勇者绘卷」2 件套是回能而非属性加成，无法解析 → 新增 `energy_regen` 类型。
+  5. 3 把同名武器（Prized Isshin Blade）导致 slug 冲突崩溃 → 新增 `uniqueSlug()` 按源 key 后缀消歧。
+  6. `Wolf's Gravestone` 生成 `wolf_s_gravestone` → `toSlug` 先剥离撇号。
+  7. `prizedisshinblade-01` 副属性输出 0（源数据 `baseStatText` 为字面量 `"NaN"`）→ 按契约留空。
+  8. 4 件套 `effect_type` 仅 1/61 有值（措辞为「X is increased by Y%」）→ 补 9 条规则后提升到 19/61。
+  9. `max_stacks` 漏掉「stacks up to N times」语序 → 叠层正则兼容两种语序（5 → 7 套）。
 - 职能推导过程中发现并修复 6 类误判（均已写入脚本注释，避免回归）：
   1. 雷电将军的「为队伍恢复**元素能量**」被误判为治疗 → 治疗规则要求非 Energy/Stamina。
   2. 荒泷一斗的「降低**自己**的抗性」被误判为减益 → 减益规则要求句中出现 opponents/enemies。
@@ -47,6 +68,12 @@
   6. `is_primary` 在纯辅助角色上出现多行 `true` → 改为每角色恰好一行。
 
 ### 变更
+- 补齐许可证：远端初始提交已加入 MIT 许可证（Copyright © 2026 Yee），
+  [CONTRIBUTING.md](CONTRIBUTING.md) 与两份 README 同步登记，`CHANGELOG` 的「确定 LICENSE」待办移除。
+- `weapons.csv` 表头新增 `max_level` 列（原表无数据行，属契约修订而非破坏性变更）；
+  配套把 `base_atk_lv90` / `sub_stat_value_lv90` 的语义定义为「满级值」。
+- `toSlug()` 改为先剥离撇号再替换：`Wolf's Gravestone` 由 `wolf_s_gravestone` 变为 `wolfs_gravestone`。
+  已核对 `characters.csv` 与 `character_roles.csv` 重新生成后**逐字节未变**（角色英文名不含撇号）。
 - `.gitignore` 新增 `genshin-db*.tgz`、`data.min.json`、`/package/`、`.cache/`，
   避免按 README 步骤下载的源数据与抓取缓存被误提交。
 
@@ -54,8 +81,10 @@
 - [ ] 复核 `character_roles.csv` 中 `confidence=low` 的行（`agree=false` 的 5 个来源冲突角色）
 - [ ] 补齐旅行者分元素变体（`traveleranemo` ~ `travelerpyro`）：源数据仅有天赋与命座记录
 - [ ] `character_roles.damage_source` 需要伤害构成数据才能填，当前全表留空
-- [ ] 填充 `data/weapons/weapons.csv`（255 把，源数据含 90 级基础攻击力、副属性、R1~R5 被动）
-- [ ] 填充 `data/artifacts/artifact_sets.csv`（63 套，源数据含 `effect2Pc` / `effect4Pc` 文本）
+- [ ] 武器 `obtain_method` 与圣遗物 `obtain_domain` 全表为空：源数据没有获取途径，需另找来源
+- [ ] 4 件套效果的完整结构化拆解（当前 `effect_type` 仅 19/61 有值，需要人工校对）
+- [ ] 待建 `weapon_refinements.csv`（R1~R5 被动数值）与 `artifact_substat_tiers.csv`（副词条档位）
+- [ ] 填充 `data/artifacts/artifact_main_stats.csv`（各主词条满级数值档位各不相同，需逐条录入）
 - [ ] 补齐 `docs/mechanics/reactions.md` 的剧变反应等级系数表
 - [ ] 建立 `guides/character-builds/` 的角色配装条目
 

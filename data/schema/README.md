@@ -65,24 +65,27 @@ community_roles.csv
 
 ### 2.2 weapons/
 
-| 表 | 主键 | 详细定义 |
-|---|---|---|
-| `weapons.csv` | `weapon_id` | [weapons/README.md](../weapons/README.md) |
+| 表 | 主键 | 字段数量 | 详细定义 |
+|---|---|---|---|
+| `weapons.csv` | `weapon_id` | 15 | [weapons/README.md](../weapons/README.md) |
 
 ```
 weapons.csv
-  weapon_id, slug, name_zh, name_en, rarity, weapon_type, base_atk_lv90,
-  sub_stat, sub_stat_value_lv90, passive_name_zh, passive_summary,
-  obtain_method, version, source
+  weapon_id, slug, name_zh, name_en, rarity, weapon_type, max_level,
+  base_atk_lv90, sub_stat, sub_stat_value_lv90, passive_name_zh,
+  passive_summary, obtain_method, version, source
 ```
+
+> `max_level` 是本仓库对原表头的**追加**：1★/2★ 共 10 把武器上限为 70，
+> 因此 `base_atk_lv90` / `sub_stat_value_lv90` 的语义是「满级值」，等级上限见 `max_level`。
 
 ### 2.3 artifacts/
 
-| 表 | 主键 | 详细定义 |
-|---|---|---|
-| `artifact_sets.csv` | `set_id` | [artifacts/README.md](../artifacts/README.md) |
-| `artifact_set_bonuses.csv` | `set_id` + `pieces` + `effect_index` | 同上 |
-| `artifact_main_stats.csv` | `slot` + `main_stat` | 同上 |
+| 表 | 主键 | 字段数量 | 详细定义 |
+|---|---|---|---|
+| `artifact_sets.csv` | `set_id` | 11 | [artifacts/README.md](../artifacts/README.md) |
+| `artifact_set_bonuses.csv` | `set_id` + `pieces` + `effect_index` | 15 | 同上 |
+| `artifact_main_stats.csv` | `slot` + `main_stat` | 6 | 同上 |
 
 ```
 artifact_sets.csv

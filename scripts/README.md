@@ -112,13 +112,14 @@ tar -xzf genshin-db.tgz
 node scripts/import_genshin_db.mjs --in package/src/min/data.min.json
 node scripts/import_genshin_db.mjs --in <path> --dry-run        # 只统计不写文件
 node scripts/import_genshin_db.mjs --in <path> --targets characters
+node scripts/import_genshin_db.mjs --in <path> --targets all     # 全部四类
 ```
 
 | 参数 | 说明 |
 |---|---|
 | `--in <path>` | **必填**，`data.min.json` 路径 |
 | `--out <dir>` | 仓库根目录，默认脚本上级目录 |
-| `--targets <list>` | 默认 `characters`；`roles` 尚未实现 |
+| `--targets <list>` | 逗号分隔，默认 `characters`；可选 `characters` `roles` `weapons` `artifacts` `all` |
 | `--dry-run` | 只输出统计，不写文件 |
 
 ### 它做了什么
@@ -154,7 +155,40 @@ node scripts/import_genshin_db.mjs --in <path> --targets characters
 
 | target | 说明 |
 |---|---|
-| — | 当前 `characters` 与 `roles` 均已实现 |
+| — | `characters` / `roles` / `weapons` / `artifacts` 均已实现 |
+
+---
+
+## 武器与圣遗物导入（`--targets weapons,artifacts`）
+
+| 产物 | 行数 | 来源字段 |
+|---|---|---|
+| `data/weapons/weapons.csv` | 255 | `stats.weapons` 成长曲线 + 中文被动文本 |
+| `data/artifacts/artifact_sets.csv` | 63 | `data.*.artifacts` 的 `effect2Pc` / `effect4Pc` |
+| `data/artifacts/artifact_set_bonuses.csv` | 122 | 同上，按规则表拆成结构化行 |
+
+### 踩过的坑（回归清单）
+
+| # | 问题 | 修法 |
+|---|---|---|
+| 1 | EM 副属性算成 16538.4（差 100 倍） | `SUBSTAT` 映射后传的是枚举值 `em`，而函数里判断的是原始 `FIGHT_PROP_ELEMENT_MASTERY`，导致 EM 走了百分比分支 |
+| 2 | EM 输出 165.4 而非 165 | EM 在游戏内是整数显示，改为整数取整（百分数仍保留 1 位） |
+| 3 | 元素类 2 件套数值取到 `Anemo` 而非 `15` | `(\w+) DMG Bonus \+(\d+)%` 的数值在第 2 捕获组，规则表新增 `valueGroup` |
+| 4 | 烬城勇者绘卷 2 件套无法解析 | 它是「回复元素能量」而非属性加成，新增 `energy_regen` 类型 |
+| 5 | 3 把同名武器 slug 冲突导致脚本崩溃 | 新增 `uniqueSlug()`，用源 key 的区分后缀消歧并打印警告 |
+| 6 | `Wolf's Gravestone` → `wolf_s_gravestone` | `toSlug` 先剥离撇号再替换，得 `wolfs_gravestone` |
+| 7 | `prizedisshinblade-01` 副属性输出 0 | 源数据 `baseStatText` 是字面量 `"NaN"`、`base.specialized=0`，按契约留空而非写 0 |
+| 8 | 4 件套 `effect_type` 只有 1/61 有值 | 4 件套多用「X is increased by Y%」句式，补 9 条规则后提升到 19/61 |
+| 9 | `max_stacks` 漏掉「stacks up to 2 times」语序 | `singleNumber` 支持多捕获组，叠层正则兼容两种语序（5 → 7 套） |
+
+### 设计取舍
+
+| 取舍 | 理由 |
+|---|---|
+| **2 件套解析失败即中止（退出码 3）** | 2 件套措辞规整，漏解析说明规则表有洞，静默通过会让数据悄悄缺项 |
+| **4 件套不硬拆** | 多为复合条件句，强行拆出单一 `effect_type` + `value` 会产生误导；只填可机械提取的字段，并在 `data/artifacts/README.md` 公布覆盖度 |
+| **`obtain_method` / `obtain_domain` 留空** | 源数据没有这两个字段，不推测 |
+| **部分武器/圣遗物文本用中文** | 中文标点不含 ASCII 逗号，天然满足「单元格禁用逗号」契约；同时与 `name_zh` 一致 |
 
 ---
 

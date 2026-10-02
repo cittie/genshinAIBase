@@ -54,7 +54,9 @@ if (args.help || !args.input) {
 
 const REPO = path.resolve(args.outDir || path.join(__dirname, '..'));
 const SRC = path.resolve(args.input);
-const TARGETS = new Set(args.targets.split(',').map(s => s.trim()).filter(Boolean));
+const TARGETS = new Set(
+  args.targets.split(',').map(s => s.trim()).filter(Boolean).flatMap(t =>
+    t === 'all' ? ['characters', 'roles', 'weapons', 'artifacts'] : [t]));
 
 // ---------------------------------------------------------------------------
 // 枚举映射
@@ -112,9 +114,31 @@ const warnings = [];
 
 function warn(msg) { warnings.push(msg); }
 
+/**
+ * 生成不与已有 slug 冲突的 slug。
+ *
+ * 源数据里存在同名不同 ID 的记录（如两把 "Prized Isshin Blade"，源 key 为
+ * prizedisshinblade 与 prizedisshinblade-01），此时把源 key 的区分后缀接到
+ * slug 上，保证既唯一又可追溯；仍冲突则退化为递增序号。
+ */
+function uniqueSlug(base, key, used) {
+  let slug = base;
+  if (used.has(slug)) {
+    const head = base.replace(/_/g, '');
+    const extra = String(key).replace(/[^a-z0-9]/gi, '').slice(head.length);
+    if (extra) slug = `${base}_${extra}`;
+    const root = slug;
+    let n = 2;
+    while (used.has(slug)) slug = `${root}_${n++}`;
+    warn(`slug 冲突已消歧: ${base} + (${key}) -> ${slug}`);
+  }
+  return slug;
+}
+
 /** 英文名 -> 稳定 slug（小写下划线）。与 AGENTS.md §3.1 的 slug 约定一致。 */
 function toSlug(name) {
-  return name
+  return String(name)
+    .replace(/['\u2019]/g, '')     // Wolf's -> Wolfs，避免生成 wolf_s_gravestone
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '_')
     .replace(/^_+|_+$/g, '');
@@ -334,6 +358,83 @@ function runRegression(rows) {
     for (const f of ['asc', 'burst']) {
       if (got[f] !== want[f]) problems.push(`${slug}.${f}: got ${got[f]} want ${want[f]}`);
     }
+  }
+  return problems;
+}
+
+// ---------------------------------------------------------------------------
+// 武器回归自检：期望值来自外部（游戏内数值 / 社区公认值），不是脚本输出抄来的。
+// ---------------------------------------------------------------------------
+const WEAPON_REGRESSION = {
+  staff_of_homa: { rarity: 5, atk: 608, sub: 'crit_dmg_pct', val: 66.2 },
+  wolfs_gravestone: { rarity: 5, atk: 608, sub: 'atk_pct', val: 49.6 },
+  amos_bow: { rarity: 5, atk: 608, sub: 'atk_pct', val: 49.6 },
+  skyward_harp: { rarity: 5, atk: 674, sub: 'crit_rate_pct', val: 22.1 },
+  aquila_favonia: { rarity: 5, atk: 674, sub: 'physical_dmg_pct', val: 41.3 },
+  primordial_jade_winged_spear: { rarity: 5, atk: 674, sub: 'crit_rate_pct', val: 22.1 },
+  engulfing_lightning: { rarity: 5, atk: 608, sub: 'energy_recharge_pct', val: 55.1 },
+  aqua_simulacra: { rarity: 5, atk: 542, sub: 'crit_dmg_pct', val: 88.2 },
+  the_catch: { rarity: 4, atk: 510, sub: 'energy_recharge_pct', val: 45.9 },
+  favonius_sword: { rarity: 4, atk: 454, sub: 'energy_recharge_pct', val: 61.3 },
+  iron_sting: { rarity: 4, atk: 510, sub: 'em', val: 165 },
+  black_tassel: { rarity: 3, atk: 354, sub: 'hp_pct', val: 46.9 },
+};
+
+function runWeaponRegression(rows) {
+  const bySlug = new Map(rows.map(r => [r[1], r]));
+  const problems = [];
+  for (const [slug, want] of Object.entries(WEAPON_REGRESSION)) {
+    const row = bySlug.get(slug);
+    if (!row) { problems.push(`${slug}: 缺失`); continue; }
+    const got = {
+      rarity: Number(row[4]), atk: Number(row[7]), sub: row[8], val: Number(row[9]),
+    };
+    for (const f of ['rarity', 'atk', 'val']) {
+      if (got[f] !== want[f]) problems.push(`${slug}.${f}: got ${got[f]} want ${want[f]}`);
+    }
+    for (const f of ['sub']) {
+      if (got[f] !== want[f]) problems.push(`${slug}.${f}: got ${got[f]} want ${want[f]}`);
+    }
+  }
+  return problems;
+}
+
+// ---------------------------------------------------------------------------
+// 圣遗物回归自检：2 件套解析结果必须与公认数值一致。
+// ---------------------------------------------------------------------------
+const ARTIFACT_REGRESSION = {
+  gladiators_finale: ['atk_pct', '18'],
+  viridescent_venerer: ['anemo_dmg_pct', '15'],
+  emblem_of_severed_fate: ['energy_recharge_pct', '20'],
+  crimson_witch_of_flames: ['pyro_dmg_pct', '15'],
+  deepwood_memories: ['dendro_dmg_pct', '15'],
+  blizzard_strayer: ['cryo_dmg_pct', '15'],
+  thundering_fury: ['electro_dmg_pct', '15'],
+  heart_of_depth: ['hydro_dmg_pct', '15'],
+  archaic_petra: ['geo_dmg_pct', '15'],
+  pale_flame: ['physical_dmg_pct', '25'],
+  tenacity_of_the_millelith: ['hp_pct', '20'],
+  husk_of_opulent_dreams: ['def_pct', '30'],
+  ocean_hued_clam: ['healing_bonus_pct', '15'],
+  retracing_bolide: ['shield_strength_pct', '35'],
+  gilded_dreams: ['em', '80'],
+  berserker: ['crit_rate_pct', '12'],
+  adventurer: ['hp', '1000'],
+  lucky_dog: ['def', '100'],
+  noblesse_oblige: ['elemental_burst_dmg_pct', '20'],
+  marechaussee_hunter: ['normal_attack_dmg_pct', '15'],
+  lavawalker: ['pyro_res_pct', '40'],
+  tiny_miracle: ['elemental_res_pct', '20'],
+};
+
+function runArtifactRegression(setRows) {
+  const bySlug = new Map(setRows.map(r => [r[1], r]));
+  const problems = [];
+  for (const [slug, [type, value]] of Object.entries(ARTIFACT_REGRESSION)) {
+    const row = bySlug.get(slug);
+    if (!row) { problems.push(`${slug}: 缺失`); continue; }
+    if (row[5] !== type) problems.push(`${slug}.bonus_2pc_type: got ${row[5]} want ${type}`);
+    if (row[6] !== value) problems.push(`${slug}.bonus_2pc_value: got ${row[6]} want ${value}`);
   }
   return problems;
 }
@@ -649,6 +750,299 @@ function listCharactersForRoles(raw, repo) {
 }
 
 // ---------------------------------------------------------------------------
+// weapons.csv
+//
+// 武器基础攻击力来自解包的成长曲线；副属性类型是定值、数值随等级成长。
+// 注意：1★/2★ 共 10 把武器等级上限为 70（其余 245 把为 90），因此新增
+// `max_level` 列，并把 base_atk_lv90 / sub_stat_value_lv90 定义为「满级值」。
+// ---------------------------------------------------------------------------
+
+const WEAPONS_HEADER = [
+  'weapon_id', 'slug', 'name_zh', 'name_en', 'rarity', 'weapon_type', 'max_level',
+  'base_atk_lv90', 'sub_stat', 'sub_stat_value_lv90',
+  'passive_name_zh', 'passive_summary', 'obtain_method', 'version', 'source',
+];
+
+const WEAPON_TYPE = {
+  WEAPON_SWORD_ONE_HAND: 'sword', WEAPON_CLAYMORE: 'claymore',
+  WEAPON_POLE: 'polearm', WEAPON_CATALYST: 'catalyst', WEAPON_BOW: 'bow',
+};
+
+/** 武器满级属性：攻击力走曲线 + 突破加成；副属性只走曲线（genshin-db 原实现如此）。 */
+function weaponStatsAtMax(raw, key) {
+  const s = raw.stats.weapons[key];
+  if (!s) return undefined;
+  const maxLevel = s.promotion[s.promotion.length - 1].maxlevel;
+  const [, promo] = promotionAt(s.promotion, maxLevel, '+');
+  const c = raw.curve.weapons[String(maxLevel)];
+  if (!c) throw new Error(`武器曲线缺少 ${maxLevel} 级`);
+  return {
+    maxLevel,
+    atk: s.base.attack * c[s.curve.attack] + promo.attack,
+    specialized: s.base.specialized * c[s.curve.specialized],
+    specializedType: s.specialized,
+  };
+}
+
+/** 副属性数值：EM 为整数固定值，其余按百分数数值保留 1 位小数（与游戏内显示一致）。
+ *  注意传入的是已映射的仓库枚举（`em`），不是原始的 FIGHT_PROP_* 名。
+ *  源数据里 prizedisshinblade-01 的 baseStatText 是字面量 "NaN"、base.specialized=0，
+ *  这种情况按契约留空（未知），而不是写成 0。 */
+function weaponSubstatValue(type, value) {
+  if (!type) return '';
+  if (!Number.isFinite(value) || value === 0) return '';
+  if (type === 'em') return String(Math.round(value));
+  return String(Math.round(value * 1000) / 10);
+}
+
+function buildWeapons(raw, version) {
+  const en = raw.data.English.weapons;
+  const zh = raw.data.ChineseSimplified.weapons;
+  const usedSlug = new Map();
+  const rows = [];
+
+  for (const key of Object.keys(en)) {
+    const rec = en[key];
+    const zrec = zh[key] || {};
+    const st = weaponStatsAtMax(raw, key);
+    if (!st) { warn(`武器 ${key}: 缺少 stats，已跳过`); continue; }
+
+    const base = toSlug(rec.name);
+    if (!base) throw new Error(`武器 ${key} 无法生成 slug`);
+    const slug = uniqueSlug(base, key, usedSlug);
+    usedSlug.set(slug, key);
+
+    const wtype = WEAPON_TYPE[rec.weaponType];
+    if (!wtype) warn(`武器 ${key}: 未知 weaponType ${rec.weaponType}`);
+
+    const subStat = SUBSTAT[st.specializedType];
+    const r1zh = zrec.r1 && zrec.r1.description;
+    const r1en = rec.r1 && rec.r1.description;
+
+    rows.push([
+      String(rec.id), slug, zrec.name || '', rec.name,
+      String(rec.rarity), wtype || '', String(st.maxLevel),
+      String(Math.round(st.atk)),
+      subStat === undefined ? '' : (subStat || ''),
+      weaponSubstatValue(subStat, st.specialized),
+      zrec.effectName || rec.effectName || '',
+      noteText(r1zh || r1en || ''),           // 被动全文，优先中文（中文标点不含 ASCII 逗号）
+      '',                                      // obtain_method：源数据无此字段
+      version.weapons ? (version.weapons[key] || '') : '',
+      'datamine',
+    ]);
+  }
+
+  rows.sort((a, b) => Number(a[0]) - Number(b[0]));
+  return rows;
+}
+
+// ---------------------------------------------------------------------------
+// artifact_sets.csv + artifact_set_bonuses.csv
+//
+// 套装效果是自然语言，因此采用「规则表 + 无匹配即中止」策略：
+// 任何一条 2 件套文本若无任何规则命中，脚本直接退出，避免静默漏解析。
+// ---------------------------------------------------------------------------
+
+const ELEMENT_EN = {
+  Pyro: 'pyro', Hydro: 'hydro', Anemo: 'anemo', Electro: 'electro',
+  Dendro: 'dendro', Cryo: 'cryo', Geo: 'geo',
+};
+
+/** 规则按顺序匹配，命中后从文本中移除，避免同一数值被多条规则重复计入。
+ *  `types` 里的 `$N` 指向捕获组 N；`valueGroup` 指定数值所在的捕获组（默认 1）。 */
+const ARTIFACT_STAT_RULES = [
+  { re: /ATK \+(\d+(?:\.\d+)?)%/, types: ['atk_pct'], unit: 'pct' },
+  { re: /HP \+(\d+(?:\.\d+)?)%/, types: ['hp_pct'], unit: 'pct' },
+  { re: /Max HP increased by ([\d,]+)/, types: ['hp'], unit: 'flat' },
+  { re: /DEF \+(\d+(?:\.\d+)?)%/, types: ['def_pct'], unit: 'pct' },
+  { re: /DEF increased by ([\d,]+)/, types: ['def'], unit: 'flat' },
+  { re: /Increases Elemental Mastery by (\d+)/, types: ['em'], unit: 'flat' },
+  { re: /CRIT Rate \+(\d+(?:\.\d+)?)%/, types: ['crit_rate_pct'], unit: 'pct' },
+  { re: /CRIT DMG \+(\d+(?:\.\d+)?)%/, types: ['crit_dmg_pct'], unit: 'pct' },
+  { re: /Energy Recharge \+(\d+(?:\.\d+)?)%/, types: ['energy_recharge_pct'], unit: 'pct' },
+  { re: /Gain a (\d+(?:\.\d+)?)% (\w+) DMG Bonus/, types: ['$2_dmg_pct'], unit: 'pct' },
+  { re: /(\w+) DMG Bonus \+(\d+(?:\.\d+)?)%/, types: ['$1_dmg_pct'], unit: 'pct', valueGroup: 2 },
+  { re: /Physical DMG (?:is increased by |\+)(\d+(?:\.\d+)?)%/, types: ['physical_dmg_pct'], unit: 'pct' },
+  { re: /Elemental Skill and Elemental Burst DMG \+(\d+(?:\.\d+)?)%/, types: ['elemental_skill_dmg_pct', 'elemental_burst_dmg_pct'], unit: 'pct' },
+  { re: /Elemental Burst DMG \+(\d+(?:\.\d+)?)%/, types: ['elemental_burst_dmg_pct'], unit: 'pct' },
+  { re: /Increases Elemental Skill DMG by (\d+(?:\.\d+)?)%/, types: ['elemental_skill_dmg_pct'], unit: 'pct' },
+  { re: /Normal and Charged Attack DMG \+(\d+(?:\.\d+)?)%/, types: ['normal_attack_dmg_pct', 'charged_attack_dmg_pct'], unit: 'pct' },
+  { re: /Normal Attack DMG (?:increased by |\+)(\d+(?:\.\d+)?)%/, types: ['normal_attack_dmg_pct'], unit: 'pct' },
+  { re: /Plunging Attack DMG increased by (\d+(?:\.\d+)?)%/, types: ['plunging_dmg_pct'], unit: 'pct' },
+  { re: /Healing Bonus \+(\d+(?:\.\d+)?)%/, types: ['healing_bonus_pct'], unit: 'pct' },
+  { re: /Character Healing Effectiveness \+(\d+(?:\.\d+)?)%/, types: ['healing_bonus_pct'], unit: 'pct' },
+  { re: /Increases incoming healing by (\d+(?:\.\d+)?)%/, types: ['incoming_healing_bonus_pct'], unit: 'pct' },
+  { re: /Increases Shield Strength by (\d+(?:\.\d+)?)%/, types: ['shield_strength_pct'], unit: 'pct' },
+  { re: /All Elemental RES increased by (\d+(?:\.\d+)?)%/, types: ['elemental_res_pct'], unit: 'pct' },
+  { re: /(\w+) RES increased by (\d+(?:\.\d+)?)%/, types: ['$1_res_pct'], unit: 'pct', valueGroup: 2 },
+  // 4 件套常见的「X is increased by Y%」句式（2 件套极少用这种写法）
+  { re: /Normal, Charged, and Plunging Attack DMG will increase by (\d+(?:\.\d+)?)%/, types: ['normal_attack_dmg_pct', 'charged_attack_dmg_pct', 'plunging_dmg_pct'], unit: 'pct' },
+  { re: /(Normal|Charged|Plunging) Attack DMG (?:is increased|will increase|increases?) by (\d+(?:\.\d+)?)%/, types: ['$1_attack_dmg_pct'], unit: 'pct', valueGroup: 2 },
+  { re: /increases Charged Attack DMG by (\d+(?:\.\d+)?)%/, types: ['charged_attack_dmg_pct'], unit: 'pct' },
+  { re: /CRIT Rate (?:is increased|increases) by (?:an additional )?(\d+(?:\.\d+)?)%/, types: ['crit_rate_pct'], unit: 'pct' },
+  { re: /CRIT DMG (?:is increased|increases) by (?:an additional )?(\d+(?:\.\d+)?)%/, types: ['crit_dmg_pct'], unit: 'pct' },
+  { re: /ATK is increased by (\d+(?:\.\d+)?)%/, types: ['atk_pct'], unit: 'pct' },
+  { re: /Increases DMG by (\d+(?:\.\d+)?)%/, types: ['dmg_pct'], unit: 'pct' },
+  { re: /gain an? (\d+(?:\.\d+)?)% (?:Elemental )?DMG Bonus/, types: ['elemental_dmg_pct'], unit: 'pct' },
+  // 减抗类（挂在敌人身上，与自身属性加成不同）
+  { re: /(\w+) RES will be decreased by (\d+(?:\.\d+)?)%/, types: ['$1_res_shred_pct'], unit: 'pct', valueGroup: 2 },
+  // 必须排在元素伤害规则之后，否则 \w+ 会把 "dealt" 之类当成元素名
+  { re: /DMG dealt is increased by (\d+(?:\.\d+)?)%/, types: ['dmg_pct'], unit: 'pct' },
+  // 回复元素能量类（如「烬城勇者绘卷」2 件套）
+  { re: /regenerates (\d+) Elemental Energy/, types: ['energy_regen'], unit: 'flat' },
+];
+
+const ARTIFACT_SETS_HEADER = [
+  'set_id', 'slug', 'name_zh', 'name_en', 'rarity_max',
+  'bonus_2pc_type', 'bonus_2pc_value', 'bonus_4pc_summary',
+  'obtain_domain', 'version', 'source',
+];
+
+const ARTIFACT_BONUSES_HEADER = [
+  'set_id', 'slug', 'pieces', 'effect_index', 'effect_name', 'effect_type',
+  'effect_target', 'value', 'value_unit', 'condition', 'duration_sec',
+  'max_stacks', 'notes', 'version', 'source',
+];
+
+/** 在效果文本中提取结构化属性，返回 [{type, value, unit}]。 */
+function parseArtifactStats(text) {
+  const out = [];
+  let rest = String(text || '');
+  for (const rule of ARTIFACT_STAT_RULES) {
+    const m = rest.match(rule.re);
+    if (!m) continue;
+    for (const t of rule.types) {
+      const type = t.replace(/\$(\d)/g, (_, n) => {
+        const word = m[Number(n)];
+        return ELEMENT_EN[word] || String(word).toLowerCase();
+      });
+      out.push({
+        type,
+        value: String(m[rule.valueGroup || 1]).replace(/,/g, ''),
+        unit: rule.unit,
+      });
+    }
+    rest = rest.replace(rule.re, ' ');
+  }
+  return out;
+}
+
+/** 触发条件：取第一个分句（中文按「，」，英文按逗号）。 */
+function firstClause(text) {
+  const zhParts = String(text || '').split('，');
+  if (zhParts.length > 1) return zhParts[0];
+  const enParts = String(text || '').split(/,\s*/);
+  return enParts.length > 1 ? enParts[0] : '';
+}
+
+/** 仅当文本中恰好出现一次时才返回，避免把套装级数值误挂到某一条效果上。
+ *  正则可含多个捕获组（不同语序），取第一个有值的组。 */
+function singleNumber(text, re) {
+  const hits = [];
+  for (const m of String(text || '').matchAll(re)) {
+    const v = m.slice(1).find(x => x !== undefined);
+    if (v !== undefined) hits.push(v);
+  }
+  return hits.length === 1 ? hits[0] : '';
+}
+
+function buildArtifacts(raw, version) {
+  const en = raw.data.English.artifacts;
+  const zh = raw.data.ChineseSimplified.artifacts;
+  const keys = Object.keys(en).sort();
+  const setRows = [];
+  const bonusRows = [];
+  const unparsed = [];
+  const usedSlug = new Map();
+
+  for (const key of keys) {
+    const rec = en[key];
+    const zrec = zh[key] || {};
+    const base = toSlug(rec.name);
+    if (!base) throw new Error(`圣遗物 ${key} 无法生成 slug`);
+    const slug = uniqueSlug(base, key, usedSlug);
+    usedSlug.set(slug, key);
+    const ver = version.artifacts ? (version.artifacts[key] || '') : '';
+    const rarityMax = Array.isArray(rec.rarityList) && rec.rarityList.length
+      ? String(Math.max(...rec.rarityList)) : '';
+
+    const eff2 = rec.effect2Pc;
+    const eff4 = rec.effect4Pc;
+    const zh2 = zrec.effect2Pc;
+    const zh4 = zrec.effect4Pc;
+
+    const parsed2 = eff2 ? parseArtifactStats(eff2) : [];
+    if (eff2 && parsed2.length === 0) unparsed.push(`${key}: ${JSON.stringify(eff2)}`);
+
+    setRows.push([
+      String(rec.id), slug, zrec.name || '', rec.name, rarityMax,
+      parsed2.length ? parsed2[0].type : '',
+      parsed2.length ? parsed2[0].value : '',
+      noteText(zh4 || eff4 || ''),
+      '',                                   // obtain_domain：源数据无此字段
+      ver, 'datamine',
+    ]);
+
+    parsed2.forEach((s, i) => {
+      bonusRows.push([
+        String(rec.id), slug, '2', String(i + 1), '',
+        s.type, 'self', s.value, s.unit, '', '', '',
+        noteText(zh2 || eff2 || ''),
+        ver, 'datamine',
+      ]);
+    });
+
+    if (eff4) {
+      const parsed4 = parseArtifactStats(eff4);
+      const duration = singleNumber(eff4, /for (\d+(?:\.\d+)?)s\b/g);
+      // 叠层语序有两种：「maximum of 3 stacks」与「stacks up to 2 times」
+      const stacks = singleNumber(eff4,
+        /(?:maximum of|up to|max(?:imum)?) (\d+) stacks?|stacks? up to (\d+) times?/gi);
+      const target = /party members|nearby party|all party/i.test(eff4) ? 'team' : 'self';
+      const condition = noteText(firstClause(zh4 || eff4));
+
+      if (parsed4.length === 0) {
+        bonusRows.push([
+          String(rec.id), slug, '4', '1', '', '', target, '', '',
+          condition, duration, stacks, noteText(zh4 || eff4), ver, 'datamine',
+        ]);
+      } else {
+        // 数值依赖其他属性时（如「基于元素充能效率的 25%」）不填 value
+        const qualified = /of (Energy Recharge|Max HP|DEF|Elemental Mastery)/i.test(eff4);
+        parsed4.forEach((s, i) => {
+          bonusRows.push([
+            String(rec.id), slug, '4', String(i + 1), '',
+            s.type, target,
+            qualified ? '' : s.value, qualified ? '' : s.unit,
+            condition, duration, stacks,
+            qualified
+              ? `数值取决于其他属性、不单独给出: ${noteText(eff4)}`
+              : noteText(zh4 || eff4),
+            ver, 'datamine',
+          ]);
+        });
+      }
+    }
+  }
+
+  if (unparsed.length) {
+    console.error('\n[2 件套解析失败] 规则表需补充，已中止写入：');
+    unparsed.forEach(u => console.error('  - ' + u));
+    process.exit(3);
+  }
+
+  setRows.sort((a, b) => Number(a[0]) - Number(b[0]));
+  bonusRows.sort((a, b) => Number(a[0]) - Number(b[0]) || Number(a[2]) - Number(b[2]) || Number(a[3]) - Number(b[3]));
+
+  // 覆盖度报告（非闸门）：4 件套是复合条件句，结构化字段本就填不全，这里让缺口可见
+  const p4 = bonusRows.filter(r => r[2] === '4');
+  console.error(`4 件套行 ${p4.length}：effect_type 有值 ${p4.filter(r => r[5]).length} / `
+    + `duration_sec 有值 ${p4.filter(r => r[10]).length} / max_stacks 有值 ${p4.filter(r => r[11]).length}`);
+  return { setRows, bonusRows };
+}
+
+// ---------------------------------------------------------------------------
 // 主流程
 // ---------------------------------------------------------------------------
 const produced = [];
@@ -667,6 +1061,31 @@ if (TARGETS.has('characters')) {
 
 if (TARGETS.has('roles')) {
   produced.push(...buildRoles(raw, version, REPO, args));
+}
+
+if (TARGETS.has('weapons')) {
+  const rows = buildWeapons(raw, version);
+  const problems = runWeaponRegression(rows);
+  if (problems.length) {
+    console.error('\n[武器回归自检失败] 已中止写入：');
+    problems.forEach(p => console.error('  - ' + p));
+    process.exit(2);
+  }
+  console.error(`武器回归自检通过（${Object.keys(WEAPON_REGRESSION).length} 把）`);
+  produced.push(writeCsv('data/weapons/weapons.csv', WEAPONS_HEADER, rows));
+}
+
+if (TARGETS.has('artifacts')) {
+  const { setRows, bonusRows } = buildArtifacts(raw, version);
+  const problems = runArtifactRegression(setRows);
+  if (problems.length) {
+    console.error('\n[圣遗物回归自检失败] 已中止写入：');
+    problems.forEach(p => console.error('  - ' + p));
+    process.exit(2);
+  }
+  console.error(`圣遗物回归自检通过（${Object.keys(ARTIFACT_REGRESSION).length} 套）`);
+  produced.push(writeCsv('data/artifacts/artifact_sets.csv', ARTIFACT_SETS_HEADER, setRows));
+  produced.push(writeCsv('data/artifacts/artifact_set_bonuses.csv', ARTIFACT_BONUSES_HEADER, bonusRows));
 }
 
 console.log('\n=== 导入结果 ===');

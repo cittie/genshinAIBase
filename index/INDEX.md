@@ -80,9 +80,9 @@
 | [characters/characters.csv](../data/characters/characters.csv) | `char_id` | 角色基础属性、突破加成、爆发能量 | ✅ **124 行** |
 | [characters/character_roles.csv](../data/characters/character_roles.csv) | `char_id`+`role` | 角色定位（长表） | ✅ **172 行 / 120 角色** |
 | [characters/community_roles.csv](../data/characters/community_roles.csv) | `char_id` | 社区定位来源快照（交叉核对） | ✅ **120 行** |
-| [weapons/weapons.csv](../data/weapons/weapons.csv) | `weapon_id` | 武器基础属性与被动 | 表头 |
-| [artifacts/artifact_sets.csv](../data/artifacts/artifact_sets.csv) | `set_id` | 圣遗物套装主表 | 表头 |
-| [artifacts/artifact_set_bonuses.csv](../data/artifacts/artifact_set_bonuses.csv) | `set_id`+`pieces`+`effect_index` | 套装效果（长表） | 表头 |
+| [weapons/weapons.csv](../data/weapons/weapons.csv) | `weapon_id` | 武器基础属性与被动 | ✅ **255 行** |
+| [artifacts/artifact_sets.csv](../data/artifacts/artifact_sets.csv) | `set_id` | 圣遗物套装主表 | ✅ **63 行** |
+| [artifacts/artifact_set_bonuses.csv](../data/artifacts/artifact_set_bonuses.csv) | `set_id`+`pieces`+`effect_index` | 套装效果（长表） | ✅ **122 行** |
 | [artifacts/artifact_main_stats.csv](../data/artifacts/artifact_main_stats.csv) | `slot`+`main_stat` | 主词条数值 | 表头 |
 | [elements/reactions.csv](../data/elements/reactions.csv) | `reaction_id` | 反应系数与属性 | 表头 |
 | [elements/aura_consumption.csv](../data/elements/aura_consumption.csv) | `reaction_id` | 附着量消耗 | 表头 |
@@ -126,6 +126,10 @@
 |---|---|
 | 「谁能当奶妈」「有没有护盾角色」 | [data/characters/character_roles.csv](../data/characters/character_roles.csv)（按 `role` 过滤） |
 | 「谁是主 C」「谁是后台」 | [data/characters/character_roles.csv](../data/characters/character_roles.csv)（`main_dps` / `sub_dps`） |
+| 「这把武器的基础攻击力/副属性是多少」 | [data/weapons/weapons.csv](../data/weapons/weapons.csv) |
+| 「哪些武器是充能/精通副属性」 | [data/weapons/weapons.csv](../data/weapons/weapons.csv)（按 `sub_stat` 过滤） |
+| 「哪些套装 2 件套加攻击力」 | [data/artifacts/artifact_sets.csv](../data/artifacts/artifact_sets.csv)（按 `bonus_2pc_type` 过滤） |
+| 「某个 4 件套效果是什么」 | [data/artifacts/artifact_sets.csv](../data/artifacts/artifact_sets.csv) 的 `bonus_4pc_summary`（完整效果） |
 | 「谁是增伤」「谁减抗」 | [data/characters/character_roles.csv](../data/characters/character_roles.csv)（`buffer` / `debuffer`） |
 | 「暴击率多少够」「双爆配比」 | [rules/stat-priority.md](../rules/stat-priority.md#3-词条排序生成流程) |
 | 「蒸发几倍」「融化倍率」 | [docs/mechanics/reactions.md](../docs/mechanics/reactions.md#反应倍率) |
@@ -149,6 +153,12 @@
 |---|---|
 | ✅ 角色基础数据（124 名）**已收录** | `data/characters/characters.csv` |
 | ✅ 角色职能定位（120 名）**已收录**（推导字段，含依据与 `confidence`） | `data/characters/character_roles.csv` |
+| ✅ 武器基础数据（255 把）**已收录** | `data/weapons/weapons.csv` |
+| ✅ 圣遗物套装与效果（63 套 / 122 行）**已收录** | `data/artifacts/` |
+| 武器**获取途径**（`obtain_method` 全表为空，源数据无此字段） | `data/weapons/weapons.csv` |
+| 圣遗物**获取秘境**（`obtain_domain` 全表为空） | `data/artifacts/artifact_sets.csv` |
+| 4 件套效果的完整结构化拆解（仅 `effect_type` 19/61 有值） | `data/artifacts/artifact_set_bonuses.csv` |
+| 武器 R1~R5 精炼数值、圣遗物主副词条数值 | 待建表 |
 | 角色定位未覆盖 4 名（旅行者与特殊条目） | `data/characters/character_roles.csv` |
 | `damage_source` 全表留空（倍率条目数不能反映伤害占比） | `data/characters/character_roles.csv` |
 | 旅行者分元素变体（仅天赋/命座记录可得） | `data/characters/` |

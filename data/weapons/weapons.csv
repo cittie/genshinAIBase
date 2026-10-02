@@ -1,1 +1,256 @@
-weapon_id,slug,name_zh,name_en,rarity,weapon_type,base_atk_lv90,sub_stat,sub_stat_value_lv90,passive_name_zh,passive_summary,obtain_method,version,source
+weapon_id,slug,name_zh,name_en,rarity,weapon_type,max_level,base_atk_lv90,sub_stat,sub_stat_value_lv90,passive_name_zh,passive_summary,obtain_method,version,source
+11101,dull_blade,无锋剑,Dull Blade,1,sword,70,185,,,,,,1.0,datamine
+11201,silver_sword,银剑,Silver Sword,2,sword,70,243,,,,,,1.0,datamine
+11301,cool_steel,冷刃,Cool Steel,3,sword,90,401,atk_pct,35.2,止水融冰,对处于水元素或冰元素影响下的敌人，造成的伤害提高12%。,,1.0,datamine
+11302,harbinger_of_dawn,黎明神剑,Harbinger of Dawn,3,sword,90,401,crit_dmg_pct,46.9,激励,生命值高于90%时，暴击率提升14%。,,1.0,datamine
+11303,travelers_handy_sword,旅行剑,Traveler's Handy Sword,3,sword,90,448,def_pct,29.3,旅程,获得元素晶球或元素微粒时，恢复1%生命值。,,1.0,datamine
+11304,dark_iron_sword,暗铁剑,Dark Iron Sword,3,sword,90,401,em,141,过载,触发超载、超导、星超导、感电、原激化、超激化、超绽放、月感电或雷元素扩散反应后的12秒内，攻击力提高20%。,,1.0,datamine
+11305,fillet_blade,吃虎鱼刀,Fillet Blade,3,sword,90,401,atk_pct,35.2,决,攻击命中时，有50%的概率对单个敌人造成240%攻击力的伤害。该效果每15秒只能触发一次。,,1.0,datamine
+11306,skyrider_sword,飞天御剑,Skyrider Sword,3,sword,90,354,energy_recharge_pct,52.1,决心,施放元素爆发后，提高12%攻击力和移动速度，持续15秒。,,1.0,datamine
+11401,favonius_sword,西风剑,Favonius Sword,4,sword,90,454,energy_recharge_pct,61.3,顺风而行,攻击造成暴击时，有60%的几率产生少量元素微粒，能为角色恢复6点元素能量。该效果每12秒只能触发一次。,,1.0,datamine
+11402,the_flute,笛剑,The Flute,4,sword,90,510,atk_pct,41.3,和弦,普通攻击或重击命中时，会获得一个和音。积攒了5个和音后，释放音律的力量，对周围的敌人造成100%攻击力的伤害。和音最多存在30秒，每0.5秒至多获得1个和音。,,1.0,datamine
+11403,sacrificial_sword,祭礼剑,Sacrificial Sword,4,sword,90,454,energy_recharge_pct,61.3,气定神闲,元素战技造成伤害时，有40%的概率重置该技能的冷却时间，该效果每30秒只能触发一次。,,1.0,datamine
+11404,royal_longsword,宗室长剑,Royal Longsword,4,sword,90,510,atk_pct,41.3,专注,攻击造成伤害时，暴击率提升8%，最多堆叠5次。攻击造成暴击后，移除已有的专注效果。,,1.0,datamine
+11405,lions_roar,匣里龙吟,Lion's Roar,4,sword,90,510,atk_pct,41.3,踏火息雷,对处于火元素或雷元素影响下的敌人，造成的伤害提高20%。,,1.0,datamine
+11406,prototype_rancour,试作斩岩,Prototype Rancour,4,sword,90,565,physical_dmg_pct,34.5,碎石,普通攻击或重击命中时，攻击力和防御力提高4%，持续6秒，最多叠加4层。该效果每0.3秒只能触发一次。,,1.0,datamine
+11407,iron_sting,铁蜂刺,Iron Sting,4,sword,90,510,em,165,注能之刺,造成元素伤害后的6秒内，角色造成的伤害提高6%，该效果最多叠加2层。该效果每1秒可以触发一次。,,1.0,datamine
+11408,blackcliff_longsword,黑岩长剑,Blackcliff Longsword,4,sword,90,565,crit_dmg_pct,36.8,乘胜追击,击败敌人后，攻击力提升12%，持续30秒。该效果至多叠加3层，每层持续时间独立。,,1.0,datamine
+11409,the_black_sword,黑剑,The Black Sword,4,sword,90,510,crit_rate_pct,27.6,「正义」,普通攻击与重击的造成的伤害提升20%；此外，普通攻击与重击暴击时，回复等同于攻击力60%的生命值。该效果每5秒至多发动一次。,,1.0,datamine
+11410,the_alley_flash,暗巷闪光,The Alley Flash,4,sword,90,620,em,55,街巷游侠,角色造成的伤害提升12%。受到伤害后，该伤害提升效果会失效5秒。,,1.4,datamine
+11412,sword_of_descension,降临之剑,Sword of Descension,4,sword,90,440,atk_pct,35.2,降世,仅在以下平台生效： "PlayStation™Network" 普通攻击与重击命中敌人后有50%概率在小范围内造成200%攻击力的伤害。该效果每10秒只能触发一次；此外，旅行者装备降临之剑时，攻击力提升66点。,,1.0,datamine
+11413,festering_desire,腐殖之剑,Festering Desire,4,sword,90,510,energy_recharge_pct,45.9,无尽的渴慕,元素战技造成的伤害增加16%，元素战技的暴击率提升6%。,,1.2,datamine
+11414,amenoma_kageuchi,天目影打刀,Amenoma Kageuchi,4,sword,90,454,atk_pct,55.1,岩藏之胤,施放元素战技后，获得1个胤种，该效果每5秒至多触发一次。胤种持续30秒，至多同时存在3个。施放元素爆发后，会清除持有的所有胤种，并在2秒之后，基于消耗的胤种数量，每个为该角色恢复6点元素能量。,,2.0,datamine
+11415,cinnabar_spindle,辰砂之纺锤,Cinnabar Spindle,4,sword,90,454,def_pct,69,无垢之心,元素战技造成的伤害值提高，提高数值相当于防御力的40%。该效果每1.5秒最多触发一次，并将在元素战技造成伤害后的0.1秒后清除效果。,,2.3,datamine
+11416,kagotsurube_isshin,笼钓瓶一心,Kagotsurube Isshin,4,sword,90,510,atk_pct,41.3,澄澄一心传,普通攻击、重击或下落攻击命中敌人时，将卷起切落风，造成180%攻击力的范围伤害，并且使攻击力提升15%，持续8秒。该效果每8秒至多触发一次。,,2.8,datamine
+11417,sapwood_blade,原木刀,Sapwood Blade,4,sword,90,565,energy_recharge_pct,30.6,森林的瑞佑,触发燃烧、原激化、超激化、蔓激化、绽放、月绽放、超绽放或烈绽放后，将在角色周围产生至多存在10秒的「种识之叶」。拾取种识之叶的角色元素精通提升60点，持续12秒。每20秒至多通过这种方式产生一枚种识之叶。角色处于队伍后台时也能触发。种识之叶的效果无法叠加。,,3.0,datamine
+11418,xiphos_moonlight,西福斯的月光,Xiphos' Moonlight,4,sword,90,510,em,165,镇灵的低语,每10秒，产生如下效果：装备者的每点元素精通，都会为该角色提升0.036%元素充能效率，并基于该提升的30%为队伍中附近的其他角色提升元素充能效率，持续12秒，多件同名武器产生的此效果可以叠加。角色处于队伍后台时也能触发效果。,,3.1,datamine
+11419,prized_isshin_blade,「一心传」名刀,Prized Isshin Blade,4,sword,90,510,atk_pct,41.3,徊徊切舍刀,普通攻击、重击或下落攻击命中敌人时，将释放祟灵，造成180%攻击力的范围伤害，并且恢复等同于攻击力100%的生命值。该效果每8秒至多触发一次；装备该武器的角色造成的伤害降低50%。,,2.8,datamine
+11420,prized_isshin_blade_01,「一心传」名刀,Prized Isshin Blade,4,sword,90,510,atk_pct,,徊徊切舍刀,普通攻击、重击或下落攻击命中敌人时，将释放祟灵，造成180%攻击力的范围伤害。该效果每8秒最多触发一次；装备该武器的角色造成的伤害降低50%。,,2.8,datamine
+11421,prized_isshin_blade_02,「一心传」名刀,Prized Isshin Blade,4,sword,90,510,atk_pct,20.7,徊徊切舍刀,普通攻击、重击或下落攻击命中敌人时，将释放祟灵，造成180%攻击力的范围伤害，并且恢复等同于攻击力100%的生命值。该效果每8秒至多触发一次；装备该武器的角色造成的伤害降低50%。,,2.8,datamine
+11422,toukabou_shigure,东花坊时雨,Toukabou Shigure,4,sword,90,510,em,165,怪谭·时雨心地一本足,攻击命中敌人后，会为命中的一名敌人施加「纸伞作祟」状态，持续10秒。该效果每15秒至多触发一次；持续期间该敌人被击败时，将清除该效果的冷却时间。装备者对处于「纸伞作祟」状态下的敌人造成的伤害提升16%。,,3.3,datamine
+11424,wolf_fang,狼牙,Wolf-Fang,4,sword,90,510,crit_rate_pct,27.6,苍狼北风,元素战技与元素爆发造成的伤害提升16%。元素战技命中敌人时，元素战技的暴击率提升2%；元素爆发命中敌人时，元素爆发的暴击率提升2%。上述两种效果各自持续10秒，至多叠加4次，每0.1秒至多触发一次。,,4.0,datamine
+11425,finale_of_the_deep,海渊终曲,Finale of the Deep,4,sword,90,565,atk_pct,27.6,最终的崇高,施放元素战技时，攻击力提升12%，持续15秒，并赋予生命值上限25%的生命之契，该效果每10秒至多触发一次。生命之契清除时，基于清除值的2.4%提升至多150点攻击力，持续15秒。,,4.0,datamine
+11426,fleuve_cendre_ferryman,灰河渡手,Fleuve Cendre Ferryman,4,sword,90,510,energy_recharge_pct,45.9,铁骨,元素战技暴击率提升8%；此外，施放元素战技后的5秒内，元素充能效率提升16%。,,4.0,datamine
+11427,the_dockhands_assistant,船坞长剑,The Dockhand's Assistant,4,sword,90,510,hp_pct,41.3,船工号子,受到治疗或进行治疗时，将赋予一枚坚忍标记，持续30秒，至多拥有三枚坚忍标记。施放元素战技或元素爆发时，将消耗所有的坚忍标记，产生持续10秒的「奋起」效果：每枚消耗的坚忍标记提高40点元素精通，并在效果产生2秒后，每枚消耗的坚忍标记为装备者恢复2点元素能量。每15秒至多触发一次奋起效果；角色处于队伍后,,4.1,datamine
+11428,sword_of_narzissenkreuz,水仙十字之剑,Sword of Narzissenkreuz,4,sword,90,510,atk_pct,41.3,勇者之剑,装备者不具备「始基力」时：普通攻击、重击、下落攻击命中时，会释放芒性或荒性的能量冲击，造成160%攻击力的伤害。该效果每12秒至多触发一次，能量冲击的类型由水仙十字之剑当前的属性决定。,,4.2,datamine
+11430,sturdy_bone,弥坚骨,Sturdy Bone,4,sword,90,565,atk_pct,27.6,陷阵者的自矜,冲刺或替代冲刺的能力消耗的体力降低15%；此外，使用冲刺或替代冲刺的能力后，普通攻击造成的伤害提高，提高数值相当于攻击力的16%，该效果在生效18次或7秒后消失。,,5.1,datamine
+11431,flute_of_ezpitzal,息燧之笛,Flute of Ezpitzal,4,sword,90,454,def_pct,69,镜与烟色的隐谜,施放元素战技时，防御力提升16%，持续15秒。,,5.0,datamine
+11432,calamity_of_eshu,厄水之祸,Calamity of Eshu,4,sword,90,565,atk_pct,27.6,弥漫的边界,角色处于护盾庇护下时，普通攻击和重击造成的伤害提升20%，普通攻击和重击的暴击率提升8%。,,5.2,datamine
+11433,serenitys_call,谧音吹哨,Serenity's Call,4,sword,90,454,energy_recharge_pct,61.3,沉声止语,触发元素反应后的12秒内，生命值上限提高16%。月兆·满辉：该效果中的生命值上限额外提高16%。装备者处于队伍后台时，依然能触发上述效果。,,6.0,datamine
+11434,moonweavers_dawn,织月者的曙色,Moonweaver's Dawn,4,sword,90,565,atk_pct,27.6,秘银的血告,元素爆发造成的伤害提高20%；装备者的元素能量上限不超过60/40点时，元素爆发造成的伤害额外提高16%/28%。,,6.0,datamine
+11435,heretics_molten_blade,熔猎异端之刃,Heretic's Molten Blade,4,sword,90,510,crit_rate_pct,27.6,独光的赐坠,装备者施放元素战技后，获得「映落瞳中的初光」：持续期间，将记录装备者的移动距离，每秒都将基于上一秒记录的移动距离，使装备者获得最低18%、最高36%的攻击力加成。该效果持续14秒，每14秒至多触发一次，并会在装备者退场时移除。,,7.0,datamine
+11436,emberwell,引火之源,Emberwell,4,sword,90,510,em,165,燃于雪原的星火,触发元素反应的12秒内，装备者的攻击力提升16%；触发星烁反应的12秒内，装备者造成的星烁反应伤害提升16%。装备者处于队伍后台时，依然能触发上述效果。,,7.0,datamine
+11437,new_bough,新枝,New Bough,4,sword,90,510,crit_dmg_pct,55.1,叶脉蔓生,施放元素战技后的12秒内，装备者的攻击命中敌人时，会获得「蓊郁」：攻击力提升4%，元素精通提升20点。该效果持续6秒，至多叠加3层，每1秒至多触发一次。装备者处于队伍后台时，依然能触发上述效果。 辉映·星烁：「蓊郁」效果改为攻击力提升6%，且装备者造成的星烁反应伤害提升8%。,,7.1,datamine
+11438,silver_light,银釭,Silver Light,4,sword,90,510,atk_pct,41.3,翦霞照水,施放元素战技后的12秒内，元素精通提升52点。该效果至多叠加2层，每层持续时间独立计算。,,7.1,datamine
+11501,aquila_favonia,风鹰剑,Aquila Favonia,5,sword,90,674,physical_dmg_pct,41.3,西风之鹰的抗争,攻击力提高20%；受到伤害时触发：高扬抗争旗号的西风鹰之魂苏醒，恢复等同于攻击力的100%的生命值，并对周围的敌人造成200%攻击力的伤害。该效果每15秒只能触发一次。,,1.0,datamine
+11502,skyward_blade,天空之刃,Skyward Blade,5,sword,90,608,energy_recharge_pct,55.1,穿刺高天的利齿,暴击率提升4%；施放元素爆发时，获得破空之势：移动速度提升10%，攻击速度提升10%，普通攻击与重击命中时，额外造成20%攻击力的伤害，持续12秒。,,1.0,datamine
+11503,freedom_sworn,苍古自由之誓,Freedom-Sworn,5,sword,90,608,em,198,抗争的践行之歌,飘游风中的「千年的大乐章」的一部分。造成的伤害提高10%；触发元素反应时，角色获得一枚奋起之符，每0.5秒内至多触发一次，角色处于队伍后台也能触发。拥有2枚奋起之符时，将消耗所有奋起之符，使附近的队伍中所有角色获得持续12秒的「千年的大乐章·抗争之歌」效果：普通攻击、重击、下落攻击造成的伤害提高16,,1.6,datamine
+11504,summit_shaper,斫峰之刃,Summit Shaper,5,sword,90,608,atk_pct,49.6,金璋皇极,护盾强效提升20%。攻击命中后的8秒内，攻击力提升4%。该效果至多可叠加5层，每0.3秒只能触发一次。此外，处于护盾庇护下时，该效果的攻击力提升效果提高100%。,,1.2,datamine
+11505,primordial_jade_cutter,磐岩结绿,Primordial Jade Cutter,5,sword,90,542,crit_rate_pct,44.1,护国的无垢之心,生命值提升20%。此外，基于装备该武器的角色生命值上限的1.2%，获得攻击力加成。,,1.3,datamine
+11509,mistsplitter_reforged,雾切之回光,Mistsplitter Reforged,5,sword,90,674,crit_dmg_pct,44.1,雾切御腰物,获得12%所有元素伤害加成，并能获得「雾切之巴印」的威势。雾切之巴印：持有1/2/3层雾切之巴印时，获得8/16/28%自己的元素类型的元素伤害加成。在下列情况下，角色将各获得1层雾切之巴印：普通攻击造成元素伤害时，持续5秒；施放元素爆发时，持续10秒；此外，角色元素能量低于100%时，将获得1层雾,,2.0,datamine
+11510,haran_geppaku_futsu,波乱月白经津,Haran Geppaku Futsu,5,sword,90,608,crit_rate_pct,33.1,白刃流转,获得12%所有元素伤害加成；队伍中附近的其他角色在施放元素战技时，会为装备该武器的角色产生1层「波穗」效果，至多叠加2层，每0.3秒最多触发1次。装备该武器的角色施放元素战技时，如果有积累的「波穗」效果，则将消耗已有的「波穗」，获得「波乱」：根据消耗的层数，每层提升20%普通攻击伤害，持续8秒。,,2.6,datamine
+11511,key_of_khaj_nisut,圣显之钥,Key of Khaj-Nisut,5,sword,90,542,hp_pct,66.2,沉入沙海的史诗,生命值提升20%。元素战技命中敌人时，将产生持续20秒的「宏大诗篇」效果：基于装备者生命值上限的0.12%，获得元素精通提升，该效果每0.3秒至多触发一次，至多叠加3层。该效果叠加至3层或3层的持续时间刷新时，将基于装备者生命值上限的0.2%，为队伍中附近所有角色提供元素精通提升，持续20秒。,,3.1,datamine
+11512,light_of_foliar_incision,裁叶萃光,Light of Foliar Incision,5,sword,90,542,crit_dmg_pct,88.2,白月枝芒,暴击率提升4%；普通攻击造成元素伤害后，获得「裁叶」效果：普通攻击和元素战技造成的伤害提高，提高值相当于元素精通的120%。该效果在生效28次或12秒后消失，每12秒至多获得一次「裁叶」效果。,,3.4,datamine
+11513,splendor_of_tranquil_waters,静水流涌之辉,Splendor of Tranquil Waters,5,sword,90,542,crit_dmg_pct,88.2,湖光的朝与暮,装备者的当前生命值提升或降低时，元素战技造成的伤害提升8%，该效果持续6秒，至多叠加3次，每0.2秒至多触发一次；队伍中其他角色的当前生命值提升或降低时，装备者的生命值上限提升14%，该效果持续6秒，至多叠加2次，每0.2秒至多触发一次。装备者处于队伍后台时，依然能触发上述效果。,,4.2,datamine
+11514,uraku_misugiri,有乐御簾切,Uraku Misugiri,5,sword,90,542,crit_dmg_pct,88.2,锦之花与龛中剑,普通攻击造成的伤害提升16%，元素战技造成的伤害提升24%；队伍中附近的角色在场上造成岩元素伤害后，上述效果进一步提升100%，持续15秒。此外，装备者的防御力提升20%。,,4.5,datamine
+11515,absolution,赦罪,Absolution,5,sword,90,674,crit_dmg_pct,44.1,死之契,暴击伤害提升20%；生命之契的数值增加时，装备者造成的伤害提升16%。该效果持续6秒，至多叠加3次。,,4.7,datamine
+11516,peak_patrol_song,岩峰巡歌,Peak Patrol Song,5,sword,90,542,def_pct,82.7,不凋的盛年,普通攻击或下落攻击命中敌人后，将获得「荣花之歌」：防御力提高8%，并获得10%所有元素伤害加成，该效果持续6秒，至多叠加2层，每0.1秒至多触发一次。该效果叠加至2层或2层的持续时间刷新时，基于装备者的防御力，每1000点使队伍中附近所有角色的所有元素伤害加成提高8%，至多提高25.6%，持续15秒,,5.1,datamine
+11517,azurelight,苍耀,Azurelight,5,sword,90,674,crit_rate_pct,22.1,白山的馈赐,施放元素战技后的12秒内，攻击力提升24%。持续期间，装备者的元素能量为0时，攻击力还会提升24%，且暴击伤害提升40%。,,5.7,datamine
+11518,athame_artis,黑蚀,Athame Artis,5,sword,90,608,crit_rate_pct,33.1,白日王的灼辉,元素爆发造成的暴击伤害提升16%；元素爆发命中敌人时，将获得「白昼之刃」效果：攻击力提升20%，除装备者以外，队伍中附近的当前场上角色攻击力提升16%，持续3秒。 此外，队伍拥有「魔导·秘仪」效果时，「白昼之刃」的效果额外提升75%。装备者处于队伍后台时，依然能触发上述效果。,,6.2,datamine
+11519,lightbearing_moonshard,朏魄含光,Lightbearing Moonshard,5,sword,90,542,crit_dmg_pct,88.2,琅玕衍义,防御力提高20%。装备者施放元素战技后的5秒内，月结晶反应伤害提升64%。,,6.3,datamine
+11520,whitelake_frostfeather,白湖冬羽,Whitelake Frostfeather,5,sword,90,674,crit_rate_pct,22.1,雪鹄的终幕舞,装备者的元素战技命中敌人时，获得「湖色的哀告」：攻击力提升8%，持续8秒，至多叠加3层，每0.1秒至多触发一次，每层持续时间独立计算；持有3层时，装备者造成的星烁反应伤害的暴击伤害提升50%，且触发星烁反应或造成星烁反应伤害时，还会使装备者恢复4点元素能量。上述恢复元素能量的效果每3.5秒至多触发一,,7.0,datamine
+11521,exaiphanes_blade,星锋剑,Exaiphanes Blade,5,sword,90,608,crit_rate_pct,33.1,旅者之路,旅行者装备时，命中敌人后，攻击力提升16%，持续8秒，并使旅行者恢复3点元素能量。该效果每5秒至多触发一次，角色处于队伍后台也能触发。,,7.0,datamine
+11522,beyond_the_chrysalis,蝶变,Beyond the Chrysalis,5,sword,90,674,crit_dmg_pct,44.1,破茧的自由舞,装备者每次施放元素战技或元素爆发时，将按照以下顺序，依次获得以下三种效果中的一种： 忠忱之风：装备者的暴击伤害提升56%，持续10秒； 叛弃之风：装备者造成的星扩散反应伤害提升36%，持续10秒； 丰获之风：为装备者恢复5点元素能量，每4秒至多通过这种方式恢复5点元素能量。 装备者退场时，将移除上述,,7.1,datamine
+12101,waster_greatsword,训练大剑,Waster Greatsword,1,claymore,70,185,,,,,,1.0,datamine
+12201,old_mercs_pal,佣兵重剑,Old Merc's Pal,2,claymore,70,243,,,,,,1.0,datamine
+12301,ferrous_shadow,铁影阔剑,Ferrous Shadow,3,claymore,90,401,hp_pct,35.2,不屈,生命值低于70%时，重击不会轻易被打断，并提高30%重击伤害。,,1.0,datamine
+12302,bloodtainted_greatsword,沐浴龙血的剑,Bloodtainted Greatsword,3,claymore,90,354,em,187,踏火息雷,对处于火元素或雷元素影响下的敌人，造成的伤害提高12%。,,1.0,datamine
+12303,white_iron_greatsword,白铁大剑,White Iron Greatsword,3,claymore,90,401,def_pct,43.9,收割,击败敌人时，恢复8%生命值。,,1.0,datamine
+12305,debate_club,以理服人,Debate Club,3,claymore,90,401,atk_pct,35.2,有话直说,施放元素战技后，普通攻击和重击命中时会在小范围内额外造成60%攻击力的伤害。该效果持续15秒，伤害每3秒只能触发一次。,,1.0,datamine
+12306,skyrider_greatsword,飞天大御剑,Skyrider Greatsword,3,claymore,90,401,physical_dmg_pct,43.9,勇气,普通攻击和重击命中时，攻击力提高6%，持续6秒，最多叠加4层。该效果每0.5秒只能触发一次。,,1.0,datamine
+12401,favonius_greatsword,西风大剑,Favonius Greatsword,4,claymore,90,454,energy_recharge_pct,61.3,顺风而行,攻击造成暴击时，有60%的几率产生少量元素微粒，能为角色恢复6点元素能量。该效果每12秒只能触发一次。,,1.0,datamine
+12402,the_bell,钟剑,The Bell,4,claymore,90,510,hp_pct,41.3,叛逆的守护者,受到伤害时，生成一个伤害吸收量等同于生命值上限20%的护盾，持续10秒或直到护盾失效、每45秒只能触发一次。角色处于护盾庇护下时，造成的伤害提升12%。,,1.0,datamine
+12403,sacrificial_greatsword,祭礼大剑,Sacrificial Greatsword,4,claymore,90,565,energy_recharge_pct,30.6,气定神闲,元素战技造成伤害时，有40%的概率重置该技能的冷却时间，该效果每30秒只能触发一次。,,1.0,datamine
+12404,royal_greatsword,宗室大剑,Royal Greatsword,4,claymore,90,565,atk_pct,27.6,专注,攻击造成伤害时，暴击率提升8%，最多堆叠5次。攻击造成暴击后，移除已有的专注效果。,,1.0,datamine
+12405,rainslasher,雨裁,Rainslasher,4,claymore,90,510,em,165,止水息雷,对处于水元素或雷元素影响下的敌人，造成的伤害提高20%。,,1.0,datamine
+12406,prototype_archaic,试作古华,Prototype Archaic,4,claymore,90,565,atk_pct,27.6,粉碎,普通攻击和重击命中时，有50%的概率对小范围内的敌人造成240%攻击力的额外伤害。该效果每15秒只能触发一次。,,1.0,datamine
+12407,whiteblind,白影剑,Whiteblind,4,claymore,90,510,def_pct,51.7,注能之锋,普通攻击和重击命中后，攻击力和防御力提高6%。该效果持续6秒，最多叠加4层，每0.5秒只能触发一次。,,1.0,datamine
+12408,blackcliff_slasher,黑岩斩刀,Blackcliff Slasher,4,claymore,90,510,crit_dmg_pct,55.1,乘胜追击,击败敌人后，攻击力提升12%，持续30秒。该效果至多叠加3层，每层持续时间独立。,,1.0,datamine
+12409,serpent_spine,螭骨剑,Serpent Spine,4,claymore,90,510,crit_rate_pct,27.6,破浪,角色在场上时，每4秒提升6%造成的伤害，3%受到的伤害。该效果最多叠加5层，不随角色退场重置，受到伤害后会减少1层效果。,,1.0,datamine
+12410,lithic_blade,千岩古剑,Lithic Blade,4,claymore,90,510,atk_pct,41.3,千岩诀·同心,队伍中每有一位璃月角色，装备该武器的角色便获得7%攻击力提升与3%暴击率提升。至多获得4层提升效果。,,1.3,datamine
+12411,snow_tombed_starsilver,雪葬的星银,Snow-Tombed Starsilver,4,claymore,90,565,physical_dmg_pct,34.5,霜葬,普通攻击与重击命中敌人时，有60%概率在敌人上方生成恒冰晶核并坠落，造成80%攻击力的范围伤害。若敌人处于冰元素影响下，则造成200%攻击力的伤害。该效果每10秒至多触发一次。,,1.2,datamine
+12412,luxurious_sea_lord,衔珠海皇,Luxurious Sea-Lord,4,claymore,90,454,atk_pct,55.1,海洋的胜利,元素爆发造成的伤害提升12%。元素爆发命中敌人时，有100%概率召唤大鲔冲击，造成100%攻击力的范围伤害。该效果每15秒至多触发一次。,,2.1,datamine
+12414,katsuragikiri_nagamasa,桂木斩长正,Katsuragikiri Nagamasa,4,claymore,90,510,energy_recharge_pct,45.9,名士振舞,元素战技造成的伤害提升6%。元素战技命中后，角色流失3点元素能量，并在此后的6秒内，每2秒恢复3点元素能量。该效果每10秒至多触发一次，角色处于队伍后台也能触发。,,2.0,datamine
+12415,makhaira_aquamarine,玛海菈的水色,Makhaira Aquamarine,4,claymore,90,510,em,165,沙上楼阁,每10秒，产生如下效果：基于装备者的元素精通的24%，提升该角色的攻击力，并基于该提升的30%为队伍中附近的其他角色提升攻击力，持续12秒，多件同名武器产生的此效果可以叠加。角色处于队伍后台时也能触发效果。,,3.1,datamine
+12416,akuoumaru,恶王丸,Akuoumaru,4,claymore,90,510,atk_pct,41.3,驭浪的海祇民,队伍中所有角色的元素能量上限的总和，每1点能使装备此武器的角色的元素爆发造成的伤害提高0.12%，通过这种方式，元素爆发造成的伤害至多提高40%。,,2.2,datamine
+12417,forest_regalia,森林王器,Forest Regalia,4,claymore,90,565,energy_recharge_pct,30.6,森林的瑞佑,触发燃烧、原激化、超激化、蔓激化、绽放、月绽放、超绽放或烈绽放后，将在角色周围产生至多存在10秒的「种识之叶」。拾取种识之叶的角色元素精通提升60点，持续12秒。每20秒至多通过这种方式产生一枚种识之叶。角色处于队伍后台时也能触发。种识之叶的效果无法叠加。,,3.0,datamine
+12418,mailed_flower,饰铁之花,Mailed Flower,4,claymore,90,565,em,110,风与花的密语,元素战技命中敌人或触发元素反应后的8秒内，攻击力提升12%，元素精通提升48点。,,3.5,datamine
+12424,talking_stick,聊聊棒,Talking Stick,4,claymore,90,565,crit_rate_pct,18.4,「伶牙俐齿」,承受火元素附着后的15秒内，攻击力提升16%，每12秒至多触发一次；承受水元素、冰元素、雷元素或草元素附着后的15秒内，所有元素伤害加成提升12%，每12秒至多触发一次。,,4.0,datamine
+12425,tidal_shadow,浪影阔剑,Tidal Shadow,4,claymore,90,510,atk_pct,41.3,巡航的白浪,受到治疗后，攻击力提升24%，持续8秒。角色处于队伍后台也能触发。,,4.0,datamine
+12426,ultimate_overlords_mega_magic_sword,「究极霸王超级魔剑」,"Ultimate Overlord's Mega Magic Sword",4,claymore,90,565,energy_recharge_pct,30.6,加油！,攻击力提升12%。不仅如此！海沫村中曾蒙你帮助的美露莘们的声援心意充满了力量，依照她们的数目，攻击力至多进一步提升12%。,,4.3,datamine
+12427,portable_power_saw,便携动力锯,Portable Power Saw,4,claymore,90,454,hp_pct,55.1,船工号子,受到治疗或进行治疗时，将赋予一枚坚忍标记，持续30秒，至多拥有三枚坚忍标记。施放元素战技或元素爆发时，将消耗所有的坚忍标记，产生持续10秒的「奋起」效果：每枚消耗的坚忍标记提高40点元素精通，并在效果产生2秒后，每枚消耗的坚忍标记为装备者恢复2点元素能量。每15秒至多触发一次奋起效果；角色处于队伍后,,4.1,datamine
+12430,fruitful_hook,硕果钩,Fruitful Hook,4,claymore,90,565,atk_pct,27.6,坠枝之重,下落攻击的暴击率提升16%；下落攻击命中敌人后，普通攻击、重击、下落攻击造成的伤害提升16%，持续10秒。,,5.1,datamine
+12431,earth_shaker,撼地者,Earth Shaker,4,claymore,90,565,atk_pct,27.6,苍翠之路的誓言,队伍中的角色触发火元素相关反应后，装备者元素战技造成的伤害提升16%，持续8秒。该效果队伍中的角色处于队伍后台时也能触发。,,5.0,datamine
+12432,flame_forged_insight,拾慧铸熔,Flame-Forged Insight,4,claymore,90,510,em,165,盛放的思绪,触发感电、月感电、绽放、月绽放、结晶或月结晶反应时，恢复12点元素能量，并在接下来的15秒内使元素精通提升60点。该效果每15秒至多触发一次。装备者处于队伍后台时，依然能触发上述效果。,,5.8,datamine
+12433,master_key,万能钥匙,Master Key,4,claymore,90,454,energy_recharge_pct,61.3,迎刃而解,触发元素反应后的12秒内，元素精通提升60点。月兆·满辉：该效果中的元素精通额外提升60点。装备者处于队伍后台时，依然能触发上述效果。,,6.0,datamine
+12435,forged_by_the_golden_melody,金律铸影,Forged by the Golden Melody,4,claymore,90,510,crit_rate_pct,27.6,交奏的昼与夜,每10秒，装备者按照以下顺序，分别奏响对应效果的「谐律乐章」：攻击力提升18%/元素精通提升120点/星烁反应伤害提升28%，每种乐章效果持续10秒，装备者处于队伍后台时，依然能触发上述效果。 触发星烁反应后，还会额外获得持续12秒的、与触发星烁反应时演奏乐章效果相同的「谐律乐章·复调」，该效果可以,,7.0,datamine
+12436,blade_of_atonement,救赎之斩,Blade of Atonement,4,claymore,90,565,atk_pct,27.6,罪责的悔赎,触发元素反应的12秒内，装备者的元素精通提升64点；触发星烁反应的12秒内，装备者的攻击力提升16%。装备者处于队伍后台时，依然能触发上述效果。,,7.0,datamine
+12501,skyward_pride,天空之傲,Skyward Pride,5,claymore,90,674,energy_recharge_pct,36.8,斩裂晴空的龙脊,造成的伤害提高8%；施放元素爆发后：普通攻击和重击命中时会发出真空刃，对路径上的敌人造成80%攻击力的伤害，持续20秒或直至发出8次真空刃。,,1.0,datamine
+12502,wolfs_gravestone,狼的末路,Wolf's Gravestone,5,claymore,90,608,atk_pct,49.6,如狼般狩猎者,攻击力提高20%；攻击命中生命值低于30%的敌人时，队伍中所有成员的攻击力提高40%，持续12秒。该效果30秒只能触发一次。,,1.0,datamine
+12503,song_of_broken_pines,松籁响起之时,Song of Broken Pines,5,claymore,90,741,physical_dmg_pct,20.7,揭旗的叛逆之歌,飘游风中的「千年的大乐章」的一部分。攻击力提高16%；普通攻击或重击命中敌人时，角色获得一枚低语之符，每0.3秒内至多触发一次。拥有4枚低语之符时，将消耗所有低语之符，使附近的队伍中所有角色获得持续12秒的「千年的大乐章·揭旗之歌」效果：普通攻击速度提高12%，攻击力提升20%。触发后20秒内，无法,,1.5,datamine
+12504,the_unforged,无工之剑,The Unforged,5,claymore,90,608,atk_pct,49.6,金璋皇极,护盾强效提升20%。攻击命中后的8秒内，攻击力提升4%。该效果至多可叠加5层，每0.3秒只能触发一次。此外，处于护盾庇护下时，该效果的攻击力提升效果提高100%。,,1.1,datamine
+12510,redhorn_stonethresher,赤角石溃杵,Redhorn Stonethresher,5,claymore,90,542,crit_dmg_pct,88.2,御伽大王御伽话,防御力提高28%；普通攻击与重击造成的伤害值提高，提高数值相当于防御力的40%。,,2.3,datamine
+12511,beacon_of_the_reed_sea,苇海信标,Beacon of the Reed Sea,5,claymore,90,608,crit_rate_pct,33.1,沙海守望,元素战技命中敌人后，攻击力提升20%，持续8秒；受到伤害后，攻击力提升20%，持续8秒。上述2种效果角色处于队伍后台时也能触发。此外，不处于护盾庇护下时，生命值上限提高32%。,,3.5,datamine
+12512,verdict,裁断,Verdict,5,claymore,90,674,crit_rate_pct,22.1,诸多朝与暮的誓约,攻击力提升20%；队伍中的角色获取结晶反应产生的晶片或触发月结晶反应时，会为装备者赋予1枚「约印」，使元素战技造成的伤害提升18%，约印持续15秒，至多同时持有2枚。所有约印将在装备者的元素战技造成伤害后的0.2秒后移除。每1秒至多通过月结晶反应获取1枚「约印」。,,4.3,datamine
+12513,fang_of_the_mountain_king,山王长牙,Fang of the Mountain King,5,claymore,90,741,crit_rate_pct,11,绿松石之狩,元素战技命中敌人后，会获得1层「悬木祝赐」，该效果每0.5秒至多触发1次；队伍中附近的角色触发了燃烧或烈绽放反应后，装备者会获得3层悬木祝赐，该效果每2秒至多触发1次，队伍中的角色处于队伍后台时也能触发。悬木祝赐：元素战技伤害和元素爆发伤害提升10%，持续6秒，至多叠加6层，每层持续时间独立计算。,,5.0,datamine
+12514,a_thousand_blazing_suns,焚曜千阳,A Thousand Blazing Suns,5,claymore,90,741,crit_rate_pct,11,落日重燃的黎明,施放元素战技或元素爆发时，获得「焚光」效果：暴击伤害提高20%，攻击力提升28%，该效果持续6秒，每10秒至多触发一次。 持续期间内，普通攻击或重击造成元素伤害后，将使此次「焚光」效果的持续时间延长2秒，该效果每1秒至多触发一次，至多通过这种方式使持续时间延长6秒。 此外，处于夜魂加持状态下时，「焚,,5.3,datamine
+12515,gest_of_the_mighty_wolf,狼的武功歌,Gest of the Mighty Wolf,5,claymore,90,608,crit_rate_pct,33.1,不灭的骑士道,攻击速度提升10%。普通攻击命中敌人/施放元素战技/开始重击时，装备者将分别获得1/2/2层「四风诗系」：造成的伤害提升7.5%，该效果持续4秒，至多叠加4次，每0.01秒至多触发一次。 此外，队伍拥有「魔导·秘仪」效果时，每层「四风诗系」还会使装备者的暴击伤害提高7.5%。,,6.4,datamine
+12516,a_teaspoon_of_transcendence,超越之匙,A Teaspoon of Transcendence,5,claymore,90,674,crit_dmg_pct,44.1,白女皇的升变,攻击力提升28%。 此外，装备者的重击每次命中敌人后，都会短暂达成「超越」：使装备者的星超导和星扩散反应伤害提升16%，持续5秒。该效果至多叠加3层，每0.2秒至多叠加一层。,,6.7,datamine
+13101,beginners_protector,新手长枪,Beginner's Protector,1,polearm,70,185,,,,,,1.0,datamine
+13201,iron_point,铁尖枪,Iron Point,2,polearm,70,243,,,,,,1.0,datamine
+13301,white_tassel,白缨枪,White Tassel,3,polearm,90,401,crit_rate_pct,23.4,锐利,普通攻击造成的伤害提升24%。,,1.0,datamine
+13302,halberd,钺矛,Halberd,3,polearm,90,448,atk_pct,23.5,沉重,对普通攻击命中的敌人造成160%攻击力的额外伤害。该效果每10秒只能触发一次。,,1.0,datamine
+13303,black_tassel,黑缨枪,Black Tassel,3,polearm,90,354,hp_pct,46.9,克柔,对史莱姆类敌人造成的伤害增加40%。,,1.0,datamine
+13401,dragons_bane,匣里灭辰,Dragon's Bane,4,polearm,90,454,em,221,踏火止水,对处于水元素或火元素影响下的敌人，造成的伤害提高20%。,,1.0,datamine
+13402,prototype_starglitter,试作星镰,Prototype Starglitter,4,polearm,90,510,energy_recharge_pct,45.9,嗜魔,施放元素战技后，普通攻击和重击造成的伤害提高8%。该效果持续12秒，最多叠加2层。,,1.0,datamine
+13403,crescent_pike,流月针,Crescent Pike,4,polearm,90,565,physical_dmg_pct,34.5,注能之针,获得元素微粒或元素晶球后的5秒内，普通攻击和重击额外造成20%攻击力伤害。,,1.0,datamine
+13404,blackcliff_pole,黑岩刺枪,Blackcliff Pole,4,polearm,90,510,crit_dmg_pct,55.1,乘胜追击,击败敌人后，攻击力提升12%，持续30秒。该效果至多叠加3层，每层持续时间独立。,,1.0,datamine
+13405,deathmatch,决斗之枪,Deathmatch,4,polearm,90,454,crit_rate_pct,36.8,角斗士,身边至少有2个敌人时，获得16%攻击力提升与16%防御力提升；身边的敌人少于2个时，获得24%攻击力提升。,,1.0,datamine
+13406,lithic_spear,千岩长枪,Lithic Spear,4,polearm,90,565,atk_pct,27.6,千岩诀·同心,队伍中每有一位璃月角色，装备此武器的角色便获得7%攻击力提升与3%暴击率提升。至多获得4层提升效果。,,1.3,datamine
+13407,favonius_lance,西风长枪,Favonius Lance,4,polearm,90,565,energy_recharge_pct,30.6,顺风而行,攻击造成暴击时，有60%的几率产生少量元素微粒，能为角色恢复6点元素能量。该效果每12秒只能触发一次。,,1.0,datamine
+13408,royal_spear,宗室猎枪,Royal Spear,4,polearm,90,565,atk_pct,27.6,专注,攻击造成伤害时，暴击率提升8%，最多堆叠5次。攻击造成暴击后，移除已有的专注效果。,,1.1,datamine
+13409,dragonspine_spear,龙脊长枪,Dragonspine Spear,4,polearm,90,454,physical_dmg_pct,69,霜葬,普通攻击与重击命中敌人时，有60%概率在敌人上方生成恒冰晶核并坠落，造成80%攻击力的范围伤害。若敌人处于冰元素影响下，则造成200%攻击力的伤害。该效果每10秒至多触发一次。,,1.2,datamine
+13414,kitain_cross_spear,喜多院十文字,Kitain Cross Spear,4,polearm,90,565,em,110,名士振舞,元素战技造成的伤害提升6%。元素战技命中后，角色流失3点元素能量，并在此后的6秒内，每2秒恢复3点元素能量。该效果每10秒至多触发一次，角色处于队伍后台也能触发。,,2.0,datamine
+13415,the_catch,「渔获」,"The Catch",4,polearm,90,510,energy_recharge_pct,45.9,船歌,元素爆发造成的伤害提升16%，元素爆发的暴击率提升6%。,,2.1,datamine
+13416,wavebreakers_fin,断浪长鳍,Wavebreaker's Fin,4,polearm,90,620,atk_pct,13.8,驭浪的海祇民,队伍中所有角色的元素能量上限的总和，每1点能使装备此武器的角色的元素爆发造成的伤害提高0.12%，通过这种方式，元素爆发造成的伤害至多提高40%。,,2.2,datamine
+13417,moonpiercer,贯月矢,Moonpiercer,4,polearm,90,565,em,110,幽林月影,触发燃烧、原激化、超激化、蔓激化、绽放、月绽放、超绽放或烈绽放后，将在角色周围产生至多存在10秒的「苏生之叶」。拾取苏生之叶的角色攻击力提升16%，持续12秒。每20秒至多通过这种方式产生一枚苏生之叶。角色处于队伍后台时也能触发。,,3.0,datamine
+13419,missive_windspear,风信之锋,Missive Windspear,4,polearm,90,510,atk_pct,41.3,不至之风,触发元素反应后的10秒内，攻击力提升12%，元素精通提升48点。,,3.1,datamine
+13424,ballad_of_the_fjords,峡湾长歌,Ballad of the Fjords,4,polearm,90,510,crit_rate_pct,27.6,冰原的诸多故事,队伍中存在至少三种不同元素类型的角色时，元素精通提升120点。,,4.0,datamine
+13425,rightful_reward,公义的酬报,Rightful Reward,4,polearm,90,565,hp_pct,27.6,枪尖一点,受到治疗时，恢复8点能量，该效果每10秒至多触发一次，角色处于队伍后台时也能触发。,,4.0,datamine
+13426,dialogues_of_the_desert_sages,沙中伟贤的对答,Dialogues of the Desert Sages,4,polearm,90,510,hp_pct,41.3,均衡的原理,进行治疗时，恢复8点能量，该效果每10秒至多触发一次，角色处于队伍后台时也能触发。,,4.5,datamine
+13427,prospectors_drill,勘探钻机,Prospector's Drill,4,polearm,90,565,atk_pct,27.6,石匠号子,受到治疗或进行治疗时，将赋予一枚团结标记，持续30秒，至多拥有三枚团结标记。施放元素战技或元素爆发时，将消耗所有的团结标记，产生持续10秒的「抗争」效果：每枚消耗的团结标记提高3%攻击力与7%所有元素伤害加成。每15秒至多触发一次抗争效果；角色处于队伍后台时也能获得团结标记。,,4.1,datamine
+13430,mountain_bracing_bolt,镇山之钉,Mountain-Bracing Bolt,4,polearm,90,565,energy_recharge_pct,30.6,越峰之望,攀爬消耗的体力降低15%，元素战技造成的伤害提升12%；此外，队伍中附近的其他角色施放元素战技后，装备者的元素战技造成的伤害还会提升12%，持续8秒。,,5.1,datamine
+13431,footprint_of_the_rainbow,虹的行迹,Footprint of the Rainbow,4,polearm,90,510,def_pct,51.7,流水与泉的约定,施放元素战技时，防御力提升16%，持续15秒。,,5.0,datamine
+13432,tamayuratei_no_ohanashi,且住亭御咄,Tamayuratei no Ohanashi,4,polearm,90,565,energy_recharge_pct,30.6,好事者奔行灯,施放元素战技时，提高20%攻击力和10%移动速度，持续10秒。,,5.4,datamine
+13433,prospectors_shovel,掘金之锹,Prospector's Shovel,4,polearm,90,510,atk_pct,41.3,当机立断,感电反应造成的伤害提升48%，月感电反应造成的伤害提升12%。月兆·满辉：月感电反应造成的伤害额外提升12%。,,6.0,datamine
+13434,sacrificers_staff,圣祭者的辉杖,Sacrificer's Staff,4,polearm,90,620,crit_rate_pct,9.2,未染的觖望,元素战技命中敌人后的6秒内，攻击力提升8%，元素充能效率提升6%。该效果至多叠加3层，装备者处于队伍后台时依然能触发。,,6.1,datamine
+13435,frostbreath,寒息,Frostbreath,4,polearm,90,510,energy_recharge_pct,45.9,万顷一掷,触发冰元素或水元素相关反应后的15秒内，装备者的攻击力提升20%，并为队伍中自己的其他角色恢复6点元素能量。该效果每16秒至多触发一次。,,7.0,datamine
+13436,song_of_the_vigil,戍望谣歌,Song of the Vigil,4,polearm,90,565,em,110,旧日和弦,触发元素反应后，为装备者恢复4点元素能量，该效果每9秒至多触发一次；触发星烁反应的12秒内，装备者的攻击力提升20%。装备者处于队伍后台时，依然能触发上述效果。,,7.0,datamine
+13501,staff_of_homa,护摩之杖,Staff of Homa,5,polearm,90,608,crit_dmg_pct,66.2,无羁的朱赤之蝶,生命值提升20%。此外，基于装备该武器的角色生命值上限的0.8%，获得攻击力加成。当装备该武器的角色生命值低于50%时，进一步获得1%基于生命值上限的攻击力提升。,,1.3,datamine
+13502,skyward_spine,天空之脊,Skyward Spine,5,polearm,90,674,energy_recharge_pct,36.8,斫断黑翼的利齿,暴击率提升8%，普通攻击速度提升12%。此外，普通攻击与重击命中敌人时，有50%概率触发真空刃，在小范围内造成额外40%攻击力的伤害。该效果每2秒至多触发一次。,,1.0,datamine
+13504,vortex_vanquisher,贯虹之槊,Vortex Vanquisher,5,polearm,90,608,atk_pct,49.6,金璋皇极,护盾强效提升20%。攻击命中后的8秒内，攻击力提升4%。该效果至多可叠加5层，每0.3秒只能触发一次。此外，处于护盾庇护下时，该效果的攻击力提升效果提高100%。,,1.1,datamine
+13505,primordial_jade_winged_spear,和璞鸢,Primordial Jade Winged-Spear,5,polearm,90,674,crit_rate_pct,22.1,昭理的鸢之枪,命中敌人时自身攻击力提高3.2%，持续6秒，最高可以叠加7层。该效果每0.3秒最多触发一次。满层状态时伤害提升12%。,,1.0,datamine
+13507,calamity_queller,息灾,Calamity Queller,5,polearm,90,741,atk_pct,16.5,灭却之戒法,获得12%所有元素伤害加成；施放元素战技后，获得持续20秒的「圆顿」，攻击力每1秒提升3.2%，该攻击力提升效果至多叠加6次。当装备此武器的角色处于队伍后台时，「圆顿」的攻击力提升效果翻倍。,,2.4,datamine
+13509,engulfing_lightning,薙草之稻光,Engulfing Lightning,5,polearm,90,608,energy_recharge_pct,55.1,非时之梦·常世灶食,攻击力获得提升，提升程度相当于元素充能效率超出100%部分的28%，至多通过这种方式提升80%。施放元素爆发后的12秒内，元素充能效率提升30%。,,2.1,datamine
+13511,staff_of_the_scarlet_sands,赤沙之杖,Staff of the Scarlet Sands,5,polearm,90,542,crit_rate_pct,44.1,蜃气尽头的热梦,基于装备者元素精通的52%，获得攻击力加成。元素战技命中敌人时，将产生持续10秒的「赤沙之梦」效果：基于装备者元素精通的28%，获得攻击力加成，该效果至多叠加3层。,,3.1,datamine
+13512,crimson_moons_semblance,赤月之形,Crimson Moon's Semblance,5,polearm,90,674,crit_rate_pct,22.1,烬日之影,重击命中敌人时，赋予生命值上限25%的生命之契，该效果每14秒至多触发一次。此外，装备者具有生命之契时，造成的伤害提升12%；若生命之契的数值大于等于生命值上限的30%，造成的伤害将进一步提升24%。,,4.6,datamine
+13513,lumidouce_elegy,柔灯挽歌,Lumidouce Elegy,5,polearm,90,608,crit_rate_pct,33.1,白晓的序曲,攻击力提升15%；装备者对敌人触发燃烧反应或对处于燃烧状态下的敌人造成草元素伤害后，造成的伤害提高18%。该效果持续8秒，至多叠加2层；叠加至2层或2层的持续时间刷新时，恢复12点元素能量，每12秒至多通过这种方式恢复一次元素能量。上述2种效果角色处于队伍后台时也能触发。,,4.8,datamine
+13514,symphonist_of_scents,香韵奏者,Symphonist of Scents,5,polearm,90,608,crit_dmg_pct,66.2,百味交响,攻击力提升12%；当装备此武器的角色处于队伍后台时，攻击力额外提升12%。进行治疗后，装备者与受到治疗的角色会获得「甘美回奏」的效果，攻击力提升32%，持续3秒。装备者处于队伍后台时，依然能触发上述效果。,,5.6,datamine
+13515,fractured_halo,支离轮光,Fractured Halo,5,polearm,90,608,crit_dmg_pct,66.2,洁霜的玉冕,施放元素战技或元素爆发后的20秒内，攻击力提升24%。持续期间内，若装备者创造了护盾，则接下来的20秒内，还会获得「流电圣敕」效果：队伍中附近所有角色触发的月感电反应造成的伤害提升40%。,,5.8,datamine
+13516,bloodsoaked_ruins,血染荒城,Bloodsoaked Ruins,5,polearm,90,674,crit_rate_pct,22.1,哀恸的赞礼,施放元素爆发后的3.5秒内，装备者对敌人造成的月感电反应伤害提高36%。此外，装备者触发月感电反应后，将获得「荒落的挽歌」：暴击伤害提高28%，持续6秒；并为装备者恢复12点元素能量，每14秒至多通过这种方式恢复一次元素能量。,,6.0,datamine
+13517,disaster_and_remorse,灾悔,Disaster and Remorse,5,polearm,90,674,crit_rate_pct,22.1,祸咎一击,装备者施放元素战技后，获得持续17秒的「纷争之途」，和分别持续3秒的「无赦」与「无愈」效果，每18秒至多触发一次。 无赦：装备者的普通攻击与重击伤害提升40%。 无愈：装备者的元素战技与元素爆发伤害提升40%。 「纷争之途」期间，装备者的普通攻击与重击命中敌人时，将延长1秒「无愈」；装备者的元素战技,,6.6,datamine
+14101,apprentices_notes,学徒笔记,Apprentice's Notes,1,catalyst,70,185,,,,,,1.0,datamine
+14201,pocket_grimoire,口袋魔导书,Pocket Grimoire,2,catalyst,70,243,,,,,,1.0,datamine
+14301,magic_guide,魔导绪论,Magic Guide,3,catalyst,90,354,em,187,止水息雷,对处于水元素或雷元素影响下的敌人，造成的伤害提高12%。,,1.0,datamine
+14302,thrilling_tales_of_dragon_slayers,讨龙英杰谭,Thrilling Tales of Dragon Slayers,3,catalyst,90,401,hp_pct,35.2,传承,主动切换角色时，新登场的角色攻击力提升24%，持续10秒。该效果每20秒只能触发一次。,,1.0,datamine
+14303,otherworldly_story,异世界行记,Otherworldly Story,3,catalyst,90,401,energy_recharge_pct,39,能量沐浴,获得元素微粒或元素晶球时，恢复1%生命值。,,1.0,datamine
+14304,emerald_orb,翡玉法球,Emerald Orb,3,catalyst,90,448,em,94,激流,触发蒸发、感电、冰冻、绽放、月感电、月绽放或水元素扩散后的12秒内，攻击力提高20%。,,1.0,datamine
+14305,twin_nephrite,甲级宝珏,Twin Nephrite,3,catalyst,90,448,crit_rate_pct,15.6,奔袭战术,击败敌人后的15秒内，移动速度和攻击力提升12%。,,1.0,datamine
+14401,favonius_codex,西风秘典,Favonius Codex,4,catalyst,90,510,energy_recharge_pct,45.9,顺风而行,攻击造成暴击时，有60%的几率产生少量元素微粒，能为角色恢复6点元素能量。该效果每12秒只能触发一次。,,1.0,datamine
+14402,the_widsith,流浪乐章,The Widsith,4,catalyst,90,510,crit_dmg_pct,55.1,登场乐,角色登场时，随机获得一个主题曲，持续10秒。每30秒只能触发一次。宣叙调：攻击力提升60%；咏叹调：全元素伤害提升48%；间奏曲：元素精通提升240。,,1.0,datamine
+14403,sacrificial_fragments,祭礼残章,Sacrificial Fragments,4,catalyst,90,454,em,221,气定神闲,元素战技造成伤害时，有40%的概率重置该技能的冷却时间，该效果每30秒只能触发一次。,,1.0,datamine
+14404,royal_grimoire,宗室秘法录,Royal Grimoire,4,catalyst,90,565,atk_pct,27.6,专注,攻击造成伤害时，暴击率提升8%，最多堆叠5次。攻击造成暴击后，移除已有的专注效果。,,1.0,datamine
+14405,solar_pearl,匣里日月,Solar Pearl,4,catalyst,90,510,crit_rate_pct,27.6,日月辉,普通攻击命中后的6秒内，元素战技与元素爆发的伤害提高20%；元素战技与元素爆发命中后的6秒内，普通攻击的伤害提高20%。,,1.0,datamine
+14406,prototype_amber,试作金珀,Prototype Amber,4,catalyst,90,510,hp_pct,41.3,炊金,施放元素爆发后6秒内，每2秒恢复4点元素能量，队伍中的所有角色每2秒恢复4%生命值。,,1.0,datamine
+14407,mappa_mare,万国诸海图谱,Mappa Mare,4,catalyst,90,565,em,110,注能之卷,触发元素反应后的10秒内，获得8%元素伤害加成，该效果最多可以叠加2层。,,1.0,datamine
+14408,blackcliff_agate,黑岩绯玉,Blackcliff Agate,4,catalyst,90,510,crit_dmg_pct,55.1,乘胜追击,击败敌人后，攻击力提升12%，持续30秒。该效果至多叠加3层，每层持续时间独立。,,1.0,datamine
+14409,eye_of_perception,昭心,Eye of Perception,4,catalyst,90,454,atk_pct,55.1,回响,普通攻击与重击命中时，有50%几率发射一枚昭心法球，造成240%攻击力伤害，至多在敌人之间弹射4次。该效果每12秒至多触发一次。,,1.0,datamine
+14410,wine_and_song,暗巷的酒与诗,Wine and Song,4,catalyst,90,565,energy_recharge_pct,30.6,变化万端,普通攻击命中敌人后，冲刺或替代冲刺的能力消耗的体力降低14%，持续5秒。此外，使用冲刺或替代冲刺的能力后，攻击力提升20%，持续5秒。,,1.4,datamine
+14412,frostbearer,忍冬之果,Frostbearer,4,catalyst,90,510,atk_pct,41.3,霜葬,普通攻击与重击命中敌人时，有60%概率在敌人上方生成恒冰晶核并坠落，造成80%攻击力的范围伤害。若敌人处于冰元素影响下，则造成200%攻击力的伤害。该效果每10秒至多触发一次。,,1.2,datamine
+14413,dodoco_tales,嘟嘟可故事集,Dodoco Tales,4,catalyst,90,454,atk_pct,55.1,嘟嘟！大冒险,普通攻击命中敌人后的6秒内，重击造成的伤害提升16%；重击命中敌人后的6秒内，攻击力提升8%。,,1.6,datamine
+14414,hakushin_ring,白辰之环,Hakushin Ring,4,catalyst,90,565,energy_recharge_pct,30.6,樱之斋宫,装备该武器的角色触发雷元素相关反应后，队伍中附近的与该元素反应相关的元素类型的角色，获得10%对应元素的元素伤害加成，持续6秒。通过这种方式，角色获得的元素伤害加成无法叠加。,,2.0,datamine
+14415,oathsworn_eye,证誓之明瞳,Oathsworn Eye,4,catalyst,90,565,atk_pct,27.6,微光的海渊民,施放元素战技后，元素充能效率提升24%，持续10秒。,,2.5,datamine
+14416,wandering_evenstar,流浪的晚星,Wandering Evenstar,4,catalyst,90,510,em,165,林野晚星,每10秒，产生如下效果：基于装备者的元素精通的24%，提升该角色的攻击力，并基于该提升的30%为队伍中附近的其他角色提升攻击力，持续12秒，多件同名武器产生的此效果可以叠加。角色处于队伍后台时也能触发效果。,,3.1,datamine
+14417,fruit_of_fulfillment,盈满之实,Fruit of Fulfillment,4,catalyst,90,510,energy_recharge_pct,45.9,圆满之相,触发元素反应后，获得「盈缺」效果：元素精通提升24点，攻击力降低5%。每0.3秒至多获得一层盈缺效果，至多叠加5层。未触发元素反应时将每6秒失去一层。角色处于队伍后台时也能触发效果。,,3.0,datamine
+14424,sacrificial_jade,遗祀玉珑,Sacrificial Jade,4,catalyst,90,454,crit_rate_pct,36.8,碧玉流转,处于队伍后台超过5秒后，生命值上限提升32%，元素精通提升40点。装备者登场并留在场上10秒后，该效果将失效。,,4.0,datamine
+14425,flowing_purity,纯水流华,Flowing Purity,4,catalyst,90,565,atk_pct,27.6,未完的杰作,施放元素战技时，所有元素伤害加成提升8%，持续15秒，并赋予生命值上限24%的生命之契，该效果每10秒至多触发一次。生命之契清除时，每清除1000点将会提供2%所有元素伤害加成，至多通过这种方式获得12%所有元素伤害加成，持续15秒。,,4.0,datamine
+14426,ballad_of_the_boundless_blue,无垠蔚蓝之歌,Ballad of the Boundless Blue,4,catalyst,90,565,energy_recharge_pct,30.6,蔚蓝深空,普通攻击或重击命中敌人后的6秒内，普通攻击造成的伤害提升8%，重击造成的伤害提升6%。该效果至多叠加3次，每0.3秒至多触发一次。,,4.1,datamine
+14427,ash_graven_drinking_horn,苍纹角杯,Ash-Graven Drinking Horn,4,catalyst,90,510,hp_pct,41.3,图帕克之握,攻击命中敌人时，在目标位置基于生命值上限的40%，造成范围伤害。该效果每15秒至多触发一次。,,5.0,datamine
+14430,waveriding_whirl,乘浪的回旋,Waveriding Whirl,4,catalyst,90,454,energy_recharge_pct,61.3,长牙飞去来,游泳消耗的体力降低15%。此外，施放元素战技后的10秒内，生命值上限提升20%，队伍中每存在一位水元素类型的角色，生命值上限将进一步提升12%，至多通过这种方式提升24%，该效果每15秒至多触发一次。,,5.2,datamine
+14431,ring_of_yaxche,木棉之环,Ring of Yaxche,4,catalyst,90,510,hp_pct,41.3,丰沃之陆的回声,施放元素战技时，获得「玉锻之冕」效果：每1000点生命值上限都会使普通攻击造成的伤害提升0.6%，持续10秒。通过这种方式至多使普通攻击造成的伤害提升16%。,,5.0,datamine
+14432,etherlight_spindlelute,天光的纺琴,Etherlight Spindlelute,4,catalyst,90,510,energy_recharge_pct,45.9,最后的歌者,施放元素战技后的20秒内，装备者的元素精通提升100点。,,6.0,datamine
+14433,blackmarrow_lantern,乌髓孑灯,Blackmarrow Lantern,4,catalyst,90,454,em,221,结契的凭证,绽放反应造成的伤害提升48%，月绽放反应伤害提升12%。月兆·满辉：月绽放反应伤害额外提升12%。,,6.0,datamine
+14434,dawning_frost,霜辰,Dawning Frost,4,catalyst,90,510,crit_dmg_pct,55.1,深宵的胎梦,重击命中敌人后的10秒内，元素精通提升72点；元素战技命中敌人后的10秒内，元素精通提升48点。,,6.1,datamine
+14435,clash_of_kings,群王局戏,Clash of Kings,4,catalyst,90,510,crit_rate_pct,27.6,被遗忘的昼夜,装备者施放元素战技后，获得持续6秒的「棋中法度」：攻击力提升20%，元素精通提升100点，该效果每12秒至多触发一次，无法叠加。持续期间，装备者的重击命中敌人时，还会使上述效果的持续时间延长6秒，至多通过这种方式使持续时间延长6秒。,,7.0,datamine
+14436,echoes_of_the_heart,寸心余响,Echoes of the Heart,4,catalyst,90,565,atk_pct,27.6,誓言的回音,触发元素反应的12秒内，装备者的元素精通提升60点；触发星烁反应的12秒内，装备者造成的星烁反应伤害提升16%。装备者处于队伍后台时，依然能触发上述效果。,,7.0,datamine
+14437,winters_heavy_heart,凝雪沉心,Winter's Heavy Heart,4,catalyst,90,510,crit_dmg_pct,55.1,寒霜的遗秘,装备者获得「银染的血契」：队伍中每存在一位冰元素类型的角色，装备者的元素精通提升24点；队伍中每存在一位雷元素类型的角色，装备者的攻击力提升4.8%。至多4位冰元素类型或雷元素类型的角色可以提供上述效果。 辉映·星烁：「银染的血契」效果改为：队伍中每存在一位冰元素类型或雷元素类型的角色，装备者的元素,,7.1,datamine
+14501,skyward_atlas,天空之卷,Skyward Atlas,5,catalyst,90,674,atk_pct,33.1,浮游四方的灵云,元素伤害加成提升12%；普通攻击命中时，有50%的概率获得高天流云的青睐，在15秒内主动攻击附近的敌人，造成等同于160%攻击力的伤害。该效果每30秒只能触发一次。,,1.0,datamine
+14502,lost_prayer_to_the_sacred_winds,四风原典,Lost Prayer to the Sacred Winds,5,catalyst,90,608,crit_rate_pct,33.1,无边际的眷顾,移动速度提高10%；在场上每4秒获得8%元素伤害加成。该效果最多叠加4层，持续直到角色倒下或离场。,,1.0,datamine
+14504,memory_of_dust,尘世之锁,Memory of Dust,5,catalyst,90,608,atk_pct,49.6,金璋皇极,护盾强效提升20%。攻击命中后的8秒内，攻击力提升4%。该效果至多可叠加5层，每0.3秒只能触发一次。此外，处于护盾庇护下时，该效果的攻击力提升效果提高100%。,,1.1,datamine
+14505,jadefalls_splendor,碧落之珑,Jadefall's Splendor,5,catalyst,90,608,hp_pct,49.6,定土玉圭,施放元素爆发或创造护盾后的3秒内，将产生「定土玉圭」效果：每2.5秒恢复4.5点元素能量，并基于装备者的生命值上限，每1000点使其对应元素类型的元素伤害加成提高0.3%，至多提高12%。装备该武器的角色处于队伍后台时，依然能产生「定土玉圭」效果。,,3.6,datamine
+14506,everlasting_moonglow,不灭月华,Everlasting Moonglow,5,catalyst,90,608,hp_pct,49.6,白夜皓月,治疗加成提升10%；普通攻击造成的伤害增加，增加值为装备该武器的角色生命值上限的1%。在施放元素爆发后的12秒内，普通攻击命中敌人时恢复0.6点元素能量，每0.1秒至多通过这种方式恢复一次元素能量。,,2.1,datamine
+14509,kaguras_verity,神乐之真意,Kagura's Verity,5,catalyst,90,608,crit_dmg_pct,66.2,神樱神游神乐舞,施放元素战技时，将获得「神乐舞」的效果，使装备该武器的角色的元素战技造成的伤害提高12%，造成的星超导反应伤害提升12%，该效果持续24秒，至多叠加3层。持有3层时，该角色获得12%所有元素伤害加成。,,2.5,datamine
+14511,a_thousand_floating_dreams,千夜浮梦,A Thousand Floating Dreams,5,catalyst,90,542,em,265,千夜的曙歌,队伍中每个其他角色，都会依据元素类型与装备者相同与否，为装备者提供提升效果。相同：元素精通提升32点；不同：装备者元素类型的元素伤害加成提升10%。上述提升效果每种至多叠加3层。此外，队伍中装备者以外的附近角色的元素精通提升40点，多件同名武器产生的此效果可以叠加。,,3.2,datamine
+14512,tulaytullahs_remembrance,图莱杜拉的回忆,Tulaytullah's Remembrance,5,catalyst,90,674,crit_dmg_pct,44.1,堙没的蓝宝石泪滴,普通攻击速度提升10%；施放元素战技后的14秒内：普通攻击造成的伤害每1秒提升4.8%；普通攻击命中敌人后，普通攻击造成的伤害提升9.6%，该效果每0.3秒至多触发1次。持续期间内，普通攻击造成的伤害至多通过上述效果提升至48%。角色退场时将移除效果，再次施放元素战技时会先移除原有的效果。,,3.3,datamine
+14513,cashflow_supervision,金流监督,Cashflow Supervision,5,catalyst,90,674,crit_rate_pct,22.1,黄金的血潮,攻击力提升16%。当前生命值提升或降低时，普通攻击造成的伤害提升16%，重击造成的伤害提升14%，造成的星超导反应伤害提升14%。该效果持续4秒，至多叠加3层，每0.3秒至多触发一次；处于叠加3层的状态下时，攻击速度提升8%。,,4.1,datamine
+14514,tome_of_the_eternal_flow,万世流涌大典,Tome of the Eternal Flow,5,catalyst,90,542,crit_dmg_pct,88.2,万世的浪涛,生命值提升16%。当前生命值提升或降低时，重击造成的伤害提升14%。该效果持续4秒，至多叠加3次，每0.3秒至多触发一次；叠加至3层或3层的持续时间刷新时，恢复8点元素能量，每12秒至多通过这种方式恢复一次元素能量。,,4.1,datamine
+14515,cranes_echoing_call,鹤鸣余音,Crane's Echoing Call,5,catalyst,90,741,atk_pct,16.5,云笈降真要诀,装备者下落攻击命中敌人后，队伍中附近的所有角色下落攻击造成的伤害提高28%，持续20秒；队伍中附近的角色的下落攻击命中敌人时，为装备者恢复2.5点元素能量，每0.7秒至多通过这种方式恢复一次元素能量，装备者处于队伍后台时依然能通过这种方式恢复元素能量。,,4.4,datamine
+14516,surfs_up,冲浪时光,Surf's Up,5,catalyst,90,542,crit_dmg_pct,88.2,水色回忆,生命值上限提高20%。每15秒一次，施放元素战技后的14秒内，产生如下效果：获得4层「炽夏」，每层使普通攻击造成的伤害提升12%。持续期间内，每1.5秒一次：普通攻击命中敌人后，移除1层；每1.5秒一次：对敌人触发蒸发反应后，增加1层。「炽夏」效果至多叠加4层。,,5.0,datamine
+14517,starcallers_watch,祭星者之望,Starcaller's Watch,5,catalyst,90,542,em,265,奉予风阳的禋祀,元素精通提升100点。装备者创造护盾后的15秒内，获得「照夜之镜」效果：队伍中自己的当前场上角色对附近的敌人造成的伤害提升28%，每14秒至多获得一次「照夜之镜」效果。,,5.3,datamine
+14518,sunny_morning_sleep_in,寝正月初晴,Sunny Morning Sleep-In,5,catalyst,90,542,em,265,一汤二鹰三鸣神,触发扩散、星扩散反应后的6秒内，元素精通提升120点；元素战技命中敌人后的9秒内，元素精通提升96点；元素爆发命中敌人后的30秒内，元素精通提升32点。,,5.4,datamine
+14519,vivid_notions,溢彩心念,Vivid Notions,5,catalyst,90,674,crit_dmg_pct,44.1,落虹之愿,攻击力提升28%；进行下落攻击时，获得「初霞之彩」效果：下落攻击造成的暴击伤害提升28%；施放元素战技或元素爆发时，获得「苍暮之辉」效果：下落攻击造成的暴击伤害提升40%；上述两种效果各自持续15秒，并将在坠地冲击命中后的0.1秒后解除。,,5.5,datamine
+14520,nightweavers_looking_glass,纺夜天镜,Nightweaver's Looking Glass,5,catalyst,90,542,em,265,千年的祷咏歌,元素战技造成水元素或草元素伤害时，装备者获得「终北圣言」效果：元素精通提升60点，持续4.5秒；队伍中附近的角色触发月绽放反应时，装备者获得「朔月诗篇」效果：元素精通提升60点，持续10秒；「终北圣言」效果与「朔月诗篇」效果同时存在时，队伍中附近的所有角色触发的绽放反应造成的伤害提升120%，超绽放,,6.0,datamine
+14521,reliquary_of_truth,真语秘匣,Reliquary of Truth,5,catalyst,90,542,crit_dmg_pct,88.2,伪言的真意,暴击率提升8%。施放元素战技时，装备者获得「伪言之秘」效果：元素精通提升80点，持续12秒。装备者对敌人造成月绽放反应伤害时，装备者获得「真识之月」效果：暴击伤害提升24%，持续4秒。「伪言之秘」效果与「真识之月」效果同时存在时，这些效果分别提升50%。,,6.1,datamine
+14522,nocturnes_curtain_call,帷间夜曲,Nocturne's Curtain Call,5,catalyst,90,542,crit_dmg_pct,88.2,十字路的旅歌,生命值上限提高10%。装备者触发月曜反应或对敌人造成月曜反应伤害时，将为装备者恢复14点元素能量，并获得持续12秒的「丰饶海的神酒」效果：生命值上限进一步提高14%，月曜反应伤害的暴击伤害提升60%。恢复元素能量效果每18秒至多触发一次，装备者处于队伍后台时，依然能触发上述效果。,,6.3,datamine
+14523,angelos_heptades,尘光七谕,Angelos' Heptades,5,catalyst,90,741,atk_pct,16.5,末临者的华冠,攻击力提升12%。装备者创造护盾后的20秒内，获得「先导之光」效果：依据装备者的攻击力，每1000点攻击力都会使队伍中自己的当前场上角色造成的伤害提升10%，至多提升26%。此外，装备者创造护盾时，还会获得「指引者的餍足」效果，使装备者恢复14点元素能量，该效果每14秒至多触发一次；在不处于战斗状态,,6.6,datamine
+14524,hymn_of_the_maelstrom,漩流颂歌,Hymn of the Maelstrom,5,catalyst,90,542,hp_pct,66.2,沉眠的回旋曲,治疗加成提升4%； 进行治疗时，装备者获得「告真的蜜酿」效果：生命值上限提升4%，且基于装备者生命值上限超过40000的部分，每1000点生命值上限都会使队伍中自己的当前场上角色的攻击力提升0.4%，通过这种方式至多提升8%。该效果持续10秒，至多叠加3层。 队伍中附近的角色触发冻结反应或星扩散反应,,7.1,datamine
+15101,hunters_bow,猎弓,Hunter's Bow,1,bow,70,185,,,,,,1.0,datamine
+15201,seasoned_hunters_bow,历练的猎弓,Seasoned Hunter's Bow,2,bow,70,243,,,,,,1.0,datamine
+15301,raven_bow,鸦羽弓,Raven Bow,3,bow,90,448,em,94,踏火止水,对处于水元素或火元素影响下的敌人，造成的伤害提高12%。,,1.0,datamine
+15302,sharpshooters_oath,神射手之誓,Sharpshooter's Oath,3,bow,90,401,crit_dmg_pct,46.9,精准,针对要害造成的伤害提升24%。,,1.0,datamine
+15303,recurve_bow,反曲弓,Recurve Bow,3,bow,90,354,hp_pct,46.9,收割,击败敌人时，恢复8%生命值。,,1.0,datamine
+15304,slingshot,弹弓,Slingshot,3,bow,90,354,crit_rate_pct,31.2,弹弓,普通攻击与重击的箭矢若在发射后的0.3秒内击中敌人，则造成的伤害增加36%；否则，造成的伤害下降10%。,,1.0,datamine
+15305,messenger,信使,Messenger,3,bow,90,448,crit_dmg_pct,31.2,飞矢传书,重击若命中要害，则额外造成100%攻击力的伤害，该伤害必定暴击。此效果每10秒只能触发一次。,,1.0,datamine
+15401,favonius_warbow,西风猎弓,Favonius Warbow,4,bow,90,454,energy_recharge_pct,61.3,顺风而行,攻击造成暴击时，有60%的几率产生少量元素微粒，能为角色恢复6点元素能量。该效果每12秒只能触发一次。,,1.0,datamine
+15402,the_stringless,绝弦,The Stringless,4,bow,90,510,em,165,无矢之歌,元素战技与元素爆发的伤害提高24%。,,1.0,datamine
+15403,sacrificial_bow,祭礼弓,Sacrificial Bow,4,bow,90,565,energy_recharge_pct,30.6,气定神闲,元素战技造成伤害时，有40%的概率重置该技能的冷却时间，该效果每30秒只能触发一次。,,1.0,datamine
+15404,royal_bow,宗室长弓,Royal Bow,4,bow,90,510,atk_pct,41.3,专注,攻击造成伤害时，暴击率提升8%，最多堆叠5次。攻击造成暴击后，移除已有的专注效果。,,1.0,datamine
+15405,rust,弓藏,Rust,4,bow,90,510,atk_pct,41.3,速射弓斗,普通攻击造成的伤害提升40%，重击造成的伤害下降10%。,,1.0,datamine
+15406,prototype_crescent,试作澹月,Prototype Crescent,4,bow,90,510,atk_pct,41.3,离簇不归,重击若命中要害，则提升10%移动速度与36%攻击力，持续10秒。,,1.0,datamine
+15407,compound_bow,钢轮弓,Compound Bow,4,bow,90,454,physical_dmg_pct,69,注能之矢,普通攻击与重击命中时，提升4%攻击力与1.2%普通攻击速度。该效果持续6秒，最多可以叠加4层，每0.3秒只能触发一次。,,1.0,datamine
+15408,blackcliff_warbow,黑岩战弓,Blackcliff Warbow,4,bow,90,565,crit_dmg_pct,36.8,乘胜追击,击败敌人后，攻击力提升12%，持续30秒。该效果至多叠加3层，每层持续时间独立。,,1.0,datamine
+15409,the_viridescent_hunt,苍翠猎弓,The Viridescent Hunt,4,bow,90,510,crit_rate_pct,27.6,苍翠之风,普通攻击与重击命中时，有50%几率生成一个风之眼，持续吸引周围敌人，并对其中的敌人每0.5秒造成40%攻击的伤害。该效果持续4秒，每14秒至多触发一次。,,1.0,datamine
+15410,alley_hunter,暗巷猎手,Alley Hunter,4,bow,90,565,atk_pct,27.6,街巷伏击,装备该武器的角色处于队伍后台时，每1秒角色造成的伤害提升2%，最多通过这种方式获得20%的伤害提升；在场上超过4秒后，上述伤害提升效果每1秒会流失4%，直到降低至0%。,,1.4,datamine
+15411,fading_twilight,落霞,Fading Twilight,4,bow,90,565,energy_recharge_pct,30.6,渊中霞彩,具有夕暮、流霞、朝晖三种状态，分别能使造成的伤害提升6%/10%/14%。攻击命中敌人后，将转换为下一种状态，每7秒至多转换一次状态。装备该武器的角色处于队伍后台时该效果依旧能触发转换。,,2.7,datamine
+15412,mitternachts_waltz,幽夜华尔兹,Mitternachts Waltz,4,bow,90,510,physical_dmg_pct,51.7,极夜二重奏,普通攻击命中敌人后的5秒内，元素战技造成的伤害提升20%；元素战技命中敌人后的5秒内，普通攻击造成的伤害提升20%。,,1.6,datamine
+15413,windblume_ode,风花之颂,Windblume Ode,4,bow,90,510,em,165,风花之愿,施放元素战技时，获得风之花的悠古愿望加持，攻击力提升16%，持续6秒。,,1.4,datamine
+15414,hamayumi,破魔之弓,Hamayumi,4,bow,90,454,atk_pct,55.1,浅濑之弭,普通攻击造成的伤害提升16%，重击造成的伤害提升12%。当装备该武器的角色元素能量等于100%时，这个效果提升100%。,,2.0,datamine
+15415,predator,掠食者,Predator,4,bow,90,510,atk_pct,41.3,强力攻击,仅在以下平台生效： "PlayStation™Network" 对敌人造成冰元素伤害后，普通攻击与重击造成的伤害提高10%，该效果持续6秒，至多叠加2次；此外，埃洛伊装备掠食者时，攻击力提升66点。,,2.1,datamine
+15416,mouuns_moon,曚云之月,Mouun's Moon,4,bow,90,565,atk_pct,27.6,驭浪的海祇民,队伍中所有角色的元素能量上限的总和，每1点能使装备此武器的角色的元素爆发造成的伤害提高0.12%，通过这种方式，元素爆发造成的伤害至多提高40%。,,2.2,datamine
+15417,kings_squire,王下近侍,King's Squire,4,bow,90,454,atk_pct,55.1,迷宫之王的教导,施放元素战技或元素爆发时，将获得「森林教诲」的效果，元素精通提升60点，持续12秒。该效果将在切换角色时移除。森林教诲的持续时间结束或被移除时，将对附近一名敌人造成100%攻击力的伤害。森林教诲每20秒至多触发一次。,,3.0,datamine
+15418,end_of_the_line,竭泽,End of the Line,4,bow,90,510,energy_recharge_pct,45.9,网破,施放元素战技后，将触发「沿洄」效果，在攻击命中敌人时造成80%攻击力的范围伤害，该效果将在15秒或触发3次范围伤害后移除。每2秒至多通过这种方式造成一次范围伤害，每12秒至多触发一次沿洄。,,3.0,datamine
+15419,ibis_piercer,鹮穿之喙,Ibis Piercer,4,bow,90,565,atk_pct,27.6,秘智之眸的青睐,重击命中敌人后的6秒内，角色元素精通提升40点。该效果至多叠加2层，每0.5秒至多触发一次。,,3.7,datamine
+15424,scion_of_the_blazing_sun,烈阳之嗣,Scion of the Blazing Sun,4,bow,90,565,crit_rate_pct,18.4,阳炎古道,重击命中敌人后，会向命中的敌人降下阳炎矢，造成攻击力60%的伤害，并为受到阳炎矢伤害的敌人施加持续10秒的灼心效果。装备者的重击对处于灼心状态下的敌人造成的伤害提升28%。阳炎矢每10秒至多触发一次。,,4.0,datamine
+15425,song_of_stillness,静谧之曲,Song of Stillness,4,bow,90,510,atk_pct,41.3,深海弦振,受到治疗后，造成的伤害提升16%，持续8秒。角色处于队伍后台也能触发。,,4.0,datamine
+15426,cloudforged,筑云,Cloudforged,4,bow,90,510,em,165,镌岩为坊,元素能量减少后，装备者的元素精通提升40点。该效果持续18秒，至多叠加2层。,,4.7,datamine
+15427,range_gauge,测距规,Range Gauge,4,bow,90,565,atk_pct,27.6,石匠号子,受到治疗或进行治疗时，将赋予一枚团结标记，持续30秒，至多拥有三枚团结标记。施放元素战技或元素爆发时，将消耗所有的团结标记，产生持续10秒的「抗争」效果：每枚消耗的团结标记提高3%攻击力与7%所有元素伤害加成。每15秒至多触发一次抗争效果；角色处于队伍后台时也能获得团结标记。,,4.1,datamine
+15430,flower_wreathed_feathers,缀花之翎,Flower-Wreathed Feathers,4,bow,90,510,atk_pct,41.3,未至的花序,滑翔消耗的体力降低15%。进行瞄准射击时，每0.5秒提升重击造成的伤害6%，该效果最多叠加6层，并将在不处于瞄准状态下10秒后移除。,,5.2,datamine
+15431,chain_breaker,碎链,Chain Breaker,4,bow,90,565,atk_pct,27.6,花与落羽的长歌,队伍中每有一名纳塔角色或与装备者元素类型不同的角色，装备者获得4.8%攻击力提升；上述角色不少于3名时，装备者的元素精通提升24点。,,5.0,datamine
+15432,sequence_of_solitude,冷寂迸音,Sequence of Solitude,4,bow,90,510,hp_pct,41.3,静发,攻击命中敌人时，在目标位置基于生命值上限的40%，造成范围伤害。该效果每15秒至多触发一次。,,5.6,datamine
+15433,snare_hook,罗网勾针,Snare Hook,4,bow,90,454,energy_recharge_pct,61.3,矫捷无影,触发元素反应后的12秒内，元素精通提升60点。月兆·满辉：该效果中的元素精通额外提升60点。装备者处于队伍后台时，依然能触发上述效果。,,6.0,datamine
+15434,rainbow_serpents_rain_bow,虹蛇的雨弦,Rainbow Serpent's Rain Bow,4,bow,90,510,energy_recharge_pct,45.9,圣座外的星语,装备者处于队伍后台时，装备者的攻击命中敌人后的8秒内，攻击力提升28%。,,6.2,datamine
+15435,jade_vista,悬黎千钧,Jade Vista,4,bow,90,510,crit_rate_pct,27.6,缀夜为烛,除装备者外，队伍中每有一名角色：元素类型与装备者相同：装备者的元素精通提升64点；元素类型与装备者不同：装备者的攻击力提升12%。上述两种效果总共至多叠加3层，元素类型相同的效果优先生效。,,7.0,datamine
+15436,covenant_of_frost_and_snow,霜雪誓约,Covenant of Frost and Snow,4,bow,90,510,def_pct,51.7,法度的制衡,装备者施放元素战技后的12秒内，元素精通提升120点。,,7.0,datamine
+15437,breezeborne_refrain,柔风游弦,Breezeborne Refrain,4,bow,90,510,crit_rate_pct,27.6,蝰蛇的谣歌,元素充能效率提升20%。装备者的元素战技或元素爆发命中敌人时，获得一层「纯净者的圣咏」，该效果至多叠加3层，每0.03秒至多获得一层。叠加至3层时，将清除所有「纯净者的圣咏」，获得「蛇信的死毒」：使队伍中附近的所有角色造成的星烁反应伤害提升24%，持续12秒，期间无法再次获得「纯净者的圣咏」。装备者,,7.1,datamine
+15501,skyward_harp,天空之翼,Skyward Harp,5,bow,90,674,crit_rate_pct,22.1,回响长天的诗歌,暴击伤害提高20%；攻击命中时有60%概率造成125%攻击力的小范围物理伤害，该效果每4秒只能触发一次。,,1.0,datamine
+15502,amos_bow,阿莫斯之弓,Amos' Bow,5,bow,90,608,atk_pct,49.6,矢志不忘,普通攻击与重击造成的伤害提升12%；普通攻击与重击的箭矢发射后每经过0.1秒，伤害还会提升8%，至多提升5次。,,1.0,datamine
+15503,elegy_for_the_end,终末嗟叹之诗,Elegy for the End,5,bow,90,608,energy_recharge_pct,55.1,别离的思念之歌,飘游风中的「千年的大乐章」的一部分。元素精通提高60点；元素战技或元素爆发命中敌人时，角色获得一枚追思之符，每0.2秒内至多触发一次，角色处于队伍后台也能触发。拥有4枚追思之符时，将消耗所有追思之符，使附近的队伍中所有角色获得持续12秒的「千年的大乐章·别离之歌」效果：元素精通提高100点，攻击力提,,1.4,datamine
+15507,polar_star,冬极白星,Polar Star,5,bow,90,608,crit_rate_pct,33.1,极昼的先兆者,元素战技和元素爆发造成的伤害提高12%；普通攻击、重击、元素战技或元素爆发命中敌人后，将产生1层持续12秒的「白夜极星」效果。处于1/2/3/4层「白夜极星」效果下时，攻击力将提高10/20/30/48%。由普通攻击、重击、元素战技或元素爆发产生的「白夜极星」将分别独立存在。,,2.2,datamine
+15508,aqua_simulacra,若水,Aqua Simulacra,5,bow,90,542,crit_dmg_pct,88.2,洗濯诸类之形,生命值提升16%。周围存在敌人时，装备该武器的角色造成的伤害都会提升20%，不论该角色处于场上或是处于队伍后台。,,2.7,datamine
+15509,thundering_pulse,飞雷之弦振,Thundering Pulse,5,bow,90,608,crit_dmg_pct,66.2,飞雷御执,攻击力提高20%，并能获得「飞雷之巴印」的威势。飞雷之巴印：持有1/2/3层飞雷之巴印时，普通攻击造成的伤害提高12/24/40%。在下列情况下，角色将各获得1层飞雷之巴印：普通攻击造成伤害时，持续5秒；施放元素战技时，持续10秒；此外，角色元素能量低于100%时，将获得1层飞雷之巴印，此飞雷之巴印,,2.0,datamine
+15511,hunters_path,猎人之径,Hunter's Path,5,bow,90,542,crit_rate_pct,44.1,兽径的终点,获得12%所有元素伤害加成。重击命中敌人后，将获得「无休止的狩猎」：重击造成的伤害值提高，提高值相当于元素精通数值的160%。该效果将在生效12次或10秒后消失，每12秒至多获得一次无休止的狩猎。,,3.0,datamine
+15512,the_first_great_magic,最初的大魔术,The First Great Magic,5,bow,90,608,crit_dmg_pct,66.2,伟大者帕西法尔,重击造成的伤害提升16%；队伍中每存在一位与装备者元素类型相同的角色（包括装备者自身），将获得1层「手法」效果；每存在一位元素类型不同的角色，将获得1层「演技」效果。处于1/2/3层及以上「手法」效果下时，攻击力提升16%/32%/48%；处于1/2/3层及以上「演技」效果下时，移动速度提升4%/7,,4.0,datamine
+15513,silvershower_heartstrings,白雨心弦,Silvershower Heartstrings,5,bow,90,542,hp_pct,66.2,德吕阿的夜曲,装备者能获得「疗护」效果，持有1/2/3层疗护时，生命值上限提升12%/24%/40%。在下列情况下，装备者将各获得1层疗护：施放元素战技时，持续25秒；生命之契的数值增加时，持续25秒；进行治疗时，持续20秒，装备者处于队伍后台时依然能触发。每层疗护的持续时间独立计算。此外，处于3层疗护状态下时，,,4.7,datamine
+15514,astral_vultures_crimson_plumage,星鹫赤羽,Astral Vulture's Crimson Plumage,5,bow,90,608,crit_dmg_pct,66.2,眸中的月珥,触发扩散或星扩散反应后的12秒内，攻击力提高24%。此外，队伍中存在至少1/2名与装备者元素类型不同的角色时，装备者重击造成的伤害提高20%/48%，元素爆发造成的伤害提高10%/24%。,,5.2,datamine
+15515,the_daybreak_chronicles,黎明破晓之史,The Daybreak Chronicles,5,bow,90,674,crit_dmg_pct,44.1,悠远的流颂之歌,装备者获得「渐起的晓风」：脱离战斗状态3秒后，普通攻击、元素战技和元素爆发造成的伤害提升60%。在战斗状态下，上述伤害提升效果每秒降低10%，直到降低至0%；装备者的普通攻击、元素战技或元素爆发命中敌人时，对应类别的伤害提升效果提升10%，直到提升至60%，上述每种类别的攻击每0.1秒至多触发一次该,,6.2,datamine
+15516,golden_frostbound_oath,霜结的誓金枝,Golden Frostbound Oath,5,bow,90,542,crit_dmg_pct,88.2,与君致意的黎明,防御力提高16%。装备者的元素战技或月结晶攻击命中敌人时，将获得持续6秒的「霜妖精的报恩」效果：装备者造成的岩元素伤害提升40%，月结晶反应伤害提升40%；持续期间，若装备者附近存在月笼，则队伍中附近的所有其他角色还会获得「霜妖精的恶戏」效果：造成的岩元素伤害提升20%，月结晶反应伤害提升20%。装,,6.5,datamine
