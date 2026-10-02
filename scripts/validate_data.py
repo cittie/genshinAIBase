@@ -30,6 +30,7 @@ PRIMARY_KEYS: dict[str, list[str]] = {
     "data/characters/community_roles.csv": ["char_id"],
     "data/characters/character_talents.csv": ["char_id", "talent_type"],
     "data/characters/character_talent_params.csv": ["char_id", "talent_type", "label_index"],
+    "data/characters/character_constellations.csv": ["char_id", "constellation_index"],
     "data/weapons/weapons.csv": ["weapon_id"],
     "data/artifacts/artifact_sets.csv": ["set_id"],
     "data/artifacts/artifact_set_bonuses.csv": ["set_id", "pieces", "effect_index"],

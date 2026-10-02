@@ -119,7 +119,7 @@ node scripts/import_genshin_db.mjs --in <path> --targets all     # 全部四类
 |---|---|
 | `--in <path>` | **必填**，`data.min.json` 路径 |
 | `--out <dir>` | 仓库根目录，默认脚本上级目录 |
-| `--targets <list>` | 逗号分隔，默认 `characters`；可选 `characters` `roles` `weapons` `artifacts` `talents` `all` |
+| `--targets <list>` | 逗号分隔，默认 `characters`；可选 `characters` `roles` `weapons` `artifacts` `talents` `constellations` `all` |
 | `--dry-run` | 只输出统计，不写文件 |
 
 ### 它做了什么
@@ -156,6 +156,34 @@ node scripts/import_genshin_db.mjs --in <path> --targets all     # 全部四类
 | target | 说明 |
 |---|---|
 | — | `characters` / `roles` / `weapons` / `artifacts` 均已实现 |
+
+---
+
+## 命座导入（`--targets constellations`）
+
+| 产物 | 行数 | 说明 |
+|---|---|---|
+| `data/characters/character_constellations.csv` | 720 | 一行一个命座（每人 6 行） |
+
+### 两个推导字段
+
+| 字段 | 判定方式 |
+|---|---|
+| `effect_target` | 中文文本规则：含队伍词且含对敌减益 → `both`；仅队伍词 → `team`；仅对敌减益 → `enemy`；其余 → `self` |
+| `talent_level_up` | **用天赋名逐个做包含匹配**，与该角色自身的天赋表对照 |
+
+### 踩过的坑
+
+| # | 问题 | 修法 |
+|---|---|---|
+| 20 | 胡桃的「技能等级**提升**3级」漏判（我只匹配「提高」） | 穷举全库措辞变体：仅 250 条「提高」+ 2 条「提升」（胡桃 c3/c5）。两种都接受 |
+| 21 | 天赋名里含逗号、`♪`、`！` 导致正则截取失败（芭芭拉、卡齐娜、那维莱特共 4 条） | 放弃「先截取名字」，改为**用天赋名做包含匹配**，并兼容 `普通攻击·` 等类别前缀 |
+| 22 | 回归期望把阿贝多的 C3/C5 写反 | **代码是对的、期望是错的**：阿贝多元素战技叫「创生法·拟造阳华」，所以 C3 加战技；香菱 C3 加爆发。C3/C5 顺序**不是统一规律**，回归表已补 7 个角色 |
+
+### 值得记住的结论
+
+**「+3 加的是哪个天赋」不能靠记忆推断**：香菱 C3=爆发/C5=战技，阿贝多恰好相反；
+另有 8 个角色的 +3 落在**普通攻击**上（林尼、菲米尼、莱欧斯利、那维莱特、阿蕾奇诺、赛索斯、瓦雷莎、桑多涅 c3/c5）。
 
 ---
 

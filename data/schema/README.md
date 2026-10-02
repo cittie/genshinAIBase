@@ -47,6 +47,7 @@
 | `community_roles.csv` | `char_id` | 12 | [characters/README.md](../characters/README.md) |
 | `character_talents.csv` | `char_id` + `talent_type` | 9 | [characters/README.md](../characters/README.md) |
 | `character_talent_params.csv` | `char_id` + `talent_type` + `label_index` | 12 | [characters/README.md](../characters/README.md) |
+| `character_constellations.csv` | `char_id` + `constellation_index` | 10 | [characters/README.md](../characters/README.md) |
 
 字段速览
 
@@ -71,6 +72,10 @@ character_talents.csv
 character_talent_params.csv
   char_id, slug, talent_type, label_index, label_zh, scaling_stat,
   value_unit, param_refs, value_lv1, value_lv10, version, source
+
+character_constellations.csv
+  char_id, slug, constellation_index, name_zh, name_en, effect_target,
+  talent_level_up, description_zh, version, source
 ```
 
 ### 2.2 weapons/

@@ -11,6 +11,7 @@
 > | `characters/community_roles.csv` | ✅ **已填充 120 行**（社区定位来源快照，用于交叉核对） |
 > | `characters/character_talents.csv` | ✅ **已填充 753 行**（技能完整文本 + 属性缩放） |
 > | `characters/character_talent_params.csv` | ✅ **已填充 2387 行**（逐条效果的属性来源与数值） |
+> | `characters/character_constellations.csv` | ✅ **已填充 720 行**（6 个命之座，含天赋 +3 归属） |
 > | `weapons/weapons.csv` | ✅ **已填充 255 行**（全量武器，含满级基础攻击力与副属性） |
 > | `artifacts/artifact_sets.csv` | ✅ **已填充 63 行**（全量套装） |
 > | `artifacts/artifact_set_bonuses.csv` | ✅ **已填充 122 行**（2 件套完整 + 4 件套部分结构化） |
@@ -52,6 +53,7 @@
 | | `community_roles.csv` | 社区定位来源快照（交叉核对用） |
 | | `character_talents.csv` | 天赋完整文本与属性缩放 |
 | | `character_talent_params.csv` | 天赋逐条属性词条（长表） |
+| | `character_constellations.csv` | 命之座效果与天赋 +3 归属 |
 | [weapons/](weapons/README.md) | `weapons.csv` | 武器基础属性与被动 |
 | [artifacts/](artifacts/README.md) | `artifact_sets.csv` | 圣遗物套装主表 |
 | | `artifact_set_bonuses.csv` | 套装效果（长表，一效果一行） |

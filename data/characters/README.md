@@ -7,11 +7,12 @@
 > - `character_roles.csv`：**已填充 171 行**，覆盖 120 / 124 个角色（推导字段，含依据与可信度）
 > - `character_talents.csv`：**已填充 753 行**，技能完整文本（不截断）+ 属性缩放
 > - `character_talent_params.csv`：**已填充 2387 行**，逐条效果的属性来源与数值
+> - `character_constellations.csv`：**已填充 720 行**，6 个命之座（含天赋 +3 归属）
 > - `community_roles.csv`：**已填充 120 行**，社区定位来源快照（交叉核对用）
 >
 > 重新生成：
 > ```bash
-> node scripts/import_genshin_db.mjs --in <genshin-db 的 data.min.json> --targets characters,roles,talents
+> node scripts/import_genshin_db.mjs --in <genshin-db 的 data.min.json> --targets characters,roles,talents,constellations
 > python scripts/fetch_community_roles.py   # 刷新社区定位来源快照（联网）
 > ```
 >
@@ -327,14 +328,87 @@ Q：沃雅妮莎的治疗吃什么属性？
 
 ---
 
+## character_constellations.csv — 命之座
+
+**一行一个命座**（每人 6 行）。
+
+> **状态：已填充 720 行**，覆盖 120 个角色（`source=datamine`）
+
+除完整中文效果外，另推导两个字段：`effect_target`（受益对象）与
+`talent_level_up`（「天赋等级 +3」加的是哪个天赋）。
+
+| 字段 | 类型 | 单位 | 枚举/取值 | 可空 | 说明 |
+|---|---|---|---|---|---|
+| `char_id` | string | — | — | 否 | **主键之一**，关联 `characters.char_id` |
+| `slug` | string | — | — | 否 | 与 `characters.slug` 一致 |
+| `constellation_index` | int | — | `1`~`6` | 否 | **主键之一**，第几命 |
+| `name_zh` / `name_en` | string | — | — | 是 | 命座名（已做逗号清洗） |
+| `effect_target` | string | — | `self` `team` `both` `enemy` | 否 | 受益对象（规则判定，见下） |
+| `talent_level_up` | string | — | `normal_attack` `elemental_skill` `elemental_burst` 或空 | 是 | 「天赋等级 +3」加的是哪个天赋；非 +3 命座为空 |
+| `description_zh` | string | — | — | 是 | **完整效果文本（不截断）** |
+| `version` | string | — | — | 否 | 该角色实装的游戏版本 |
+| `source` | string | — | `datamine` | 否 | 数据来源 |
+
+### `effect_target` 判定规则与局限
+
+| 条件 | 判定 |
+|---|---|
+| 含队伍词（`队伍中…角色`）且含对敌减益 | `both` |
+| 仅含队伍词 | `team` |
+| 仅含对敌减益（削减敌人抗性/防御力、易伤） | `enemy` |
+| 其余 | `self` |
+
+分布：`self` 615 / `team` 79 / `enemy` 25 / `both` 1（`citlali` 的 c2）。
+
+> ⚠️ **局限**：`both` 只能表达「两类兼有」。`citlali` c2 实际同时包含
+> 自身精通、队友精通与对敌减抗三类，字段只能记 `both`，完整语义以 `description_zh` 为准。
+
+### `talent_level_up`：C3/C5 的顺序**不是统一规律**
+
+共 **238 条**命座含「天赋等级 +3」（119 个角色各有 2 条；埃洛伊 6 个命座都是占位文本，故无）。
+
+| 加的天赋 | 条数 |
+|---|---|
+| `elemental_burst` | 118 |
+| `elemental_skill` | 112 |
+| `normal_attack` | **8** |
+
+⚠️ **这正是本表存在的价值**——靠记忆会写错：
+
+| 角色 | C3 | C5 |
+|---|---|---|
+| 香菱 | `elemental_burst`（旋火轮） | `elemental_skill`（锅巴出击） |
+| 阿贝多 | `elemental_skill`（创生法·拟造阳华） | `elemental_burst`（诞生式·大地之潮） |
+
+**两者完全相反。**此外有 8 个角色的「+3」落在**普通攻击**上（林尼 c3、菲米尼 c3、莱欧斯利 c3、
+那维莱特 c3、阿蕾奇诺 c3、赛索斯 c3、瓦雷莎 c5、桑多涅 c3），这是较新的设计。
+
+**推导方式（可验证，非猜测）**：文本形如「元素爆发**精密水冷仪**的技能等级提高3级」
+或「旋火轮的技能等级提升3级」，把其中的天赋名与**该角色自身的天赋表**逐字比对即可确定。
+
+| 实现要点 | 说明 |
+|---|---|
+| 用天赋名逐个做包含匹配，而不是先用正则截取名字 | 天赋名里真的存在逗号、`♪`、`！`（芭芭拉「演唱，开始♪」、卡齐娜「出击，冲天转转！」、那维莱特「潮水啊，我已归来」），正则截取会截断 |
+| 兼容类别前缀 | 如「普通攻击·如水从平的技能等级提高3级」 |
+| 兼容措辞变体 | 穷举全库仅两种：「技能等级**提高**3级」250 条、「技能等级**提升**3级」2 条（胡桃 c3/c5）。只匹配前者会漏掉胡桃 |
+
+### 已知缺口
+
+| 缺口 | 说明 |
+|---|---|
+| 埃洛伊 6 个命座为占位文本 | 「点亮此人一方星空之刻尚未到来」，源数据即如此，非本仓库遗漏 |
+| 命座激活材料、天赋升级材料 | 未纳入本表 |
+
+---
+
 ## 待建表
 
 | 表 | 用途 | 源数据可得性 |
 |---|---|---|
-| `character_constellations.csv` | 命之座效果 | ✅ genshin-db 有 `constellations` |
 | `character_abilities.csv` | 技能附着标签（U 值）与 ICD 组 | ❌ 需其他来源（解包属性表） |
 | 固有天赋**解锁突破阶段** | 突破 1 / 4 / 6 各解锁哪个 | ❌ 源数据未提供，`character_talents` 无法填此列 |
 | 天赋**升级材料** | 天赋书系列、周本材料 | ✅ genshin-db 的 `talents.*.costs` |
+| 命座**激活材料** | — | ✅ genshin-db 的 `constellations.*.costs`（如存在） |
 
 ---
 

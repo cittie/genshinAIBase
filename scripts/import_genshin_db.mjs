@@ -56,7 +56,7 @@ const REPO = path.resolve(args.outDir || path.join(__dirname, '..'));
 const SRC = path.resolve(args.input);
 const TARGETS = new Set(
   args.targets.split(',').map(s => s.trim()).filter(Boolean).flatMap(t =>
-    t === 'all' ? ['characters', 'roles', 'weapons', 'artifacts', 'talents'] : [t]));
+    t === 'all' ? ['characters', 'roles', 'weapons', 'artifacts', 'talents', 'constellations'] : [t]));
 
 // ---------------------------------------------------------------------------
 // 枚举映射
@@ -1338,6 +1338,162 @@ function runTalentRegression(talentRows) {
 }
 
 // ---------------------------------------------------------------------------
+// character_constellations.csv
+//
+// 一行一个命座（每人 6 行）。除完整中文效果外，额外推导两个字段：
+//   effect_target    受益对象：self / team / both / enemy
+//   talent_level_up  「天赋等级 +3」对应哪个天赋 —— 靠**天赋名反查**得到，不是猜：
+//                    文本形如「元素爆发**精密水冷仪**的技能等级提高3级」
+//                    或「旋火轮的技能等级提高3级」，把天赋名与角色自身的天赋表对照即可。
+// ---------------------------------------------------------------------------
+
+const CONSTELLATIONS_HEADER = [
+  'char_id', 'slug', 'constellation_index', 'name_zh', 'name_en',
+  'effect_target', 'talent_level_up', 'description_zh', 'version', 'source',
+];
+
+// 受益对象（中文文本判定）
+const TEAM_CN = /队伍中(附近)?(的)?(所有|自己的|其他)?角色|附近的队伍|队伍中所有/;
+// 对敌减益：效果落在敌人身上（削抗/削防/易伤）
+const ENEMY_CN = /(敌人|敌方|对手)[^。]{0,24}(抗性|防御力)[^。]{0,8}(降低|减少|下降)|降低[^。]{0,12}(敌人|敌方|对手)[^。]{0,12}(抗性|防御力)|受到的伤害(提高|提升|增加)/;
+
+function deriveEffectTarget(descZh) {
+  const text = String(descZh || '');
+  const isTeam = TEAM_CN.test(text);
+  const isEnemy = ENEMY_CN.test(text);
+  if (isTeam && isEnemy) return 'both';
+  if (isTeam) return 'team';
+  if (isEnemy) return 'enemy';
+  return 'self';
+}
+
+const TALENT_CATEGORY_CN = {
+  普通攻击: 'normal_attack', 元素战技: 'elemental_skill', 元素爆发: 'elemental_burst',
+};
+// 文本里天赋名可能带类别前缀（含「·」或直接相连），如「普通攻击·如水从平的技能等级提高3级」
+const TALENT_NAME_PREFIXES = ['', '普通攻击·', '元素战技·', '元素爆发·', '普通攻击', '元素战技', '元素爆发'];
+// 措辞变体（已穷举全库，仅此两种）：
+//   「技能等级提高3级」250 条 / 「技能等级提升3级」2 条（胡桃 c3、c5）
+const LEVELUP_RE = /的技能等级(提高|提升)3级/;
+
+/** 「X的技能等级提高/提升3级」→ X 对应的天赋类别。
+ *  用**天赋名逐个做包含匹配**，而不是先用正则截取名字：
+ *  天赋名里真的存在逗号、♪、！等字符（芭芭拉「演唱，开始♪」、
+ *  卡齐娜「出击，冲天转转！」、那维莱特「潮水啊，我已归来」），正则截取会截断。 */
+function deriveTalentLevelUp(descZh, talentList) {
+  const text = String(descZh || '').replace(/\*\*/g, '');
+  const m = text.match(LEVELUP_RE);
+  if (!m) return { value: '', how: 'none' };
+  const suffix = `的技能等级${m[1]}3级`;
+
+  const hits = talentList.filter(t => t.name
+    && TALENT_NAME_PREFIXES.some(p => text.includes(`${p}${t.name}${suffix}`)));
+  if (hits.length === 1) return { value: hits[0].type, how: 'name' };
+  if (hits.length > 1) {
+    return { value: hits[0].type, how: `conflict(${hits.map(h => h.type).join('|')})` };
+  }
+  // 回退：按类别前缀判定
+  const c = text.match(/(普通攻击|元素战技|元素爆发)[·]?([^。；]{1,30}?)的技能等级(?:提高|提升)3级/);
+  if (c) return { value: TALENT_CATEGORY_CN[c[1]], how: 'category' };
+  return { value: '?', how: 'unresolved' };
+}
+
+function buildConstellations(raw, version, repo) {
+  const chars = listCharactersForRoles(raw, repo);
+  const zhCons = raw.data.ChineseSimplified.constellations;
+  const enCons = raw.data.English.constellations;
+  const zhTalents = raw.data.ChineseSimplified.talents;
+
+  const rows = [];
+  const stats = { name: 0, category: 0, none: 0, unresolved: [], conflicts: [] };
+  const targetCount = {};
+
+  for (const ch of chars) {
+    const zrec = zhCons[ch.sourceKey];
+    const erec = enCons[ch.sourceKey];
+    if (!zrec) continue;
+
+    // 该角色的天赋表（按名称做包含匹配用）
+    const talentList = [];
+    const zt = zhTalents[ch.sourceKey] || {};
+    for (const [sub, type] of Object.entries({ ...TALENT_TYPE, ...PASSIVE_TYPES })) {
+      if (zt[sub] && zt[sub].name) talentList.push({ type, name: zt[sub].name });
+    }
+
+    const ver = version.constellations ? (version.constellations[ch.sourceKey] || '') : '';
+
+    for (let i = 1; i <= 6; i++) {
+      const z = zrec['c' + i];
+      if (!z) continue;
+      const e = (erec && erec['c' + i]) || {};
+      const desc = z.description || '';
+      const target = deriveEffectTarget(desc);
+      targetCount[target] = (targetCount[target] || 0) + 1;
+      const lv = deriveTalentLevelUp(desc, talentList);
+      if (lv.how.startsWith('unresolved')) stats.unresolved.push(`${ch.slug}.c${i}: ${lv.how}`);
+      else if (lv.how.startsWith('conflict')) stats.conflicts.push(`${ch.slug}.c${i}: ${lv.how}`);
+      else stats[lv.how] = (stats[lv.how] || 0) + 1;
+
+      rows.push([
+        ch.charId, ch.slug, String(i), fullText(z.name || ''), fullText(e.name || ''),
+        target, lv.value, fullText(desc), ver, 'datamine',
+      ]);
+    }
+  }
+
+  rows.sort((a, b) => Number(a[0]) - Number(b[0]) || Number(a[2]) - Number(b[2]));
+
+  console.error(`命座行 ${rows.length}；受益对象 ${JSON.stringify(targetCount)}`);
+  console.error(`天赋+3 解析：按天赋名 ${stats.name} / 按类别前缀 ${stats.category} / 非+3命座 ${stats.none}`);
+  if (stats.conflicts.length) {
+    console.error(`⚠ 名称与前缀冲突 ${stats.conflicts.length} 条：`);
+    stats.conflicts.slice(0, 8).forEach(c => console.error('    ' + c));
+  }
+  if (stats.unresolved.length) {
+    console.error(`⚠ 命中 +3 但天赋名无法解析 ${stats.unresolved.length} 条：`);
+    stats.unresolved.slice(0, 8).forEach(c => console.error('    ' + c));
+  }
+
+  return rows;
+}
+
+// ---------------------------------------------------------------------------
+// 命座回归自检：期望值已逐条对照源数据里的天赋名核实。
+// 注意 C3/C5 谁加战技谁加爆发**并非统一规律**：
+//   香菱 C3=旋火轮(爆发) / C5=锅巴出击(战技)
+//   阿贝多 C3=创生法·拟造阳华(战技) / C5=诞生式·大地之潮(爆发)  ← 与香菱相反
+// 这正是本表存在的价值：靠记忆会写反。
+// ---------------------------------------------------------------------------
+const CONSTELLATION_REGRESSION = {
+  xiangling: { 3: 'elemental_burst', 5: 'elemental_skill' },
+  albedo: { 3: 'elemental_skill', 5: 'elemental_burst' },
+  aino: { 3: 'elemental_burst', 5: 'elemental_skill' },
+  neuvillette: { 3: 'normal_attack', 5: 'elemental_burst' },  // C3 加的是普通攻击
+  barbara: { 3: 'elemental_burst', 5: 'elemental_skill' },     // 天赋名含逗号与 ♪
+  kachina: { 3: 'elemental_skill', 5: 'elemental_burst' },      // 天赋名含逗号与 ！
+  hu_tao: { 3: 'elemental_skill', 5: 'elemental_burst' },       // 措辞是「提升3级」而非「提高3级」
+};
+
+function runConstellationRegression(rows) {
+  const bySlug = new Map();
+  for (const r of rows) {
+    if (!bySlug.has(r[1])) bySlug.set(r[1], new Map());
+    bySlug.get(r[1]).set(r[2], r[6]);
+  }
+  const problems = [];
+  for (const [slug, want] of Object.entries(CONSTELLATION_REGRESSION)) {
+    const got = bySlug.get(slug);
+    if (!got) { problems.push(`${slug}: 缺失`); continue; }
+    for (const [idx, type] of Object.entries(want)) {
+      if (got.get(String(idx)) !== type) {
+        problems.push(`${slug}.c${idx}.talent_level_up: got ${got.get(String(idx))} want ${type}`);
+      }
+    }
+  }
+  return problems;
+}
+
+// ---------------------------------------------------------------------------
 // 主流程
 // ---------------------------------------------------------------------------
 const produced = [];
@@ -1401,6 +1557,18 @@ if (TARGETS.has('talents')) {
   console.error(`天赋回归自检通过（${Object.keys(TALENT_REGRESSION).length} 个角色）`);
   produced.push(writeCsv('data/characters/character_talents.csv', TALENTS_HEADER, talentRows));
   produced.push(writeCsv('data/characters/character_talent_params.csv', TALENT_PARAMS_HEADER, paramRows));
+}
+
+if (TARGETS.has('constellations')) {
+  const rows = buildConstellations(raw, version, REPO);
+  const problems = runConstellationRegression(rows);
+  if (problems.length) {
+    console.error('\n[命座回归自检失败] 已中止写入：');
+    problems.forEach(p => console.error('  - ' + p));
+    process.exit(2);
+  }
+  console.error(`命座回归自检通过（${Object.keys(CONSTELLATION_REGRESSION).length} 个角色）`);
+  produced.push(writeCsv('data/characters/character_constellations.csv', CONSTELLATIONS_HEADER, rows));
 }
 
 console.log('\n=== 导入结果 ===');

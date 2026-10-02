@@ -82,6 +82,7 @@
 | [characters/community_roles.csv](../data/characters/community_roles.csv) | `char_id` | 社区定位来源快照（交叉核对） | ✅ **120 行** |
 | [characters/character_talents.csv](../data/characters/character_talents.csv) | `char_id`+`talent_type` | 天赋完整文本与属性缩放 | ✅ **753 行** |
 | [characters/character_talent_params.csv](../data/characters/character_talent_params.csv) | `char_id`+`talent_type`+`label_index` | 天赋逐条属性词条（长表） | ✅ **2387 行** |
+| [characters/character_constellations.csv](../data/characters/character_constellations.csv) | `char_id`+`constellation_index` | 命之座效果与天赋 +3 归属 | ✅ **720 行** |
 | [weapons/weapons.csv](../data/weapons/weapons.csv) | `weapon_id` | 武器基础属性与被动 | ✅ **255 行** |
 | [artifacts/artifact_sets.csv](../data/artifacts/artifact_sets.csv) | `set_id` | 圣遗物套装主表 | ✅ **63 行** |
 | [artifacts/artifact_set_bonuses.csv](../data/artifacts/artifact_set_bonuses.csv) | `set_id`+`pieces`+`effect_index` | 套装效果（长表） | ✅ **122 行** |
@@ -131,6 +132,8 @@
 | 「这个角色的治疗/伤害吃什么属性」 | [data/characters/character_talent_params.csv](../data/characters/character_talent_params.csv)（`scaling_stat`） |
 | 「某个技能的倍率是多少 / 冷却多久」 | [data/characters/character_talent_params.csv](../data/characters/character_talent_params.csv)（`value_lv1` / `value_lv10`） |
 | 「某个角色的技能原文」 | [data/characters/character_talents.csv](../data/characters/character_talents.csv)（`description_zh`，完整不截断） |
+| 「这个命座加的是哪个天赋」 | [data/characters/character_constellations.csv](../data/characters/character_constellations.csv)（`talent_level_up`） |
+| 「这个命座是给自己还是给队伍」 | [data/characters/character_constellations.csv](../data/characters/character_constellations.csv)（`effect_target`） |
 | 「这把武器的基础攻击力/副属性是多少」 | [data/weapons/weapons.csv](../data/weapons/weapons.csv) |
 | 「哪些武器是充能/精通副属性」 | [data/weapons/weapons.csv](../data/weapons/weapons.csv)（按 `sub_stat` 过滤） |
 | 「哪些套装 2 件套加攻击力」 | [data/artifacts/artifact_sets.csv](../data/artifacts/artifact_sets.csv)（按 `bonus_2pc_type` 过滤） |
@@ -173,7 +176,7 @@
 | 剧变/催化反应系数、附着消耗、微粒能量 | `data/elements/` |
 | 敌人属性与抗性 | `data/enemies/` |
 | 元素共鸣数值 | `data/teams/elemental_resonance.csv` |
-| 命之座效果、固有天赋解锁阶段、天赋升级材料 | 待建表 |
+| 命之座激活材料、天赋升级材料、固有天赋解锁阶段 | 待建表 |
 | 逐技能 ICD 与附着标签 | 待建表 |
 
 > AI 在数值补齐前应给出方法论与结构性结论，而非具体排名；
